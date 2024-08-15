@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic ShieldConex IFrame</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://secure-cert.shieldconex.com/js/iframe.api.v1.js"></script>
+</head>
+<body>
+<!-- Input for Template ID and a Button to Load the IFrame -->
+<input type="text" id="templateIdInput" placeholder="Enter Template ID" />
+<button id="loadIframeBtn">Go</button>
+
+<!-- Div to load the ShieldConex IFrame -->
+<div id="frame1"></div>
+
+<script type="text/javascript">
+  // Event listener for the "Go" button
+  document.getElementById('loadIframeBtn').addEventListener('click', function() {
+    // Get the template ID from the input box
+    var templateId = document.getElementById('templateIdInput').value;
+
+    // Check if templateId is not empty
+    if (templateId) {
+      // ShieldConex IFrame Configuration
+      var config = {
+        baseUrl: 'https://secure-cert.shieldconex.com',
+        templateId: templateId, // Use the value from the input box
+        parent: 'frame1', // Matching the containing element ID
+        attributes: {
+          width: "600px",
+          height: "270px",
+          frameborder: 0
+        }
+      };
+
+      // Create and render the ShieldConex IFrame
+      var scfr = new ShieldconexIFrame(config);
+      scfr.render();
+    } else {
+      alert('Please enter a Template ID.');
+    }
+  });
+</script>
+</body>
+</html>
