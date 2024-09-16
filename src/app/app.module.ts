@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
+// @ts-ignore
 import { AppComponent } from './app.component';
 // @ts-ignore
 import { DataFetchComponent } from './data-fetch/data-fetch.component';
@@ -10,12 +11,12 @@ import { MyInterceptor } from './my-interceptor.service';  // Adjust the path as
 
 @NgModule({
   declarations: [
-    AppComponent,
     DataFetchComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppComponent
   ],
   providers: [
     provideHttpClient(

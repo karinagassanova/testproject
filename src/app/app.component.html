@@ -1,18 +1,73 @@
-<div class="container">
-  <h1>Add Two Numbers</h1>
-  <form (ngSubmit)="onSubmit()" #addForm="ngForm">
-    <div class="form-group">
-      <label for="num1">Number 1:</label>
-      <input type="number" id="num1" required [(ngModel)]="num1" name="num1" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="num2">Number 2:</label>
-      <input type="number" id="num2" required [(ngModel)]="num2" name="num2" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-  </form>
+<div class="input-container">
+  <h2>Start Tokenization</h2>
+  <p>Enter your credentials, Template ID, and configure the IFrame settings.</p>
 
-  <div *ngIf="result !== null" class="result">
-    <h2>Result: {{ result }}</h2>
+  <!-- User Credentials -->
+  <div class="input-row">
+    <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
+    <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
   </div>
+
+  <!-- Template ID and IFrame Configuration -->
+  <div class="input-row">
+    <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
+    <select [(ngModel)]="baseUrl">
+      <option value="https://secure.shieldconex.com">Production</option>
+      <option value="https://secure-cert.shieldconex.com">Cert</option>
+    </select>
+  </div>
+
+  <div class="input-row">
+    <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
+    <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
+  </div>
+
+  <button class="go-button" (click)="onGoButtonClick()">Go</button>
 </div>
+
+<button class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+<button class="clear-button" (click)="onClearButtonClick()">Clear</button>
+<button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
+
+<main>
+  <div class="demo-title-container">
+    <h1>Demo</h1>
+  </div>
+
+  <div id="frame1" class="iframe"></div>
+
+  <div id="right-column">
+    <div class="console-title-container">
+      <h1>Console</h1>
+    </div>
+    <div class="result-section">
+      <pre><code id="combined-result">
+        <h3>IFrame Render Status</h3>
+        <div>{{iframeRenderStatus}}</div>
+
+        <h3>Error Messages</h3>
+        <div>
+          <div *ngFor="let e of iframeErrors">{{e}}</div>
+        </div>
+
+        <h3>Token Data</h3>
+        <div *ngFor="let e of tokenData">
+          BFID: {{ e.token }}
+        </div>
+
+        <h3>Tokenized Data</h3>
+        <div *ngFor="let e of SCXTokens">
+          Name: {{e.name}}, Value: {{e.value}}
+        </div>
+
+       <h3>Detokenized Data</h3>
+       <div *ngFor="let e of detokenizedData; let i = index">
+  Name: {{ SCXTokens[i].name }}, Detokenized Value: {{ e | json }}
+</div>
+
+
+        <div>MessageID: {{readResponse?.messageId}}</div>
+      </code></pre>
+    </div>
+  </div>
+</main>

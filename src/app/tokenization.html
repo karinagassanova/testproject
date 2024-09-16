@@ -3,45 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic ShieldConex IFrame</title>
+  <title>ShieldConex Tokenization Dashboard</title>
+  <link rel="stylesheet" href="src/app/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://secure-cert.shieldconex.com/js/iframe.api.v1.js"></script>
 </head>
 <body>
-<!-- Input for Template ID and a Button to Load the IFrame -->
-<input type="text" id="templateIdInput" placeholder="Enter Template ID" />
-<button id="loadIframeBtn">Go</button>
 
-<!-- Div to load the ShieldConex IFrame -->
-<div id="frame1"></div>
+  <main>
 
-<script type="text/javascript">
-  // Event listener for the "Go" button
-  document.getElementById('loadIframeBtn').addEventListener('click', function() {
-    // Get the template ID from the input box
-    var templateId = document.getElementById('templateIdInput').value;
+        <h2>Start Tokenization</h2>
+        <p>Enter your Template ID to begin tokenization.</p>
+        <input type="text" id="templateIdInput" placeholder="Enter Template ID" />
+        <button id="loadIframeBtn" >Go</button>
 
-    // Check if templateId is not empty
-    if (templateId) {
-      // ShieldConex IFrame Configuration
-      var config = {
-        baseUrl: 'https://secure-cert.shieldconex.com',
-        templateId: templateId, // Use the value from the input box
-        parent: 'frame1', // Matching the containing element ID
-        attributes: {
-          width: "600px",
-          height: "270px",
-          frameborder: 0
-        }
-      };
 
-      // Create and render the ShieldConex IFrame
-      var scfr = new ShieldconexIFrame(config);
-      scfr.render();
-    } else {
-      alert('Please enter a Template ID.');
-    }
-  });
-</script>
+          <h2>Tokenization IFrame</h2>
+          <!-- Div to load the ShieldConex IFrame -->
+          <div id="frame1" class="iframe"></div>
+
+
+
+
+    <div id="right-column">
+      <div class="result-section">
+        <h3>IFrame Render Status</h3>
+        <pre><code id="iframe-render-status"></code></pre>
+      </div>
+
+      <div class="result-section">
+        <h3>Error Messages</h3>
+        <pre><code id="error-messages"></code></pre>
+      </div>
+
+      <div class="result-section">
+        <h3>Token Data</h3>
+        <pre><code id="token-data"></code></pre>
+      </div>
+
+      <div class="result-section">
+        <h3>Tokenized Data</h3>
+        <pre><code id="tokenized-data"></code></pre>
+      </div>
+
+      <div class="result-section">
+        <h3>Real Data Values</h3>
+        <pre><code id="real-data-values"></code></pre>
+      </div>
+    </div>
+  </main>
+
+
+<script src="tokenization.js"></script>
 </body>
 </html>
