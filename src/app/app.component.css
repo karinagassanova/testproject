@@ -63,6 +63,7 @@ button {
 
 /* Ensure the diagram is responsive */
 .diagram svg {
+  padding-top: 10px;
   transform: translateX(+290px); /* Move the diagram to the left */
   width: 100%; /* Full width of the diagram area */
   height: 100%; /* Full height of the diagram area */

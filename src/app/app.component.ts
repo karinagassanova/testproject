@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import {JsonPipe, NgForOf} from '@angular/common';
+import {JsonPipe, NgForOf, NgIf} from '@angular/common';
 
 interface TokenResponse {
   messageId: string;
@@ -41,7 +41,7 @@ type TokenDisplay = {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [FormsModule, NgForOf, JsonPipe],
+  imports: [FormsModule, NgForOf, JsonPipe, NgIf],
   standalone: true
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -60,6 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
   readResponse: TokenResponse | undefined;
   tokenData: TokenDisplay[] = [];
   detokenizedData: string[] = []; // Added this for displaying detokenized data
+  protected isDiagramVisible: boolean | undefined;
 
   constructor(private http: HttpClient) {}
 
@@ -289,5 +290,12 @@ export class AppComponent implements OnInit, OnDestroy {
       default:
         this.iframeErrors.push('Unknown message received: ' + JSON.stringify(data, null, 4));
     }
+  }
+  showDiagram(): void {
+    this.isDiagramVisible = true;
+  }
+
+  hideDiagram(): void {
+    this.isDiagramVisible = false;
   }
 }
