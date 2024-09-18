@@ -1,13 +1,69 @@
+/* Container setup with CSS Grid */
 .container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr; /* Column width ratio */
+  max-width: 1000px; /* Container width */
+  margin: 0 auto; /* Center the container */
+  gap: 40px; /* Space between columns */
+  padding: 0; /* Remove padding from the container */
 }
 
-.form-group {
-  margin-bottom: 15px;
+/* Diagram styling */
+.diagram {
+  border: 0; /* Remove border */
+  padding: 0; /* Remove padding */
+  grid-column: 1; /* Place in the first column */
+  width: 700px; /* Full width of the allocated column */
+  height: 400px; /* Set a specific height for the diagram to make it larger */
+  transform: translateX(-550px); /* Move the diagram container to the left */
 }
 
-.btn {
-  margin-top: 10px;
+/* Main container for config and console */
+.main-container {
+  display: flex; /* Flexbox layout for stacking config and console vertically */
+  flex-direction: column; /* Stack items vertically */
+  grid-column: 2; /* Place in the second column */
+  width: 800px; /* Ensure it uses the full width of the main container's column */
+  padding: 0; /* Remove padding to ensure it uses the full width */
+  margin-left: -210px;
+}
+
+/* Configuration area styling */
+#config-area {
+  background-color: #fff; /* Background color for config area */
+  border: 1px solid #ddd; /* Border for config area */
+  padding: 20px; /* Padding inside the config area */
+  margin-bottom: 20px; /* Space between config area and console */
+  width: 100%; /* Ensure it takes full width of the main container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Console area styling */
+#right-column {
+  background-color: #fff; /* Background color for console area */
+  border: 1px solid #ddd; /* Border for console area */
+  padding: 20px; /* Padding inside the console area */
+  max-height: 400px; /* Max height for scrolling */
+  overflow-y: auto; /* Vertical scroll if needed */
+  width: 100%; /* Ensure it takes full width of the main container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Input row styling */
+.input-row {
+  display: flex; /* Flexbox layout for input rows */
+  flex-direction: column; /* Stack inputs vertically */
+  margin-bottom: 15px; /* Space between input rows */
+}
+
+/* Button styling */
+button {
+  margin-top: 10px; /* Space above buttons */
+}
+
+/* Ensure the diagram is responsive */
+.diagram svg {
+  transform: translateX(+290px); /* Move the diagram to the left */
+  width: 100%; /* Full width of the diagram area */
+  height: 100%; /* Full height of the diagram area */
 }
