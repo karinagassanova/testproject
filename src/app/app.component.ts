@@ -61,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
   tokenData: TokenDisplay[] = [];
   detokenizedData: string[] = []; // Added this for displaying detokenized data
   protected isDiagramVisible: boolean | undefined;
+  showConsole: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -298,4 +299,9 @@ export class AppComponent implements OnInit, OnDestroy {
   hideDiagram(): void {
     this.isDiagramVisible = false;
   }
+
+  toggleConsole() {
+    this.showConsole = !this.showConsole;
+  }
+
 }

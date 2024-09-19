@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tokenization Service</title>
   <link rel="stylesheet" href="app.component.css">
+  <script src="https://secure-cert.shieldconex.com/sdk/shieldconex.min.js"></script>
 </head>
 <body>
 <button (click)="showDiagram()">Proxy</button>
@@ -673,12 +674,14 @@
       <!-- User Credentials -->
       <div class="input-row">
         <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
+        <br>
         <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
       </div>
 
       <!-- Template ID and IFrame Configuration -->
       <div class="input-row">
         <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
+        <br>
         <select [(ngModel)]="baseUrl">
           <option value="https://secure.shieldconex.com">Production</option>
           <option value="https://secure-cert.shieldconex.com">Cert</option>
@@ -687,19 +690,24 @@
 
       <div class="input-row">
         <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
+        <br>
         <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
       </div>
 
-      <button class="go-button" (click)="onGoButtonClick()">Go</button>
-      <button class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
-      <button class="clear-button" (click)="onClearButtonClick()">Clear</button>
-      <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
-    </div>
 
+        <button class="go-button" (click)="onGoButtonClick()">Go</button>
+        <button class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+        <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
+        <button class="clear-button" (click)="onClearButtonClick()">Clear</button>
+      <button class="console-button" (click)="toggleConsole()">
+        {{ showConsole ? 'Hide Console' : 'Show Console' }}
+      </button>
+    </div>
+    <div id="frame1" class="iframe"></div><br><br><br>
     <!-- Console Area -->
-    <div id="right-column">
+    <div *ngIf="showConsole" id="right-column">
       <div class="console-title-container">
-        <h1>Console</h1>
+        <h1>Console</h1><br>
       </div>
       <div class="result-section">
         <pre>

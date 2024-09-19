@@ -56,9 +56,47 @@
   margin-bottom: 15px; /* Space between input rows */
 }
 
+/* Button container styling */
+.button-row {
+  display: flex; /* Use flexbox for button layout */
+  justify-content: space-between; /* Space buttons evenly */
+  margin-top: 20px; /* Space above the button container */
+}
+
 /* Button styling */
 button {
-  margin-top: 10px; /* Space above buttons */
+  flex: 1; /* Buttons take equal space */
+  margin: 0 10px; /* Space between buttons */
+  padding: 10px 15px; /* Padding inside buttons */
+  font-size: 16px; /* Font size for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  border: none; /* Remove border */
+  background-color: #007BFF; /* Button background color */
+  color: #fff; /* Button text color */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Specific styling for each button */
+button.go-button {
+  background-color: #28a745; /* Green for "Go" button */
+}
+
+button.tokenize-button {
+  background-color: #17a2b8; /* Light blue for "Tokenize" button */
+}
+
+button.clear-button {
+  background-color: #ffc107; /* Yellow for "Clear" button */
+}
+
+button.detokenize-button {
+  background-color: #dc3545; /* Red for "Detokenize" button */
 }
 
 /* Ensure the diagram is responsive */
@@ -67,4 +105,10 @@ button {
   transform: translateX(+290px); /* Move the diagram to the left */
   width: 100%; /* Full width of the diagram area */
   height: 100%; /* Full height of the diagram area */
+}
+/* Specific styling for the console button */
+button.console-button {
+  background-color: #6c757d; /* Gray color for "Console" button */
+  flex: 1;
+  margin: 0 10px;
 }
