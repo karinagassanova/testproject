@@ -92,15 +92,18 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('Error', error);
     this.iframeErrors.push(error.message);
   }
-
+  private tempTokenData: TokenDisplay | undefined;
   onShieldconexToken(tokenData: any) {
     console.log('Received Token Data:', tokenData);
 
     if (typeof tokenData === 'object' && tokenData.token) {
       const token = tokenData.token;
 
-      // Display the token data
-      this.tokenData.push({ token });
+      // Store the token data temporarily
+      this.tempTokenData = { token };
+
+      // Add the token to databaseItems
+      this.databaseItems.push({ id: this.databaseItems.length + 1, token });
 
       this.http.post<TokenResponse>(
         'https://st3nuq5s37.execute-api.us-east-1.amazonaws.com/token/handle',
@@ -138,7 +141,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iframeErrors.push('Invalid token data received.');
     }
   }
-
   onDetokenizeButtonClick() {
     if (this.readResponse) {
       const bfid = this.readResponse.bfid; // Fetch BFID from the read response
@@ -303,5 +305,22 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleConsole() {
     this.showConsole = !this.showConsole;
   }
+  databaseItems: { id: number; token: string }[] = [];
+
+
+  viewTokens(id: number) {
+    const tokenData = this.databaseItems.find(item => item.id === id);
+
+    if (tokenData) {
+      console.log(`Viewing tokens for ID ${id}:`, tokenData);
+
+      // Display the temporarily stored token data
+      this.tokenData = [this.tempTokenData!]; // Use the temporary token data
+    } else {
+      console.error(`No token data found for ID ${id}`);
+      this.iframeErrors.push(`No token data found for ID ${id}`);
+    }
+  }
+
 
 }

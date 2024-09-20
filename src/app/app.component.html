@@ -668,7 +668,7 @@
 
     <!-- Configuration Area -->
     <div id="config-area">
-      <h2>Start Tokenization</h2>
+      <h2>Client Processing Service</h2>
       <p>Enter your credentials, Template ID, and configure the IFrame settings</p>
 
       <!-- User Credentials -->
@@ -703,7 +703,29 @@
         {{ showConsole ? 'Hide Console' : 'Show Console' }}
       </button>
     </div>
+    <!-- Database Table -->
+    <div id="database-table">
+      <h2>Database</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of databaseItems">
+          <td>{{ item.id }}</td>
+          <td>
+            <button (click)="viewTokens(item.id)">View Tokens</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div id="frame1" class="iframe"></div><br><br><br>
+
     <!-- Console Area -->
     <div *ngIf="showConsole" id="right-column">
       <div class="console-title-container">
