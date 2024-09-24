@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import {JsonPipe, NgForOf, NgIf} from '@angular/common';
+import {JsonPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 
 interface TokenResponse {
   messageId: string;
@@ -41,7 +41,7 @@ type TokenDisplay = {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [FormsModule, NgForOf, JsonPipe, NgIf],
+  imports: [FormsModule, NgForOf, JsonPipe, NgIf, NgClass],
   standalone: true
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -322,5 +322,9 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  isConfigFolded = false;
 
+  toggleConfigFold() {
+    this.isConfigFolded = !this.isConfigFolded;
+  }
 }

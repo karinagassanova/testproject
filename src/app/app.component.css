@@ -49,26 +49,41 @@
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-/* Input row styling */
+/* Flexbox layout for input rows */
 .input-row {
-  display: flex; /* Flexbox layout for input rows */
-  flex-direction: column; /* Stack inputs vertically */
-  margin-bottom: 15px; /* Space between input rows */
+  display: flex; /* Use flexbox for layout */
+  margin-bottom: 10px; /* Space between input rows */
 }
 
-/* Button container styling */
-.button-row {
-  display: flex; /* Use flexbox for button layout */
-  justify-content: space-between; /* Space buttons evenly */
-  margin-top: 20px; /* Space above the button container */
+/* Adjust the width of input fields */
+.input-row input,
+.input-row select {
+  width: 300px; /* Set the same width for all input fields */
+  padding: 10px; /* Padding for inputs */
+  font-size: 14px; /* Font size */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
+
+/* Single input row styling (for rows with only one input) */
+.input-row.single input {
+  width: 200px; /* Same width for single input fields */
+}
+
+
+/* Button layout adjustment */
+.button-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap if they don't fit in one line */
+  gap: 10px; /* Space between buttons */
+}
+
 
 /* Button styling */
 button {
   flex: 1; /* Buttons take equal space */
   margin: 0 10px; /* Space between buttons */
   padding: 10px 15px; /* Padding inside buttons */
-  font-size: 16px; /* Font size for buttons */
+  font-size: 14px; /* Font size for buttons */
   cursor: pointer; /* Pointer cursor on hover */
   border: none; /* Remove border */
   background-color: #007BFF; /* Button background color */
@@ -120,6 +135,7 @@ button.console-button {
   overflow: hidden; /* Clip any overflowing content */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   margin-top: 20px; /* Space above the table */
+  padding-left:5px;
 }
 
 /* Table styling */
@@ -175,4 +191,21 @@ td button {
 /* Button hover effect in the table */
 td button:hover {
   background-color: #0056b3; /* Darker blue on hover */
+}
+/* Styling for the fold/unfold button */
+.fold-button {
+  background: #6c757d; /* Grey background color */
+  border: none; /* Remove border */
+  color: #fff; /* White text color */
+  font-size: 16px; /* Smaller font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 5px 10px; /* Padding for smaller size */
+  border-radius: 3px; /* Slightly rounded corners */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  margin-left: 10px; /* Space between title and button */
+}
+
+/* Button hover effect */
+.fold-button:hover {
+  background: #5a6268; /* Slightly darker grey on hover */
 }

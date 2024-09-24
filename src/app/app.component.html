@@ -663,45 +663,48 @@
     </svg>
   </div>
 </div>
-  <!-- Right Side: Configuration Area and Console -->
   <div class="main-container">
-
     <!-- Configuration Area -->
-    <div id="config-area">
+    <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
       <h2>Client Processing Service</h2>
-      <p>Enter your credentials, Template ID, and configure the IFrame settings</p>
-
-      <!-- User Credentials -->
-      <div class="input-row">
-        <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
-        <br>
-        <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
-      </div>
-
-      <!-- Template ID and IFrame Configuration -->
-      <div class="input-row">
-        <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
-        <br>
-        <select [(ngModel)]="baseUrl">
-          <option value="https://secure.shieldconex.com">Production</option>
-          <option value="https://secure-cert.shieldconex.com">Cert</option>
-        </select>
-      </div>
-
-      <div class="input-row">
-        <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
-        <br>
-        <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
-      </div>
-
-
-        <button class="go-button" (click)="onGoButtonClick()">Go</button>
-        <button class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
-        <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
-        <button class="clear-button" (click)="onClearButtonClick()">Clear</button>
-      <button class="console-button" (click)="toggleConsole()">
-        {{ showConsole ? 'Hide Console' : 'Show Console' }}
+      <button class="fold-button" (click)="toggleConfigFold()">
+        {{ isConfigFolded ? 'v' : '^' }}
       </button>
+
+      <div *ngIf="!isConfigFolded">
+        <p>Enter your credentials, Template ID, and configure the IFrame settings</p>
+
+        <!-- User Credentials in One Row -->
+        <div class="input-row">
+          <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
+          <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
+        </div>
+
+        <!-- Template ID and Base URL in One Row -->
+        <div class="input-row">
+          <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
+          <select [(ngModel)]="baseUrl">
+            <option value="https://secure.shieldconex.com">Production</option>
+            <option value="https://secure-cert.shieldconex.com">Cert</option>
+          </select>
+        </div>
+
+        <!-- Width and Height in One Row -->
+        <div class="input-row">
+          <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
+          <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
+        </div>
+
+        <!-- Buttons Row -->
+        <div class="button-row">
+          <button class="go-button" (click)="onGoButtonClick()">Go</button>
+          <button class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+          <button class="clear-button" (click)="onClearButtonClick()">Clear</button>
+          <button class="console-button" (click)="toggleConsole()">
+            {{ showConsole ? 'Hide Console' : 'Show Console' }}
+          </button>
+        </div>
+      </div>
     </div>
     <!-- Database Table -->
     <div id="database-table">
@@ -718,6 +721,7 @@
           <td>{{ item.id }}</td>
           <td>
             <button (click)="viewTokens(item.id)">View Tokens</button>
+            <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
           </td>
         </tr>
         </tbody>
