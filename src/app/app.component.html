@@ -93,9 +93,9 @@
             </g>
             <g data-cell-id="qTu5bRzqaAmpRmO-GuTe-2">
               <g>
-                <rect x="135" y="35" width="80" height="80" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)"
-                      pointer-events="all"/>
+                <rect x="135" y="35" width="80" height="80" fill="rgb(255, 255, 255)" [attr.stroke]="iframeOutlineColor" stroke-width="2"/>
               </g>
+
               <g>
                 <g transform="translate(-0.5 -0.5)">
                   <switch>
@@ -248,8 +248,7 @@
             </g>
             <g data-cell-id="qTu5bRzqaAmpRmO-GuTe-9">
               <g>
-                <rect x="135" y="185" width="80" height="80" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)"
-                      pointer-events="all"/>
+                <rect x="135" y="185" width="80" height="80" fill="rgb(255, 255, 255)" [attr.stroke]="iframeOutlineColor" stroke-width="2"/>
               </g>
               <g>
                 <g transform="translate(-0.5 -0.5)">
@@ -661,8 +660,10 @@
         </a></switch>
 
     </svg>
+
   </div>
 </div>
+
   <div class="main-container">
     <!-- Configuration Area -->
     <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
@@ -697,9 +698,7 @@
 
         <!-- Buttons Row -->
         <div class="button-row">
-          <button class="go-button" (click)="onGoButtonClick()">Go</button>
-          <button class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
-          <button class="clear-button" (click)="onClearButtonClick()">Clear</button>
+          <button class="go-button" (click)="onGoButtonClick()">Load Iframe</button>
           <button class="console-button" (click)="toggleConsole()">
             {{ showConsole ? 'Hide Console' : 'Show Console' }}
           </button>
@@ -727,8 +726,15 @@
         </tbody>
       </table>
     </div>
-
+    <div id="iframe-container">
+      <h2><b>IFrame</b></h2>
     <div id="frame1" class="iframe"></div><br><br><br>
+
+    <div class="button-row">
+    <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
+    <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+      </div>
+</div>
 
     <!-- Console Area -->
     <div *ngIf="showConsole" id="right-column">

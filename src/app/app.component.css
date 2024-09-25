@@ -209,3 +209,52 @@ td button:hover {
 .fold-button:hover {
   background: #5a6268; /* Slightly darker grey on hover */
 }
+.clear-button {
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 10px; /* Padding for better touch targets */
+  margin-top: 5px; /* Space above the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  width:70px;
+  margin-left: 22px;
+}
+
+button.tokenize-button {
+  border: none; /* No border */
+  padding: 10px 10px; /* Padding for better touch targets */
+  margin-top: 5px; /* Space above the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  width:75px;
+  margin-left: 22px;
+}
+/* Styling for the IFrame container */
+#iframe-container {
+  margin-top:20px;
+  background-color: #fff; /* White background like config and console */
+  border: 1px solid #ddd; /* Light gray border for a clean look */
+  padding: 20px; /* Internal padding for consistency */
+  margin-bottom: 20px; /* Space below the iframe section */
+  width: 100%; /* Full width to match the config and console */
+  box-sizing: border-box; /* Ensure padding and borders are included in the width */
+  border-radius: 5px; /* Rounded corners */
+
+}
+
+/* Styling for the iframe inside the container */
+#iframe-container .iframe {
+  margin-top:30px;
+  width: 100%; /* Ensure iframe takes full width of its container */
+  height: 600px; /* Fixed height for the iframe */
+  border: none; /* Remove border around the iframe */
+  background-color: #f8f9fa; /* Light background color to indicate the iframe area */
+  display: block; /* Ensure iframe is displayed as a block element */
+  padding: 10px; /* Optional: Add some padding around the iframe content */
+  box-sizing: border-box; /* Ensure padding is included in the total size */
+}
+

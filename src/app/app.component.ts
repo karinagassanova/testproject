@@ -62,6 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
   detokenizedData: string[] = []; // Added this for displaying detokenized data
   protected isDiagramVisible: boolean | undefined;
   showConsole: boolean = false;
+  isGoPressed: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -236,6 +237,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.scfrInstance.onToken = this.onShieldconexToken.bind(this);
 
       this.scfrInstance.render();
+      this.iframeOutlineColor = 'orange';
+      this.isGoPressed = true; // Set this to true when Go is clicked
     } else {
       alert('Please enter a Template ID.');
     }
@@ -327,4 +330,6 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleConfigFold() {
     this.isConfigFolded = !this.isConfigFolded;
   }
+  iframeOutlineColor: string = 'black'; // Default color
+
 }
