@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import {JsonPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {DiagramComponent} from "./components/diagram/diagram.component";
 
 interface TokenResponse {
   messageId: string;
@@ -37,16 +36,19 @@ type TokenDisplay = {
   token: string;
 };
 
+@Injectable({
+  providedIn: "root"
+})
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [FormsModule, NgForOf, JsonPipe, NgIf, NgClass],
-  standalone: true
 })
 export class AppComponent implements OnInit, OnDestroy {
   private messageSubscription: Subscription | undefined;
   scfrInstance: any;
+
+  message: string = ""
 
   username: string = 'bluefin';
   password: string = 'yO98lWEvIZ';
@@ -60,15 +62,15 @@ export class AppComponent implements OnInit, OnDestroy {
   readResponse: TokenResponse | undefined;
   tokenData: TokenDisplay[] = [];
   detokenizedData: string[] = []; // Added this for displaying detokenized data
-  protected isDiagramVisible: boolean | undefined;
   showConsole: boolean = false;
   isGoPressed: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private diagram: DiagramComponent) {}
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
     window.addEventListener('message', this.onMessage.bind(this));
+    this.diagram.hideAll()
   }
 
   ngOnDestroy() {
@@ -296,13 +298,6 @@ export class AppComponent implements OnInit, OnDestroy {
       default:
         this.iframeErrors.push('Unknown message received: ' + JSON.stringify(data, null, 4));
     }
-  }
-  showDiagram(): void {
-    this.isDiagramVisible = true;
-  }
-
-  hideDiagram(): void {
-    this.isDiagramVisible = false;
   }
 
   toggleConsole() {
