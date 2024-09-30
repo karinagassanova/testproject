@@ -27,6 +27,22 @@ export class DiagramComponent implements OnInit {
   thirdpartyBoxOutlineColor: string="black"
   thirdpartyBoxVisible: string="visible"
 
+  lineproxydetokOutlineColor:string="black"
+  lineproxydetokVisible:string="visible"
+
+  lineiframetokenOutlineColor:string="black"
+  lineiframetokenVisible="visible"
+
+  arrowlinethreeOutlineColor: string="black"
+  arrowlinethreeVisible: string="visible"
+
+
+  arrowlinesevenOutlineColor: string ="black"
+  arrowlinesevenVisible: string='visible'
+  arrowlineeightOutlineColor:string="black"
+  arrowlineeightVisible:string="visible"
+  arrowlinenineOutlineColor: string="black"
+  arrowlinenineVisible: string="visible"
 
   constructor() {
   }
@@ -44,6 +60,15 @@ export class DiagramComponent implements OnInit {
     this.proxyBoxVisible='hidden'
     this.thirdpartyBoxVisible='hidden'
 
+    this.lineproxydetokVisible='hidden'
+    this.lineiframetokenVisible='hidden'
+
+    this.arrowlinethreeVisible='hidden'
+
+    this.arrowlinesevenVisible='hidden'
+    this.arrowlineeightVisible='hidden'
+    this.arrowlinenineVisible='hidden'
+
   }
 
   public resetVisibility(){
@@ -55,6 +80,15 @@ export class DiagramComponent implements OnInit {
     this.detokenizationBoxVisible="hidden"
     this.proxyBoxVisible="hidden"
     this.thirdpartyBoxVisible="hidden"
+
+    this.lineproxydetokVisible="hidden"
+    this.lineiframetokenVisible="hidden"
+
+    this.arrowlinethreeVisible="hidden"
+
+    this.arrowlinesevenVisible="hidden"
+    this.arrowlineeightVisible="hidden"
+    this.arrowlinenineVisible="hidden"
   }
 
   public resetColour(){
@@ -66,6 +100,15 @@ export class DiagramComponent implements OnInit {
     this.detokenizationBoxOutlineColor="black"
     this.proxyBoxOutlineColor="black"
     this.thirdpartyBoxOutlineColor="black"
+
+    this.lineproxydetokOutlineColor="black"
+    this.lineiframetokenOutlineColor="black"
+
+    this.arrowlinethreeOutlineColor="black"
+
+    this.arrowlinesevenOutlineColor="black"
+    this.arrowlineeightOutlineColor="black"
+    this.arrowlinenineOutlineColor="black"
   }
 
   public showFlow(flow:string){
@@ -76,10 +119,27 @@ export class DiagramComponent implements OnInit {
       case "tokenization":
         this.iframeBoxVisible = "visible"
         this.iframeGenBoxVisible = "visible"
+        this.tokenizationBoxVisible="visible"
+        this.cacheBoxVisible="visible"
+        this.clientprocserviceBoxVisible="visible"
         break;
       case "detokenization":
+        this.iframeBoxVisible = "visible"
+        this.iframeGenBoxVisible = "visible"
+        this.tokenizationBoxVisible="visible"
+        this.cacheBoxVisible="visible"
+        this.clientprocserviceBoxVisible="visible"
+        this.detokenizationBoxVisible="visible"
         break;
       case "proxy":
+        this.iframeBoxVisible = "visible"
+        this.iframeGenBoxVisible = "visible"
+        this.tokenizationBoxVisible="visible"
+        this.cacheBoxVisible="visible"
+        this.clientprocserviceBoxVisible="visible"
+        this.proxyBoxVisible="visible"
+        this.thirdpartyBoxVisible="visible"
+        this.detokenizationBoxVisible="visible"
         break;
     }
   }
@@ -92,6 +152,7 @@ export class DiagramComponent implements OnInit {
       case "show_iframe":
         this.iframeBoxOutlineColor= "orange"
         this.iframeGenBoxOutlineColor="orange"
+        this.arrowlinesevenOutlineColor="orange"
         break;
       case "tokenize":
         this.iframeBoxOutlineColor= "orange"
