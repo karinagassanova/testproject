@@ -33,10 +33,16 @@ export class DiagramComponent implements OnInit {
   lineiframetokenOutlineColor:string="black"
   lineiframetokenVisible="visible"
 
+  arrowlineoneOutlineColor:string="black"
+  arrowlineoneVisible:string="visible"
+  arrowlinetwoOutlineColor:string="black"
+  arrowlinetwoVisible:string="visible"
   arrowlinethreeOutlineColor: string="black"
   arrowlinethreeVisible: string="visible"
-
-
+  arrowlinefiveOutlineColor:string="black"
+  arrowlinefiveVisible:string="visible"
+  arrowlinesixOutlineColor:string="black"
+  arrowlinesixVisible:string="visible"
   arrowlinesevenOutlineColor: string ="black"
   arrowlinesevenVisible: string='visible'
   arrowlineeightOutlineColor:string="black"
@@ -44,6 +50,8 @@ export class DiagramComponent implements OnInit {
   arrowlinenineOutlineColor: string="black"
   arrowlinenineVisible: string="visible"
 
+
+  proxytextVisible:string="visible"
   constructor() {
   }
 
@@ -63,8 +71,11 @@ export class DiagramComponent implements OnInit {
     this.lineproxydetokVisible='hidden'
     this.lineiframetokenVisible='hidden'
 
+    this.arrowlineoneVisible='hidden'
+    this.arrowlinetwoVisible='hidden'
     this.arrowlinethreeVisible='hidden'
-
+    this.arrowlinefiveVisible='hidden'
+    this.arrowlinesixVisible='hidden'
     this.arrowlinesevenVisible='hidden'
     this.arrowlineeightVisible='hidden'
     this.arrowlinenineVisible='hidden'
@@ -84,8 +95,11 @@ export class DiagramComponent implements OnInit {
     this.lineproxydetokVisible="hidden"
     this.lineiframetokenVisible="hidden"
 
+    this.arrowlineoneVisible="hidden"
+    this.arrowlinetwoVisible="hidden"
     this.arrowlinethreeVisible="hidden"
-
+    this.arrowlinefiveVisible="hidden"
+    this.arrowlinesixVisible="hidden"
     this.arrowlinesevenVisible="hidden"
     this.arrowlineeightVisible="hidden"
     this.arrowlinenineVisible="hidden"
@@ -104,8 +118,11 @@ export class DiagramComponent implements OnInit {
     this.lineproxydetokOutlineColor="black"
     this.lineiframetokenOutlineColor="black"
 
+    this.arrowlineoneOutlineColor="black"
+    this.arrowlinetwoOutlineColor="black"
     this.arrowlinethreeOutlineColor="black"
-
+    this.arrowlinefiveOutlineColor="black"
+    this.arrowlinesixOutlineColor="black"
     this.arrowlinesevenOutlineColor="black"
     this.arrowlineeightOutlineColor="black"
     this.arrowlinenineOutlineColor="black"
@@ -122,6 +139,10 @@ export class DiagramComponent implements OnInit {
         this.tokenizationBoxVisible="visible"
         this.cacheBoxVisible="visible"
         this.clientprocserviceBoxVisible="visible"
+        this.arrowlineoneVisible="visible"
+        this.arrowlinetwoVisible="visible"
+        this.arrowlinethreeVisible="visible"
+        this.lineiframetokenVisible="visible"
         break;
       case "detokenization":
         this.iframeBoxVisible = "visible"
@@ -130,6 +151,13 @@ export class DiagramComponent implements OnInit {
         this.cacheBoxVisible="visible"
         this.clientprocserviceBoxVisible="visible"
         this.detokenizationBoxVisible="visible"
+        this.arrowlineoneVisible="visible"
+        this.arrowlinetwoVisible="visible"
+        this.arrowlinethreeVisible="visible"
+        this.lineiframetokenVisible="visible"
+        this.arrowlinefiveVisible="visible"
+        this.arrowlinesixVisible="visible"
+        this.arrowlinesevenVisible="visible"
         break;
       case "proxy":
         this.iframeBoxVisible = "visible"
@@ -140,6 +168,16 @@ export class DiagramComponent implements OnInit {
         this.proxyBoxVisible="visible"
         this.thirdpartyBoxVisible="visible"
         this.detokenizationBoxVisible="visible"
+        this.arrowlineoneVisible="visible"
+        this.arrowlinetwoVisible="visible"
+        this.arrowlinethreeVisible="visible"
+        this.lineiframetokenVisible="visible"
+        this.arrowlinefiveVisible="visible"
+        this.arrowlinesixVisible="visible"
+        this.arrowlinesevenVisible="visible"
+        this.lineproxydetokVisible="visible"
+        this.arrowlineeightVisible="visible"
+        this.arrowlinenineVisible="visible"
         break;
     }
   }
@@ -152,7 +190,6 @@ export class DiagramComponent implements OnInit {
       case "show_iframe":
         this.iframeBoxOutlineColor= "orange"
         this.iframeGenBoxOutlineColor="orange"
-        this.arrowlinesevenOutlineColor="orange"
         break;
       case "tokenize":
         this.iframeBoxOutlineColor= "orange"
