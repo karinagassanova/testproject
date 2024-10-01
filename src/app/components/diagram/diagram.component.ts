@@ -50,6 +50,8 @@ export class DiagramComponent implements OnInit {
   arrowlinenineOutlineColor: string="black"
   arrowlinenineVisible: string="visible"
 
+  extradetokenizearrowBoxOutlineColor:string="black"
+  extradetokenizearrowBoxVisible:string="hidden"
 
   proxytextVisible:string="visible"
   constructor() {
@@ -80,6 +82,7 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightVisible='hidden'
     this.arrowlinenineVisible='hidden'
 
+    this.extradetokenizearrowBoxVisible='hidden'
   }
 
   public resetVisibility(){
@@ -103,6 +106,8 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenVisible="hidden"
     this.arrowlineeightVisible="hidden"
     this.arrowlinenineVisible="hidden"
+
+    this.extradetokenizearrowBoxVisible="hidden"
   }
 
   public resetColour(){
@@ -126,6 +131,8 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenOutlineColor="black"
     this.arrowlineeightOutlineColor="black"
     this.arrowlinenineOutlineColor="black"
+
+    this.extradetokenizearrowBoxOutlineColor="black"
   }
 
   public showFlow(flow:string){
@@ -143,6 +150,7 @@ export class DiagramComponent implements OnInit {
         this.arrowlinetwoVisible="visible"
         this.arrowlinethreeVisible="visible"
         this.lineiframetokenVisible="visible"
+
         break;
       case "detokenization":
         this.iframeBoxVisible = "visible"
@@ -158,6 +166,7 @@ export class DiagramComponent implements OnInit {
         this.arrowlinefiveVisible="visible"
         this.arrowlinesixVisible="visible"
         this.arrowlinesevenVisible="visible"
+        this.extradetokenizearrowBoxVisible="visible"
         break;
       case "proxy":
         this.iframeBoxVisible = "visible"
