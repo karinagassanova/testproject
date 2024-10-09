@@ -10,11 +10,13 @@ import {DiagramComponent} from "./components/diagram/diagram.component";
 import {FormsModule} from "@angular/forms";
 
 import {CommonModule, JsonPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {ButtonsComponent} from "./components/buttons/buttons.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     DiagramComponent,
+    ButtonsComponent
   ],
   imports: [
     CommonModule,

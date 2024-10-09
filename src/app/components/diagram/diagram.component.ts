@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Injectable, Input, OnInit, Output} from "@angular/core";
+import {ChangeDetectorRef, Component, EventEmitter, Injectable, Input, OnInit, Output} from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +54,10 @@ export class DiagramComponent implements OnInit {
   extradetokenizearrowBoxVisible:string="hidden"
 
   proxytextVisible:string="visible"
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
+
   }
+
 
   ngOnInit(): void {
   }
@@ -137,6 +139,7 @@ export class DiagramComponent implements OnInit {
 
   public showFlow(flow:string){
 
+    console.log("diagram.showFlow")
     this.resetVisibility();
 
     switch (flow){
@@ -189,6 +192,7 @@ export class DiagramComponent implements OnInit {
         this.arrowlinenineVisible="visible"
         break;
     }
+    this.cdr.detectChanges()
   }
 
   public highlight(state:string){
@@ -225,6 +229,8 @@ export class DiagramComponent implements OnInit {
         this.thirdpartyBoxOutlineColor="orange"
         break;
     }
+
+    this.cdr.detectChanges()
   }
 
 }
