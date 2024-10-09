@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import {JsonPipe, NgForOf} from '@angular/common';
+import {DiagramComponent} from "./components/diagram/diagram.component";
 
 interface TokenResponse {
   messageId: string;
@@ -37,16 +36,19 @@ type TokenDisplay = {
   token: string;
 };
 
+@Injectable({
+  providedIn: "root"
+})
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [FormsModule, NgForOf, JsonPipe],
-  standalone: true
 })
 export class AppComponent implements OnInit, OnDestroy {
   private messageSubscription: Subscription | undefined;
   scfrInstance: any;
+
+  message: string = ""
 
   username: string = 'bluefin';
   password: string = 'yO98lWEvIZ';
@@ -60,12 +62,15 @@ export class AppComponent implements OnInit, OnDestroy {
   readResponse: TokenResponse | undefined;
   tokenData: TokenDisplay[] = [];
   detokenizedData: string[] = []; // Added this for displaying detokenized data
+  showConsole: boolean = false;
+  isGoPressed: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private diagram: DiagramComponent) {}
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
     window.addEventListener('message', this.onMessage.bind(this));
+    this.diagram.hideAll()
   }
 
   ngOnDestroy() {
@@ -90,15 +95,18 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('Error', error);
     this.iframeErrors.push(error.message);
   }
-
+  private tempTokenData: TokenDisplay | undefined;
   onShieldconexToken(tokenData: any) {
     console.log('Received Token Data:', tokenData);
 
     if (typeof tokenData === 'object' && tokenData.token) {
       const token = tokenData.token;
 
-      // Display the token data
-      this.tokenData.push({ token });
+      // Store the token data temporarily
+      this.tempTokenData = { token };
+
+      // Add the token to databaseItems
+      this.databaseItems.push({ id: this.databaseItems.length + 1, token });
 
       this.http.post<TokenResponse>(
         'https://st3nuq5s37.execute-api.us-east-1.amazonaws.com/token/handle',
@@ -136,7 +144,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iframeErrors.push('Invalid token data received.');
     }
   }
-
   onDetokenizeButtonClick() {
     if (this.readResponse) {
       const bfid = this.readResponse.bfid; // Fetch BFID from the read response
@@ -232,6 +239,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.scfrInstance.onToken = this.onShieldconexToken.bind(this);
 
       this.scfrInstance.render();
+      this.iframeOutlineColor = 'orange';
+      this.isGoPressed = true; // Set this to true when Go is clicked
     } else {
       alert('Please enter a Template ID.');
     }
@@ -290,4 +299,32 @@ export class AppComponent implements OnInit, OnDestroy {
         this.iframeErrors.push('Unknown message received: ' + JSON.stringify(data, null, 4));
     }
   }
+
+  toggleConsole() {
+    this.showConsole = !this.showConsole;
+  }
+  databaseItems: { id: number; token: string }[] = [];
+
+
+  viewTokens(id: number) {
+    const tokenData = this.databaseItems.find(item => item.id === id);
+
+    if (tokenData) {
+      console.log(`Viewing tokens for ID ${id}:`, tokenData);
+
+      // Display the temporarily stored token data
+      this.tokenData = [this.tempTokenData!]; // Use the temporary token data
+    } else {
+      console.error(`No token data found for ID ${id}`);
+      this.iframeErrors.push(`No token data found for ID ${id}`);
+    }
+  }
+
+  isConfigFolded = false;
+
+  toggleConfigFold() {
+    this.isConfigFolded = !this.isConfigFolded;
+  }
+  iframeOutlineColor: string = 'black'; // Default color
+
 }

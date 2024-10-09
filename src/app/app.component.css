@@ -1,13 +1,260 @@
+/* Container setup with CSS Grid */
 .container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr; /* Column width ratio */
+  max-width: 1000px; /* Container width */
+  margin: 0 auto; /* Center the container */
+  gap: 40px; /* Space between columns */
+  padding: 0; /* Remove padding from the container */
 }
 
-.form-group {
-  margin-bottom: 15px;
+/* Diagram styling */
+.diagram {
+  border: 0; /* Remove border */
+  padding: 0; /* Remove padding */
+  grid-column: 1; /* Place in the first column */
+  width: 700px; /* Full width of the allocated column */
+  height: 400px; /* Set a specific height for the diagram to make it larger */
+  transform: translateX(-550px); /* Move the diagram container to the left */
 }
 
-.btn {
-  margin-top: 10px;
+/* Main container for config and console */
+.main-container {
+  display: flex; /* Flexbox layout for stacking config and console vertically */
+  flex-direction: column; /* Stack items vertically */
+  grid-column: 2; /* Place in the second column */
+  width: 800px; /* Ensure it uses the full width of the main container's column */
+  padding: 0; /* Remove padding to ensure it uses the full width */
+  margin-left: -210px;
 }
+
+/* Configuration area styling */
+#config-area {
+  background-color: #fff; /* Background color for config area */
+  border: 1px solid #ddd; /* Border for config area */
+  padding: 20px; /* Padding inside the config area */
+  margin-bottom: 20px; /* Space between config area and console */
+  width: 100%; /* Ensure it takes full width of the main container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Console area styling */
+#right-column {
+  background-color: #fff; /* Background color for console area */
+  border: 1px solid #ddd; /* Border for console area */
+  padding: 20px; /* Padding inside the console area */
+  max-height: 400px; /* Max height for scrolling */
+  overflow-y: auto; /* Vertical scroll if needed */
+  width: 100%; /* Ensure it takes full width of the main container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Flexbox layout for input rows */
+.input-row {
+  display: flex; /* Use flexbox for layout */
+  margin-bottom: 10px; /* Space between input rows */
+}
+
+/* Adjust the width of input fields */
+.input-row input,
+.input-row select {
+  width: 300px; /* Set the same width for all input fields */
+  padding: 10px; /* Padding for inputs */
+  font-size: 14px; /* Font size */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Single input row styling (for rows with only one input) */
+.input-row.single input {
+  width: 200px; /* Same width for single input fields */
+}
+
+
+/* Button layout adjustment */
+.button-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap if they don't fit in one line */
+  gap: 10px; /* Space between buttons */
+}
+
+
+/* Button styling */
+button {
+  flex: 1; /* Buttons take equal space */
+  margin: 0 10px; /* Space between buttons */
+  padding: 10px 15px; /* Padding inside buttons */
+  font-size: 14px; /* Font size for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  border: none; /* Remove border */
+  background-color: #007BFF; /* Button background color */
+  color: #fff; /* Button text color */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Specific styling for each button */
+button.go-button {
+  background-color: #28a745; /* Green for "Go" button */
+}
+
+button.tokenize-button {
+  background-color: #17a2b8; /* Light blue for "Tokenize" button */
+}
+
+button.clear-button {
+  background-color: #ffc107; /* Yellow for "Clear" button */
+}
+
+button.detokenize-button {
+  background-color: #dc3545; /* Red for "Detokenize" button */
+}
+
+/* Ensure the diagram is responsive */
+.diagram svg {
+  padding-top: 10px;
+  transform: translateX(+290px); /* Move the diagram to the left */
+  width: 100%; /* Full width of the diagram area */
+  height: 100%; /* Full height of the diagram area */
+}
+/* Specific styling for the console button */
+button.console-button {
+  background-color: #6c757d; /* Gray color for "Console" button */
+  flex: 1;
+  margin: 0 10px;
+}
+/* Database Table Styling */
+#database-table {
+  background-color: #fff; /* Background color for the table area */
+  border: 1px solid #ddd; /* Border around the table */
+  border-radius: 5px; /* Rounded corners for the table */
+  overflow: hidden; /* Clip any overflowing content */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-top: 20px; /* Space above the table */
+  padding-left:5px;
+}
+
+/* Table styling */
+table {
+  width: 100%; /* Full width of the table area */
+  border-collapse: collapse; /* Merge borders */
+  table-layout: auto; /* Allow auto column width */
+}
+
+/* Table Header Styling */
+thead {
+  background-color: #f8f9fa; /* Light gray for header background */
+}
+
+th {
+  padding: 10px; /* Padding inside table header */
+  text-align: left; /* Align text to the left */
+  border-bottom: 2px solid #ddd; /* Bottom border for header */
+  font-weight: bold; /* Bold font for header */
+}
+
+/* Table Row Styling */
+tbody tr {
+  transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+tbody tr:hover {
+  background-color: #e9ecef; /* Light blue on hover */
+}
+
+/* Table Cell Styling */
+td {
+  padding: 10px; /* Padding inside table cells */
+  border-bottom: 1px solid #ddd; /* Bottom border for cells */
+}
+
+/* Button Styling within the Table */
+td button {
+  padding: 5px 10px; /* Padding for buttons in the table */
+  font-size: 14px; /* Font size for buttons */
+  border: none; /* Remove border */
+  border-radius: 3px; /* Rounded corners */
+  background-color: #007BFF; /* Button background color */
+  color: #fff; /* Button text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Button hover effect in the table */
+td button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+/* Styling for the fold/unfold button */
+.fold-button {
+  background: #6c757d; /* Grey background color */
+  border: none; /* Remove border */
+  color: #fff; /* White text color */
+  font-size: 16px; /* Smaller font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 5px 10px; /* Padding for smaller size */
+  border-radius: 3px; /* Slightly rounded corners */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  margin-left: 10px; /* Space between title and button */
+}
+
+/* Button hover effect */
+.fold-button:hover {
+  background: #5a6268; /* Slightly darker grey on hover */
+}
+.clear-button {
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 10px; /* Padding for better touch targets */
+  margin-top: 5px; /* Space above the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  width:70px;
+  margin-left: 22px;
+}
+
+button.tokenize-button {
+  border: none; /* No border */
+  padding: 10px 10px; /* Padding for better touch targets */
+  margin-top: 5px; /* Space above the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Larger font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  width:75px;
+  margin-left: 22px;
+}
+/* Styling for the IFrame container */
+#iframe-container {
+  margin-top:20px;
+  background-color: #fff; /* White background like config and console */
+  border: 1px solid #ddd; /* Light gray border for a clean look */
+  padding: 20px; /* Internal padding for consistency */
+  margin-bottom: 20px; /* Space below the iframe section */
+  width: 100%; /* Full width to match the config and console */
+  box-sizing: border-box; /* Ensure padding and borders are included in the width */
+  border-radius: 5px; /* Rounded corners */
+
+}
+
+/* Styling for the iframe inside the container */
+#iframe-container .iframe {
+  margin-top:30px;
+  width: 100%; /* Ensure iframe takes full width of its container */
+  height: 600px; /* Fixed height for the iframe */
+  border: none; /* Remove border around the iframe */
+  background-color: #f8f9fa; /* Light background color to indicate the iframe area */
+  display: block; /* Ensure iframe is displayed as a block element */
+  padding: 10px; /* Optional: Add some padding around the iframe content */
+  box-sizing: border-box; /* Ensure padding is included in the total size */
+}
+

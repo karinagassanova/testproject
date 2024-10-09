@@ -5,18 +5,28 @@ import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient, withInterceptor
 // @ts-ignore
 import { AppComponent } from './app.component';
 // @ts-ignore
-import { DataFetchComponent } from './data-fetch/data-fetch.component';
-// @ts-ignore
-import { MyInterceptor } from './my-interceptor.service';  // Adjust the path as needed
+import { MyInterceptor } from './my-interceptor.service';
+import {DiagramComponent} from "./components/diagram/diagram.component";
+import {FormsModule} from "@angular/forms";
+
+import {CommonModule, JsonPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {ButtonsComponent} from "./components/buttons/buttons.component";
 
 @NgModule({
   declarations: [
-    DataFetchComponent
+    AppComponent,
+    DiagramComponent,
+    ButtonsComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
-    AppComponent
+    FormsModule,
+    JsonPipe,
+    NgClass,
+    NgForOf,
+    NgIf,
   ],
   providers: [
     provideHttpClient(
