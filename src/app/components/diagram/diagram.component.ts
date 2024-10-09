@@ -197,6 +197,7 @@ export class DiagramComponent implements OnInit {
 
   public highlight(state:string){
 
+    console.log("diagram.highlight")
     this.resetColour()
 
     switch (state){
