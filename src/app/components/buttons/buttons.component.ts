@@ -33,6 +33,9 @@ export class ButtonsComponent implements OnInit {
   }
 
   public highlight(state:string){
+    console.log("highlight")
+
+    this.diagramComponent.highlight(state)
   }
 
 }

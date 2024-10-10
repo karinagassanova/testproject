@@ -26,13 +26,12 @@ export class DiagramComponent implements OnInit {
   proxyBoxVisible: string="visible"
   thirdpartyBoxOutlineColor: string="black"
   thirdpartyBoxVisible: string="visible"
-
   lineproxydetokOutlineColor:string="black"
   lineproxydetokVisible:string="visible"
-
   lineiframetokenOutlineColor:string="black"
-  lineiframetokenVisible="visible"
-
+  lineiframetokenVisible:string = "visible"
+  linedetokboxOutlineColor: string="black"
+  linedetokboxVisible:string = "visible"
   arrowlineoneOutlineColor:string="black"
   arrowlineoneVisible:string="visible"
   arrowlinetwoOutlineColor:string="black"
@@ -53,7 +52,10 @@ export class DiagramComponent implements OnInit {
   extradetokenizearrowBoxOutlineColor:string="black"
   extradetokenizearrowBoxVisible:string="hidden"
 
-  proxytextVisible:string="visible"
+  detokflowlineOutlineColor:string="black"
+  detokflowlineVisible: string="hidden"
+
+
   constructor(private cdr: ChangeDetectorRef) {
 
   }
@@ -71,10 +73,9 @@ export class DiagramComponent implements OnInit {
     this.detokenizationBoxVisible='hidden'
     this.proxyBoxVisible='hidden'
     this.thirdpartyBoxVisible='hidden'
-
     this.lineproxydetokVisible='hidden'
     this.lineiframetokenVisible='hidden'
-
+    this.linedetokboxVisible='hidden'
     this.arrowlineoneVisible='hidden'
     this.arrowlinetwoVisible='hidden'
     this.arrowlinethreeVisible='hidden'
@@ -83,8 +84,9 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenVisible='hidden'
     this.arrowlineeightVisible='hidden'
     this.arrowlinenineVisible='hidden'
-
     this.extradetokenizearrowBoxVisible='hidden'
+
+    this.detokflowlineVisible='hidden'
   }
 
   public resetVisibility(){
@@ -96,10 +98,9 @@ export class DiagramComponent implements OnInit {
     this.detokenizationBoxVisible="hidden"
     this.proxyBoxVisible="hidden"
     this.thirdpartyBoxVisible="hidden"
-
     this.lineproxydetokVisible="hidden"
     this.lineiframetokenVisible="hidden"
-
+    this.linedetokboxVisible="hidden"
     this.arrowlineoneVisible="hidden"
     this.arrowlinetwoVisible="hidden"
     this.arrowlinethreeVisible="hidden"
@@ -108,8 +109,9 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenVisible="hidden"
     this.arrowlineeightVisible="hidden"
     this.arrowlinenineVisible="hidden"
-
     this.extradetokenizearrowBoxVisible="hidden"
+
+    this.detokflowlineVisible="hidden"
   }
 
   public resetColour(){
@@ -121,10 +123,9 @@ export class DiagramComponent implements OnInit {
     this.detokenizationBoxOutlineColor="black"
     this.proxyBoxOutlineColor="black"
     this.thirdpartyBoxOutlineColor="black"
-
     this.lineproxydetokOutlineColor="black"
     this.lineiframetokenOutlineColor="black"
-
+    this.linedetokboxOutlineColor="black"
     this.arrowlineoneOutlineColor="black"
     this.arrowlinetwoOutlineColor="black"
     this.arrowlinethreeOutlineColor="black"
@@ -133,8 +134,8 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenOutlineColor="black"
     this.arrowlineeightOutlineColor="black"
     this.arrowlinenineOutlineColor="black"
-
     this.extradetokenizearrowBoxOutlineColor="black"
+    this.detokflowlineOutlineColor="black"
   }
 
   public showFlow(flow:string){
@@ -144,6 +145,7 @@ export class DiagramComponent implements OnInit {
 
     switch (flow){
       case "tokenization":
+        this.arrowlinefiveVisible="visible"
         this.iframeBoxVisible = "visible"
         this.iframeGenBoxVisible = "visible"
         this.tokenizationBoxVisible="visible"
@@ -153,23 +155,11 @@ export class DiagramComponent implements OnInit {
         this.arrowlinetwoVisible="visible"
         this.arrowlinethreeVisible="visible"
         this.lineiframetokenVisible="visible"
-
         break;
       case "detokenization":
-        this.iframeBoxVisible = "visible"
-        this.iframeGenBoxVisible = "visible"
-        this.tokenizationBoxVisible="visible"
-        this.cacheBoxVisible="visible"
         this.clientprocserviceBoxVisible="visible"
         this.detokenizationBoxVisible="visible"
-        this.arrowlineoneVisible="visible"
-        this.arrowlinetwoVisible="visible"
-        this.arrowlinethreeVisible="visible"
-        this.lineiframetokenVisible="visible"
-        this.arrowlinefiveVisible="visible"
-        this.arrowlinesixVisible="visible"
-        this.arrowlinesevenVisible="visible"
-        this.extradetokenizearrowBoxVisible="visible"
+        this.detokflowlineVisible="visible"
         break;
       case "proxy":
         this.iframeBoxVisible = "visible"
@@ -184,6 +174,7 @@ export class DiagramComponent implements OnInit {
         this.arrowlinetwoVisible="visible"
         this.arrowlinethreeVisible="visible"
         this.lineiframetokenVisible="visible"
+        this.linedetokboxVisible="visible"
         this.arrowlinefiveVisible="visible"
         this.arrowlinesixVisible="visible"
         this.arrowlinesevenVisible="visible"
