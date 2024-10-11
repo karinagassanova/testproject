@@ -10,21 +10,21 @@ import {ChangeDetectorRef, Component, EventEmitter, Injectable, Input, OnInit, O
 })
 export class DiagramComponent implements OnInit {
 
-  iframeBoxOutlineColor: string="black"
+  iframeBoxOutlineColor: string="white"
   iframeBoxVisible: string= "visible"
-  iframeGenBoxOutlineColor: string="black"
+  iframeGenBoxOutlineColor: string="white"
   iframeGenBoxVisible: string= "visible"
-  tokenizationBoxOutlineColor: string= "black"
+  tokenizationBoxOutlineColor: string= "white"
   tokenizationBoxVisible: string="visible"
-  cacheBoxOutlineColor: string="black"
+  cacheBoxOutlineColor: string="white"
   cacheBoxVisible: string="visible"
-  clientprocserviceBoxOutlineColor: string="black"
+  clientprocserviceBoxOutlineColor: string="white"
   clientprocserviceBoxVisible: string="visible"
-  detokenizationBoxOutlineColor: string="black"
+  detokenizationBoxOutlineColor: string="white"
   detokenizationBoxVisible="visible"
-  proxyBoxOutlineColor: string="black"
+  proxyBoxOutlineColor: string="white"
   proxyBoxVisible: string="visible"
-  thirdpartyBoxOutlineColor: string="black"
+  thirdpartyBoxOutlineColor: string="white"
   thirdpartyBoxVisible: string="visible"
   lineproxydetokOutlineColor:string="black"
   lineproxydetokVisible:string="visible"
@@ -48,10 +48,6 @@ export class DiagramComponent implements OnInit {
   arrowlineeightVisible:string="visible"
   arrowlinenineOutlineColor: string="black"
   arrowlinenineVisible: string="visible"
-
-  extradetokenizearrowBoxOutlineColor:string="black"
-  extradetokenizearrowBoxVisible:string="hidden"
-
   detokflowlineOutlineColor:string="black"
   detokflowlineVisible: string="hidden"
 
@@ -84,8 +80,6 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenVisible='hidden'
     this.arrowlineeightVisible='hidden'
     this.arrowlinenineVisible='hidden'
-    this.extradetokenizearrowBoxVisible='hidden'
-
     this.detokflowlineVisible='hidden'
   }
 
@@ -109,20 +103,18 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenVisible="hidden"
     this.arrowlineeightVisible="hidden"
     this.arrowlinenineVisible="hidden"
-    this.extradetokenizearrowBoxVisible="hidden"
-
     this.detokflowlineVisible="hidden"
   }
 
   public resetColour(){
-    this.iframeBoxOutlineColor= "black"
-    this.iframeGenBoxOutlineColor= "black"
-    this.tokenizationBoxOutlineColor="black"
-    this.cacheBoxOutlineColor="black"
-    this.clientprocserviceBoxOutlineColor="black"
-    this.detokenizationBoxOutlineColor="black"
-    this.proxyBoxOutlineColor="black"
-    this.thirdpartyBoxOutlineColor="black"
+    this.iframeBoxOutlineColor= "white"
+    this.iframeGenBoxOutlineColor= "white"
+    this.tokenizationBoxOutlineColor="white"
+    this.cacheBoxOutlineColor="white"
+    this.clientprocserviceBoxOutlineColor="white"
+    this.detokenizationBoxOutlineColor="white"
+    this.proxyBoxOutlineColor="white"
+    this.thirdpartyBoxOutlineColor="white"
     this.lineproxydetokOutlineColor="black"
     this.lineiframetokenOutlineColor="black"
     this.linedetokboxOutlineColor="black"
@@ -134,7 +126,6 @@ export class DiagramComponent implements OnInit {
     this.arrowlinesevenOutlineColor="black"
     this.arrowlineeightOutlineColor="black"
     this.arrowlinenineOutlineColor="black"
-    this.extradetokenizearrowBoxOutlineColor="black"
     this.detokflowlineOutlineColor="black"
   }
 
