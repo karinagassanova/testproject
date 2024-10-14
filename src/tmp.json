@@ -1,0 +1,40 @@
+{
+  "messageId": "1202409051152391031328130",
+  "bfid": "djI6MTIwMjQwOTA1MTE1MjM4MTAxMjE3NzExNnxCbHVlZmluU2VjdXJpdHl8UWlteEo1NnllVGc9fFNWVDIwMTkwNDE4MTJERVZ8",
+  "reference": null,
+  "values": [
+    {
+      "name": "gender",
+      "value": "6bQ"
+    },
+    {
+      "name": "alphastring",
+      "value": "P0b4e"
+    },
+    {
+      "name": "accountnumber",
+      "value": "733"
+    },
+    {
+      "name": "address",
+      "value": null
+    },
+    {
+      "name": "email",
+      "value": null
+    },
+    {
+      "name": "name",
+      "value": null
+    },
+    {
+      "name": "numericstring",
+      "value": null
+    },
+    {
+      "name": "alphanumericstring",
+      "value": null
+    }
+  ],
+  "state": null
+}
