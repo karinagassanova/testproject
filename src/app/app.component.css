@@ -5,7 +5,7 @@
   max-width: 1000px; /* Container width */
   margin: 0 auto; /* Center the container */
   gap: 40px; /* Space between columns */
-  padding: 0; /* Remove padding from the container */
+  padding-top: 10px; /* Remove padding from the container */
 }
 
 /* Diagram styling */
@@ -40,9 +40,8 @@
 
 /* Console area styling */
 #right-column {
-  background-color: #fff; /* Background color for console area */
   border: 1px solid #ddd; /* Border for console area */
-  padding: 20px; /* Padding inside the console area */
+  padding: 10px; /* Padding inside the console area */
   max-height: 400px; /* Max height for scrolling */
   overflow-y: auto; /* Vertical scroll if needed */
   width: 100%; /* Ensure it takes full width of the main container */
@@ -80,6 +79,7 @@
 
 /* Button styling */
 button {
+  padding-top: 10px;
   flex: 1; /* Buttons take equal space */
   margin: 0 10px; /* Space between buttons */
   padding: 10px 15px; /* Padding inside buttons */
@@ -194,6 +194,7 @@ td button:hover {
 }
 /* Styling for the fold/unfold button */
 .fold-button {
+  padding-top:10px;
   background: #6c757d; /* Grey background color */
   border: none; /* Remove border */
   color: #fff; /* White text color */

@@ -3,8 +3,6 @@
 
   <!-- Left Side: Diagram -->
   <diagram></diagram>
-  <buttons></buttons>
-
   <div class="main-container">
     <!-- Configuration Area -->
     <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
@@ -67,21 +65,32 @@
         </tbody>
       </table>
     </div>
-    <div id="iframe-container">
-      <h2><b>IFrame</b></h2>
-    <div id="frame1" class="iframe"></div><br><br><br>
 
-    <div class="button-row">
-    <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
-    <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+
+    <!-- IFrame Toggle Section -->
+    <div id="iframe-toggle-area" [ngClass]="{ 'folded': isIframeFolded }">
+      <h2><b>IFrame</b></h2>
+      <button class="fold-button" (click)="toggleIframeFold()">
+        {{ isIframeFolded ? 'v' : '^' }} <!-- Toggle button -->
+      </button>
+      <br>
+      <br>
+      <div *ngIf="!isIframeFolded" id="iframe-container">
+        <p>Configure your IFrame settings and actions here:</p> <!-- Instruction text -->
+        <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
+        <br>
+        <br>
+        <div class="button-row">
+          <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
+          <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+        </div>
       </div>
-</div>
+    </div>
+
 
     <!-- Console Area -->
     <div *ngIf="showConsole" id="right-column">
-      <div class="console-title-container">
-        <h1>Console</h1><br>
-      </div>
+        <h2>Console</h2>
       <div class="result-section">
         <pre>
           <code id="combined-result">

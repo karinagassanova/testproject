@@ -11,12 +11,13 @@ import {FormsModule} from "@angular/forms";
 
 import {CommonModule, JsonPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {ButtonsComponent} from "./components/buttons/buttons.component";
+import {SharedService} from "./services/sharedservice";
 
 @NgModule({
   declarations: [
     AppComponent,
     DiagramComponent,
-    ButtonsComponent
+    ButtonsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +37,8 @@ import {ButtonsComponent} from "./components/buttons/buttons.component";
       provide: HTTP_INTERCEPTORS,
       useClass: MyInterceptor,
       multi: true
-    }
+    },
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

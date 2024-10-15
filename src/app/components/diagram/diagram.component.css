@@ -1,7 +1,7 @@
 /* Ensure the diagram is responsive */
 .diagram svg {
   padding-top: 10px;
-  transform: translateX(+290px); /* Move the diagram to the left */
+  transform: translateX(+330px); /* Move the diagram to the left */
   width: 100%; /* Full width of the diagram area */
   height: 100%; /* Full height of the diagram area */
 }
@@ -12,5 +12,48 @@
   grid-column: 1; /* Place in the first column */
   width: 700px; /* Full width of the allocated column */
   height: 400px; /* Set a specific height for the diagram to make it larger */
-  transform: translateX(-550px); /* Move the diagram container to the left */
+  transform: translateX(-650px); /* Move the diagram container to the left */
+}
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns buttons to the left */
+  gap: 10px; /* Space between buttons */
+  transform: translateX(-230px); /* Move the diagram to the left */
+}
+
+.button-container button {
+  background-color: rgb(128, 128, 128); /* Gray background */
+  color: white; /* White text color */
+  border: 2px solid transparent; /* Border for hover effects */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 16px; /* Slightly larger font for readability */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+}
+
+.button-container button:hover {
+  background-color: rgb(105, 105, 105); /* Darker gray on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.button-container button:active {
+  background-color: rgb(85, 85, 85); /* Even darker gray when clicked */
+  transform: translateY(1px); /* Slight press effect */
+}
+
+.button-container button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5); /* Outline effect on focus */
+}
+
+
+.text-left {
+  transform: translateX(-350px); /* Adjust the horizontal shift */
+  max-width: 730px; /* Restrict the width of the text container */
+  margin-left: 0; /* Align it to the left */
+  padding: 10px; /* Optional padding for a better look */
+  white-space: pre-wrap; /* Allow wrapping in the <pre> tag */
+  word-wrap: break-word; /* Ensure long words wrap inside the container */
 }

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {DiagramComponent} from "../diagram/diagram.component";
+import {SharedService} from "../../services/sharedservice";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {DiagramComponent} from "../diagram/diagram.component";
 })
 export class ButtonsComponent implements OnInit {
 
-  constructor(private diagramComponent : DiagramComponent) {
+  constructor(private diagramComponent : DiagramComponent, private sharedService :SharedService) {
   }
 
   ngOnInit(): void {
@@ -27,15 +28,11 @@ export class ButtonsComponent implements OnInit {
   }
 
   public showFlow(flow:string){
-    console.log("showFlow")
-
-    this.diagramComponent.showFlow(flow)
+    this.sharedService.showFlowMessage.next(flow)
   }
 
   public highlight(state:string){
-    console.log("highlight")
-
-    this.diagramComponent.highlight(state)
+    this.sharedService.highlightMessage.next(state)
   }
 
 }

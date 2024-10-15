@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import {DiagramComponent} from "./components/diagram/diagram.component";
+import {SharedService} from "./services/sharedservice";
 
 interface TokenResponse {
   messageId: string;
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showConsole: boolean = false;
   isGoPressed: boolean = false;
 
-  constructor(private http: HttpClient, private diagram: DiagramComponent) {}
+  constructor(private http: HttpClient, private diagram: DiagramComponent, private sharedService :SharedService) {}
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
@@ -146,6 +147,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   onDetokenizeButtonClick() {
     if (this.readResponse) {
+      this.sharedService.highlightMessage.next("detokenize")
       const bfid = this.readResponse.bfid; // Fetch BFID from the read response
       const values = this.SCXTokens
       const username = this.username;
@@ -213,6 +215,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onGoButtonClick() {
     if (this.templateId && this.baseUrl) {
+      this.sharedService.highlightMessage.next("show_iframe")
       const iframeConfigVersion2: IFrameConfigType = {
         baseUrl: this.baseUrl,
         templateId: this.templateId,
@@ -248,6 +251,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onTokenizeButtonClick() {
     if (this.scfrInstance) {
+      this.sharedService.highlightMessage.next("tokenize")
       try {
         this.scfrInstance.tokenize('echo data');
       } catch (error: any) {
@@ -310,6 +314,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const tokenData = this.databaseItems.find(item => item.id === id);
 
     if (tokenData) {
+      this.sharedService.highlightMessage.next("view_tokens")
       console.log(`Viewing tokens for ID ${id}:`, tokenData);
 
       // Display the temporarily stored token data
@@ -327,4 +332,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   iframeOutlineColor: string = 'black'; // Default color
 
+  isIframeFolded: boolean = false;
+
+  // Toggle function for the IFrame visibility
+  toggleIframeFold() {
+    this.isIframeFolded = !this.isIframeFolded;
+  }
 }
