@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule, JsonPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {ButtonsComponent} from "./components/buttons/buttons.component";
 import {SharedService} from "./services/sharedservice";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {SharedService} from "./services/sharedservice";
     NgClass,
     NgForOf,
     NgIf,
+    NgbModule,
   ],
   providers: [
     provideHttpClient(
