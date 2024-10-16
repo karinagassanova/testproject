@@ -1,8 +1,7 @@
-
 <div class="button-container">
-  <button (click)="showFlow('tokenization')">Tokenization Flow</button>
-  <button (click)="showFlow('detokenization')">Detokenization Flow</button>
-  <button (click)="showFlow('proxy')">Proxy Flow</button>
+  <button (click)="showFlow('tokenization')" [class.active]="flow === 'tokenization'">Tokenization Flow</button>
+  <button (click)="showFlow('detokenization')" [class.active]="flow === 'detokenization'">Detokenization Flow</button>
+  <button (click)="showFlow('proxy')" [class.active]="flow === 'proxy'">Proxy Flow</button>
 </div>
 <div class="diagram">
 

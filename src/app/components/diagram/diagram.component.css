@@ -48,6 +48,11 @@
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5); /* Outline effect on focus */
 }
 
+/* Style for the active button */
+.button-container button.active {
+  background-color: rgb(70, 130, 180); /* Highlight color (SteelBlue) */
+  border: 2px solid rgb(0, 128, 255); /* Add a visible border to highlight */
+}
 
 .text-left {
   transform: translateX(-350px); /* Adjust the horizontal shift */
