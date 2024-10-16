@@ -1,4 +1,4 @@
-<div class="button-container">
+<div class="button-container p-2">
   <button (click)="showFlow('tokenization')" [class.active]="flow === 'tokenization'">Tokenization Flow</button>
   <button (click)="showFlow('detokenization')" [class.active]="flow === 'detokenization'">Detokenization Flow</button>
   <button (click)="showFlow('proxy')" [class.active]="flow === 'proxy'">Proxy Flow</button>
@@ -807,9 +807,9 @@
 <br>
 <br>
 
-<div class="diagram-description" style="font-family: Helvetica, Arial, sans-serif;">
+<div class="diagram-description p-3" style="font-family: Helvetica, Arial, sans-serif;">
   <div [ngStyle]="{'display': (flow === 'proxy' ? 'block' : 'none')}" >
-    <h3>Proxy Flow</h3>
+    <div class="h3">Proxy Flow</div>
     <ol>
       <li>Consumer opens up Client Website and ShieldConex® iframe elements are loaded into the Consumer’s Browser.</li>
       <li>As Consumer enters data into the iframe elements, they are captured directly by ShieldConex® and tokenized.</li>

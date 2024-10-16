@@ -1,97 +1,100 @@
 
-<div class="container">
+<div class="container-fluid">
 
-  <!-- Left Side: Diagram -->
-  <diagram></diagram>
-  <div class="main-container">
-    <!-- Configuration Area -->
-    <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
-      <h2>Client Processing Service</h2>
-      <button class="fold-button" (click)="toggleConfigFold()">
-        {{ isConfigFolded ? 'v' : '^' }}
-      </button>
-
-      <div *ngIf="!isConfigFolded">
-        <p>Enter your credentials, Template ID, and configure the IFrame settings</p>
-
-        <!-- User Credentials in One Row -->
-        <div class="input-row">
-          <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
-          <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
-        </div>
-
-        <!-- Template ID and Base URL in One Row -->
-        <div class="input-row">
-          <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
-          <select [(ngModel)]="baseUrl">
-            <option value="https://secure-cert.shieldconex.com">Cert</option>
-            <option value="https://secure.shieldconex.com">Production</option>
-          </select>
-        </div>
-
-        <!-- Width and Height in One Row -->
-        <div class="input-row">
-          <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
-          <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
-        </div>
-
-        <!-- Buttons Row -->
-        <div class="button-row">
-          <button class="go-button" (click)="onGoButtonClick()">Load Iframe</button>
-          <button class="console-button" (click)="toggleConsole()">
-            {{ showConsole ? 'Hide Console' : 'Show Console' }}
+  <div class="row">
+    <div class="col-lg-5">
+      <diagram></diagram>
+    </div>
+    <div class="col-lg-7">
+      <div class="main-container">
+        <!-- Configuration Area -->
+        <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
+          <h2>Client Processing Service</h2>
+          <button class="fold-button" (click)="toggleConfigFold()">
+            {{ isConfigFolded ? 'v' : '^' }}
           </button>
+
+          <div *ngIf="!isConfigFolded">
+            <p>Enter your credentials, Template ID, and configure the IFrame settings</p>
+
+            <!-- User Credentials in One Row -->
+            <div class="input-row">
+              <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
+              <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
+            </div>
+
+            <!-- Template ID and Base URL in One Row -->
+            <div class="input-row">
+              <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
+              <select [(ngModel)]="baseUrl">
+                <option value="https://secure-cert.shieldconex.com">Cert</option>
+                <option value="https://secure.shieldconex.com">Production</option>
+              </select>
+            </div>
+
+            <!-- Width and Height in One Row -->
+            <div class="input-row">
+              <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
+              <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
+            </div>
+
+            <!-- Buttons Row -->
+            <div class="button-row">
+              <button class="go-button" (click)="onGoButtonClick()">Load Iframe</button>
+              <button class="console-button" (click)="toggleConsole()">
+                {{ showConsole ? 'Hide Console' : 'Show Console' }}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- Database Table -->
-    <div id="database-table">
-      <h2>Database</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of databaseItems">
-          <td>{{ item.id }}</td>
-          <td>
-            <button (click)="viewTokens(item.id)">View Tokens</button>
-            <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-    <!-- IFrame Toggle Section -->
-    <div id="iframe-toggle-area" [ngClass]="{ 'folded': isIframeFolded }">
-      <h2><b>IFrame</b></h2>
-      <button class="fold-button" (click)="toggleIframeFold()">
-        {{ isIframeFolded ? 'v' : '^' }} <!-- Toggle button -->
-      </button>
-      <br>
-      <br>
-      <div *ngIf="!isIframeFolded" id="iframe-container">
-        <p>Configure your IFrame settings and actions here:</p> <!-- Instruction text -->
-        <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
-        <br>
-        <br>
-        <div class="button-row">
-          <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
-          <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+        <!-- Database Table -->
+        <div id="database-table">
+          <h2>Database</h2>
+          <table>
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of databaseItems">
+              <td>{{ item.id }}</td>
+              <td>
+                <button (click)="viewTokens(item.id)">View Tokens</button>
+                <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </div>
 
 
-    <!-- Console Area -->
-    <div *ngIf="showConsole" id="right-column">
-        <h2>Console</h2>
-      <div class="result-section">
+        <!-- IFrame Toggle Section -->
+        <div id="iframe-toggle-area" [ngClass]="{ 'folded': isIframeFolded }">
+          <h2><b>IFrame</b></h2>
+          <button class="fold-button" (click)="toggleIframeFold()">
+            {{ isIframeFolded ? 'v' : '^' }} <!-- Toggle button -->
+          </button>
+          <br>
+          <br>
+          <div *ngIf="!isIframeFolded" id="iframe-container">
+            <p>Configure your IFrame settings and actions here:</p> <!-- Instruction text -->
+            <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
+            <br>
+            <br>
+            <div class="button-row">
+              <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
+              <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Console Area -->
+        <div *ngIf="showConsole" id="right-column">
+          <h2>Console</h2>
+          <div class="result-section">
         <pre>
           <code id="combined-result">
             <h3>IFrame Render Status</h3>
@@ -120,8 +123,9 @@
             <div>MessageID: {{ readResponse?.messageId }}</div>
           </code>
         </pre>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>

@@ -1,7 +1,6 @@
 /* Ensure the diagram is responsive */
 .diagram svg {
   padding-top: 10px;
-  transform: translateX(+330px); /* Move the diagram to the left */
   width: 100%; /* Full width of the diagram area */
   height: 100%; /* Full height of the diagram area */
 }
@@ -12,13 +11,11 @@
   grid-column: 1; /* Place in the first column */
   width: 700px; /* Full width of the allocated column */
   height: 400px; /* Set a specific height for the diagram to make it larger */
-  transform: translateX(-650px); /* Move the diagram container to the left */
 }
 .button-container {
   display: flex;
   justify-content: flex-start; /* Aligns buttons to the left */
   gap: 10px; /* Space between buttons */
-  transform: translateX(-309px); /* Move the diagram to the left */
 }
 
 .button-container button {
@@ -29,18 +26,15 @@
   padding: 10px 20px; /* Padding inside the button */
   font-size: 16px; /* Slightly larger font for readability */
   cursor: pointer; /* Change cursor to pointer on hover */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
 }
 
 .button-container button:hover {
   background-color: rgb(105, 105, 105); /* Darker gray on hover */
-  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .button-container button:active {
   background-color: rgb(85, 85, 85); /* Even darker gray when clicked */
-  transform: translateY(1px); /* Slight press effect */
 }
 
 .button-container button:focus {
@@ -55,7 +49,6 @@
 }
 
 .text-left {
-  transform: translateX(-350px); /* Adjust the horizontal shift */
   max-width: 730px; /* Restrict the width of the text container */
   margin-left: 0; /* Align it to the left */
   padding: 10px; /* Optional padding for a better look */
@@ -64,12 +57,6 @@
 }
 
 .diagram-description {
-  transform: translateX(-309px); /* Adjust the horizontal shift */
-  position: relative; /* Keeps it in the normal flow */
-  margin-top: 20px; /* Adjust to fit under the diagram */
-  margin-left: 0; /* Moves it to the left */
-  max-width: 600px; /* Limit the width for better readability */
-  padding: 15px;
   background-color: #f9f9f9; /* Light background for readability */
   border: 1px solid #ddd; /* Soft border to define the container */
   border-radius: 8px; /* Rounds the corners slightly */
