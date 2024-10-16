@@ -13,6 +13,8 @@ export class DiagramComponent implements OnInit {
 
   visibility: boolean = true
 
+  flow: string = 'proxy'
+
   iframeBoxOutlineColor: string = "white"
   iframeBoxVisible: string = "visible"
   iframeGenBoxOutlineColor: string = "white"
@@ -148,16 +150,10 @@ export class DiagramComponent implements OnInit {
 
     console.log("diagram.showFlow")
     this.resetVisibility();
+    this.flow=flow
 
     switch (flow) {
       case "tokenization":
-        this.displayText = `
-        1. Consumer opens up Client Website and ShieldConex® iframe elements are loaded into the Consumer’s Browser. \n
-        2. As Consumer enters data into the iframe elements, they are captured directly by ShieldConex® and tokenized.\n
-        3. A BFID (Bluefin ID) is returned. \n
-        4. Tokens are cached in ShieldConex® for a Maximum of 1 hour. \n
-        5. All data needed to complete the transaction is sent to the Clients processing service, including the BFID.
-      `;
         this.arrowlinefiveVisible = "visible"
         this.iframeBoxVisible = "visible"
         this.iframeGenBoxVisible = "visible"
@@ -170,26 +166,11 @@ export class DiagramComponent implements OnInit {
         this.lineiframetokenVisible = "visible"
         break;
       case "detokenization":
-        this.displayText = `
-        1. The Client sends the message to ShieldConex® in the format required by their processor with the tokens in place rather than PAN (credit card). \n
-        2. The ShieldConex® Proxy will detokenize the tokens, reinsert the actual PAN data into the payload, and relay the payment request to the processor.
-      `;
         this.clientprocserviceBoxVisible = "visible"
         this.detokenizationBoxVisible = "visible"
         this.detokflowlineVisible = "visible"
         break;
       case "proxy":
-        this.displayText = `
-        1. Consumer opens up Client Website and ShieldConex® iframe elements are loaded into the Consumer’s Browser. \n
-        2. As Consumer enters data into the iframe elements, they are captured directly by ShieldConex® and tokenized. \n
-        3. A BFID (Bluefin ID) is returned. \n
-        4. Tokens are cached in ShieldConex® for a Maximum of 1 hour. \n
-        5. All data needed to complete the transaction is sent to the Clients processing service, including the BFID. \n
-        6. Using the BFID, the Client requests their tokens and they are returned. \n
-        7. The Client sends the message to ShieldConex® in the format required by their processor with the tokens in place rather than PAN (credit card). \n
-        8. The ShieldConex® Proxy will detokenize the tokens, reinsert the actual PAN data into the payload, and relay the payment request to the processor. \n
-        9. The response is proxied back to the Client.
-      `;
         this.iframeBoxVisible = "visible"
         this.iframeGenBoxVisible = "visible"
         this.tokenizationBoxVisible = "visible"

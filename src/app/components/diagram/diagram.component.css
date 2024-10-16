@@ -18,7 +18,7 @@
   display: flex;
   justify-content: flex-start; /* Aligns buttons to the left */
   gap: 10px; /* Space between buttons */
-  transform: translateX(-230px); /* Move the diagram to the left */
+  transform: translateX(-309px); /* Move the diagram to the left */
 }
 
 .button-container button {
@@ -56,4 +56,47 @@
   padding: 10px; /* Optional padding for a better look */
   white-space: pre-wrap; /* Allow wrapping in the <pre> tag */
   word-wrap: break-word; /* Ensure long words wrap inside the container */
+}
+
+.diagram-description {
+  transform: translateX(-309px); /* Adjust the horizontal shift */
+  position: relative; /* Keeps it in the normal flow */
+  margin-top: 20px; /* Adjust to fit under the diagram */
+  margin-left: 0; /* Moves it to the left */
+  max-width: 600px; /* Limit the width for better readability */
+  padding: 15px;
+  background-color: #f9f9f9; /* Light background for readability */
+  border: 1px solid #ddd; /* Soft border to define the container */
+  border-radius: 8px; /* Rounds the corners slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+.diagram-description h3 {
+  font-size: 1.4em;
+  margin-bottom: 12px;
+  color: #333; /* Darker color for heading */
+  font-weight: bold;
+}
+
+.diagram-description ol {
+  padding-left: 20px; /* Adds space for the list */
+  margin-bottom: 10px;
+}
+
+.diagram-description ol li {
+  margin-bottom: 10px; /* Space between list items */
+  line-height: 1.6; /* Better readability */
+  color: #555; /* Soft text color for the list */
+}
+
+.diagram-description ol li::marker {
+  color: #0073e6; /* Custom color for the list markers */
+}
+
+@media (max-width: 768px) {
+  .diagram-description {
+    max-width: 100%; /* Full width on smaller screens */
+    padding: 10px;
+    margin-left: 0;
+  }
 }
