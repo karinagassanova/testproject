@@ -55,7 +55,8 @@ export class DiagramComponent implements OnInit {
   arrowlinenineVisible: string = "visible"
   detokflowlineOutlineColor: string = "black"
   detokflowlineVisible: string = "hidden"
-
+  browserlineOutlineColor:string="grey"
+  browserlineVisible:string="visible"
 
   constructor(private cdr: ChangeDetectorRef, private sharedService: SharedService) {
 
@@ -98,6 +99,7 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightVisible = 'hidden'
     this.arrowlinenineVisible = 'hidden'
     this.detokflowlineVisible = 'hidden'
+    this.browserlineVisible='hidden'
   }
 
   public resetVisibility() {
@@ -121,6 +123,7 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightVisible = "hidden"
     this.arrowlinenineVisible = "hidden"
     this.detokflowlineVisible = "hidden"
+    this.browserlineVisible="hidden"
   }
 
   public resetColour() {
@@ -144,6 +147,7 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightOutlineColor = "black"
     this.arrowlinenineOutlineColor = "black"
     this.detokflowlineOutlineColor = "black"
+    this.browserlineOutlineColor="grey"
   }
 
   public showFlow(flow: string) {
@@ -164,6 +168,7 @@ export class DiagramComponent implements OnInit {
         this.arrowlinetwoVisible = "visible"
         this.arrowlinethreeVisible = "visible"
         this.lineiframetokenVisible = "visible"
+        this.browserlineVisible="visible"
         break;
       case "detokenization":
         this.clientprocserviceBoxVisible = "visible"
@@ -190,6 +195,7 @@ export class DiagramComponent implements OnInit {
         this.lineproxydetokVisible = "visible"
         this.arrowlineeightVisible = "visible"
         this.arrowlinenineVisible = "visible"
+        this.browserlineVisible="visible"
         break;
     }
     this.cdr.detectChanges()
