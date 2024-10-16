@@ -54,7 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
   username: string = 'bluefin';
   password: string = 'yO98lWEvIZ';
   templateId: string = 'BluefinSecurity';
-  baseUrl: string = '';
+  baseUrl: string = 'https://secure-cert.shieldconex.com';
   width: number = 600;
   height: number = 800;
   iframeRenderStatus: string = '';
