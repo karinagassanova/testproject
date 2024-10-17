@@ -42,6 +42,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     },
     SharedService
   ],
+  exports: [
+    DiagramComponent
+  ],
   bootstrap: [AppComponent]
 })
 

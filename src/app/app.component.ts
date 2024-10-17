@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import {DiagramComponent} from "./components/diagram/diagram.component";
 import {SharedService} from "./services/sharedservice";
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 interface TokenResponse {
   messageId: string;
@@ -338,4 +340,5 @@ export class AppComponent implements OnInit, OnDestroy {
   toggleIframeFold() {
     this.isIframeFolded = !this.isIframeFolded;
   }
+  active = 1;
 }

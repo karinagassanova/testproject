@@ -226,4 +226,47 @@ button.tokenize-button {
   padding: 10px; /* Optional: Add some padding around the iframe content */
   box-sizing: border-box; /* Ensure padding is included in the total size */
 }
+/* Style for the navigation tabs */
+.custom-nav-tabs {
+  border-radius: 5px; /* Rounded corners */
+}
 
+/* Style for each tab item */
+.custom-nav-tabs button {
+  padding: 5px 15px; /* Smaller padding for a more compact button */
+  margin-right: 5px; /* Spacing between the buttons */
+  background-color: rgb(128, 128, 128); /* Gray background for inactive tabs */
+  border: 2px solid transparent; /* Border for hover effects */
+  color: white; /* White text color */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 14px; /* Adjusted font size for a more compact look */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Style for the inactive tabs */
+.custom-nav-tabs button:not(.active) {
+  background-color: rgb(128, 128, 128); /* Gray background for inactive tabs */
+  color: white; /* Text color */
+}
+
+/* Hover effect for all tabs */
+.custom-nav-tabs button:hover {
+  background-color: rgb(105, 105, 105); /* Darker gray on hover */
+  color: white; /* Ensure text is white on hover */
+}
+
+/* Active tab style */
+.custom-nav-tabs button.active {
+  background-color: rgb(70, 130, 180); /* Highlight color (SteelBlue) */
+  border: 2px solid rgb(0, 128, 255); /* Add a visible border to highlight */
+}
+
+/* Padding around the nav content */
+.ngbNavContent {
+  padding: 15px; /* Adjusted padding for the nav content */
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+}
