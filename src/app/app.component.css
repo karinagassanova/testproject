@@ -1,3 +1,60 @@
+.container-fluid {
+  padding: 20px; /* Add some padding to the container */
+}
+
+.main-container {
+  border: 1px solid #ccc; /* Add a border around the main container */
+  border-radius: 8px; /* Rounded corners for the container */
+  padding: 20px; /* Padding inside the main container */
+  background-color: #f9f9f9; /* Light background color for better readability */
+}
+
+.input-row {
+  display: flex; /* Use flexbox to align items in a row */
+  justify-content: space-between; /* Distribute space evenly */
+  margin-bottom: 15px; /* Space between input rows */
+}
+
+.input-group {
+  flex: 1; /* Each input group takes equal space */
+  margin-right: 20px; /* Space between input groups */
+}
+
+.input-group:last-child {
+  margin-right: 0; /* No margin for the last input group */
+}
+
+label {
+  display: block; /* Display label as a block for better alignment */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Bold label for emphasis */
+  font-size: 14px; /* Adjust label font size */
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%; /* Make inputs take full width */
+  padding: 10px; /* Padding inside inputs */
+  border: 1px solid #ccc; /* Border around inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 14px; /* Adjust input font size */
+}
+
+button {
+  padding: 10px 15px; /* Padding for buttons */
+  margin-top: 10px; /* Margin above buttons */
+  border: none; /* Remove default button border */
+  border-radius: 4px; /* Rounded corners for buttons */
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white; /* White text on buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
 
 
 /* Diagram styling */
@@ -26,26 +83,6 @@
   width: 100%; /* Ensure it takes full width of the main container */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
-
-/* Flexbox layout for input rows */
-.input-row {
-  display: flex; /* Use flexbox for layout */
-}
-
-/* Adjust the width of input fields */
-.input-row input,
-.input-row select {
-  width: 300px; /* Set the same width for all input fields */
-  padding: 10px; /* Padding for inputs */
-  font-size: 14px; /* Font size */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-/* Single input row styling (for rows with only one input) */
-.input-row.single input {
-  width: 200px; /* Same width for single input fields */
-}
-
 
 /* Button layout adjustment */
 .button-row {

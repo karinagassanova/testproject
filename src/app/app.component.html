@@ -1,6 +1,4 @@
-
 <div class="container-fluid">
-
   <div class="row">
     <div class="col-lg-5">
       <diagram></diagram>
@@ -19,28 +17,48 @@
 
             <!-- User Credentials in One Row -->
             <div class="input-row">
-              <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
-              <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
+              <div class="input-group">
+                <label for="usernameInput">Username:</label>
+                <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
+              </div>
+              <div class="input-group">
+                <label for="passwordInput">Password:</label>
+                <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
+              </div>
             </div>
 
             <!-- Template ID and Base URL in One Row -->
             <div class="input-row">
-              <input type="text" placeholder="Enter Template ID" [(ngModel)]="templateId" />
-              <select [(ngModel)]="baseUrl">
-                <option value="https://secure-cert.shieldconex.com">Cert</option>
-                <option value="https://secure.shieldconex.com">Production</option>
-              </select>
+              <div class="input-group">
+                <label for="templateId">Template ID:</label>
+                <input type="text" id="templateId" placeholder="Enter Template ID" [(ngModel)]="templateId" />
+              </div>
+              <div class="input-group">
+                <label for="baseUrl">Base URL:</label>
+                <select id="baseUrl" [(ngModel)]="baseUrl">
+                  <option value="https://secure-cert.shieldconex.com">Cert</option>
+                  <option value="https://secure.shieldconex.com">Production</option>
+                </select>
+              </div>
             </div>
 
             <!-- Width and Height in One Row -->
             <div class="input-row">
-              <input type="text" [(ngModel)]="width" placeholder="Enter Width (e.g., 600px)" />
-              <input type="text" [(ngModel)]="height" placeholder="Enter Height (e.g., 800px)" />
+              <div class="input-group">
+                <label for="width">Width:</label>
+                <input type="text" id="width" [(ngModel)]="width" placeholder="e.g., 600px" />
+              </div>
+              <div class="input-group">
+                <label for="height">Height:</label>
+                <input type="text" id="height" [(ngModel)]="height" placeholder="e.g., 800px" />
+              </div>
             </div>
           </div>
         </div>
+
         <br><br>
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="custom-nav-tabs"> <!-- Updated class name -->
+
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="custom-nav-tabs">
           <li [ngbNavItem]="1">
             <button ngbNavLink>Database</button>
             <ng-template ngbNavContent>
@@ -76,8 +94,7 @@
                 <div id="iframe-container">
                   <h2>IFrame</h2>
                   <button class="go-button" (click)="onGoButtonClick()">Load Iframe</button>
-                  <br>
-                  <br>
+                  <br><br>
                   <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
                   <br /><br />
                   <div class="button-row">
@@ -96,29 +113,29 @@
               <div id="right-column">
                 <h2>Console</h2>
                 <div class="result-section">
-          <pre>
-            <code id="combined-result">
-              <h3>IFrame Render Status</h3>
-              <div>{{ iframeRenderStatus }}</div>
-              <h3>Error Messages</h3>
-              <div>
-                <div *ngFor="let e of iframeErrors">{{ e }}</div>
-              </div>
-              <h3>Token Data</h3>
-              <div *ngFor="let e of tokenData">
-                BFID: {{ e.token }}
-              </div>
-              <h3>Tokenized Data</h3>
-              <div *ngFor="let e of SCXTokens">
-                Name: {{ e.name }}, Value: {{ e.value }}
-              </div>
-              <h3>Detokenized Data</h3>
-              <div *ngFor="let e of detokenizedData; let i = index">
-                Name: {{ SCXTokens[i].name }}, Detokenized Value: {{ e | json }}
-              </div>
-              <div>MessageID: {{ readResponse?.messageId }}</div>
-            </code>
-          </pre>
+                  <pre>
+                    <code id="combined-result">
+                      <h3>IFrame Render Status</h3>
+                      <div>{{ iframeRenderStatus }}</div>
+                      <div>MessageID: {{ readResponse?.messageId }}</div>
+                        <h3>Error Messages</h3>
+                      <div>
+                        <h3>Tokenized Data</h3>
+                      <div *ngFor="let e of SCXTokens">
+                        Name: {{ e.name }}, Value: {{ e.value }}
+                      </div>
+                      <h3>Token Data</h3>
+                      <div *ngFor="let e of tokenData">
+                        BFID: {{ e.token }}
+                      </div>
+                      <h3>Detokenized Data</h3>
+                      <div *ngFor="let e of detokenizedData; let i = index">
+                        Name: {{ SCXTokens[i].name }}, Detokenized Value: {{ e | json }}
+                      </div>
+                        <div *ngFor="let e of iframeErrors">{{ e }}</div>
+                      </div>
+                    </code>
+                  </pre>
                 </div>
               </div>
             </ng-template>

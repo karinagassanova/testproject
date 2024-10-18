@@ -82,6 +82,12 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     window.removeEventListener('message', this.onMessage.bind(this));
   }
+  private destroyIFrame() {
+    if (this.scfrInstance) {
+      this.scfrInstance.destroy(); // Assuming your IFrame instance has a destroy method
+      this.scfrInstance = null; // Clear the instance reference
+    }
+  }
 
   displayMessage(message: any, elementId: string) {
     const element = document.getElementById(elementId);
@@ -144,7 +150,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      this.iframeErrors.push('Invalid token data received.');
+
     }
   }
   onDetokenizeButtonClick() {
@@ -217,7 +223,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onGoButtonClick() {
     if (this.templateId && this.baseUrl) {
-      this.sharedService.highlightMessage.next("show_iframe")
+      this.sharedService.highlightMessage.next("show_iframe");
+
+      // Destroy old IFrame if it exists
+      this.destroyIFrame();
+
       const iframeConfigVersion2: IFrameConfigType = {
         baseUrl: this.baseUrl,
         templateId: this.templateId,
@@ -229,7 +239,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       };
 
-      // Create and render the ShieldConex IFrame
+      // Create and render the new ShieldConex IFrame
       // @ts-ignore
       this.scfrInstance = new ShieldconexIFrame(iframeConfigVersion2);
 
@@ -306,9 +316,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleConsole() {
-    this.showConsole = !this.showConsole;
-  }
   databaseItems: { id: number; token: string }[] = [];
 
 
