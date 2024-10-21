@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import {DiagramComponent} from "./components/diagram/diagram.component";
 import {SharedService} from "./services/sharedservice";
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalContent } from './components/modal/modal-component'; // Adjust the path accordingly
+
 
 
 interface TokenResponse {
@@ -68,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showConsole: boolean = false;
   isGoPressed: boolean = false;
 
-  constructor(private http: HttpClient, private diagram: DiagramComponent, private sharedService :SharedService) {}
+  constructor(private http: HttpClient, private diagram: DiagramComponent, private sharedService :SharedService, private modalService: NgbModal ) {}
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
@@ -323,16 +325,21 @@ export class AppComponent implements OnInit, OnDestroy {
     const tokenData = this.databaseItems.find(item => item.id === id);
 
     if (tokenData) {
-      this.sharedService.highlightMessage.next("view_tokens")
+      this.sharedService.highlightMessage.next("view_tokens");
       console.log(`Viewing tokens for ID ${id}:`, tokenData);
-
-      // Display the temporarily stored token data
-      this.tokenData = [this.tempTokenData!]; // Use the temporary token data
+      this.tokenData = [{ token: tokenData.token }];
+      this.openModal(this.tokenData);
     } else {
       console.error(`No token data found for ID ${id}`);
       this.iframeErrors.push(`No token data found for ID ${id}`);
     }
   }
+
+  openModal(tokenData: Array<{ token: string }>) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.tokens = tokenData; // Pass the token data to the modal
+  }
+
 
   isConfigFolded = false;
 
@@ -348,4 +355,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isIframeFolded = !this.isIframeFolded;
   }
   active = 1;
+  protected readonly open = open;
+
 }
+

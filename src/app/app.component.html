@@ -57,7 +57,6 @@
         </div>
 
         <br><br>
-
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="custom-nav-tabs">
           <li [ngbNavItem]="1">
             <button ngbNavLink>Database</button>
@@ -76,7 +75,7 @@
                   <tr *ngFor="let item of databaseItems">
                     <td>{{ item.id }}</td>
                     <td>
-                      <button (click)="viewTokens(item.id)">View Tokens</button>
+                      <button (click)="viewTokens(item.id);">View Tokens</button>
                       <button class="detokenize-button" (click)="onDetokenizeButtonClick()">Detokenize</button>
                     </td>
                   </tr>
@@ -144,6 +143,7 @@
 
         <!-- Render content for the active tab -->
         <div [ngbNavOutlet]="nav"></div>
+
       </div>
     </div>
   </div>
