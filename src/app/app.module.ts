@@ -7,7 +7,7 @@ import { DiagramComponent } from "./components/diagram/diagram.component";
 import { FormsModule } from "@angular/forms";
 import { SharedService } from "./services/sharedservice";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [

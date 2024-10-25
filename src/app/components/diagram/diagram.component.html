@@ -806,14 +806,20 @@
 <br>
 <br>
 <br>
-
 <div class="diagram-description p-3" style="font-family: Helvetica, Arial, sans-serif;">
   <div [ngStyle]="{'display': (flow === 'proxy' ? 'block' : 'none')}" >
     <div class="h3">Proxy Flow</div>
     <ol>
       <li>Consumer opens up Client Website and ShieldConex® iframe elements are loaded into the Consumer’s Browser.</li>
       <li>As Consumer enters data into the iframe elements, they are captured directly by ShieldConex® and tokenized.</li>
-      <li>A BFID (Bluefin ID) is returned.</li>
+      <li>
+        A BFID (Bluefin ID)
+        is returned.  <i class="bi bi-info-circle"
+                         style="cursor: pointer;"
+                         placement="top"
+                         ngbTooltip="Bluefin ID (BFID) is a unique identifier returned by ShieldConex® after the data is tokenized. It is used to retrieve tokens during transactions.">
+      </i> <!-- Info icon -->
+      </li>
       <li>Tokens are cached in ShieldConex® for a Maximum of 1 hour.</li>
       <li>All data needed to complete the transaction is sent to the Clients processing service, including the BFID.</li>
       <li>Using the BFID, the Client requests their tokens and they are returned.</li>
@@ -822,6 +828,7 @@
       <li>The response is proxied back to the Client.</li>
     </ol>
   </div>
+
 
   <div [ngStyle]="{'display': (flow === 'detokenization' ? 'block' : 'none')}" >
     <h3>Detokenization Flow</h3>
@@ -836,7 +843,14 @@
     <ol>
       <li>Consumer opens up Client Website and ShieldConex® iframe elements are loaded into the Consumer’s Browser.</li>
       <li>As Consumer enters data into the iframe elements, they are captured directly by ShieldConex® and tokenized.</li>
-      <li>A BFID (Bluefin ID) is returned.</li>
+      <li>
+        A BFID (Bluefin ID)
+        is returned.  <i class="bi bi-info-circle"
+                         style="cursor: pointer;"
+                         placement="top"
+                         ngbTooltip="Bluefin ID (BFID) is a unique identifier returned by ShieldConex® after the data is tokenized. It is used to retrieve tokens during transactions.">
+      </i>
+      </li>
       <li>Tokens are cached in ShieldConex® for a Maximum of 1 hour.</li>
       <li>All data needed to complete the transaction is sent to the Clients processing service, including the BFID.</li>
     </ol>

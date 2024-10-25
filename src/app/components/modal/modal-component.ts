@@ -29,4 +29,5 @@ export class NgbdModalContent implements OnInit {
   ngOnInit() {
     console.log('Tokens received in modal:', this.tokens); // Log the tokens received
   }
+
 }

@@ -5,7 +5,7 @@ import {DiagramComponent} from "./components/diagram/diagram.component";
 import {SharedService} from "./services/sharedservice";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './components/modal/modal-component'; // Adjust the path accordingly
-
+import { NgbdDetokenModalContent } from './components/modal/modal-detok-component';
 
 
 interface TokenResponse {
@@ -157,19 +157,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   onDetokenizeButtonClick() {
     if (this.readResponse) {
-      this.sharedService.highlightMessage.next("detokenize")
+      this.sharedService.highlightMessage.next("detokenize");
       const bfid = this.readResponse.bfid; // Fetch BFID from the read response
-      const values = this.SCXTokens
+      const values = this.SCXTokens; // Values that need to be detokenized
       const username = this.username;
       const password = this.password;
 
       // Log the data being sent to the API for debugging
-      console.log({
-        bfid: bfid,
-        values: values,
-        username: username,
-        password: password
-      });
+      console.log({ bfid, values, username, password });
 
       // Basic validation checks
       if (!bfid) {
@@ -185,7 +180,7 @@ export class AppComponent implements OnInit, OnDestroy {
         return;
       }
 
-
+      // Make the HTTP request to detokenize the values
       this.http.post<DetokenizeResponse>(
         'https://st3nuq5s37.execute-api.us-east-1.amazonaws.com/token/detokenize',
         {
@@ -204,14 +199,19 @@ export class AppComponent implements OnInit, OnDestroy {
         (response) => {
           console.log('Received Detokenized Data:', response);
 
+          // Validate response
           if (!response || !response.values) {
             console.error('Invalid response:', response);
             this.iframeErrors.push('Invalid response received.');
             return;
           }
 
-          // Store and display the detokenized data
+          // Store the detokenized data
           this.detokenizedData = response.values;
+
+          // Open modal with detokenized data
+          this.openDetokenizedModal(this.detokenizedData);
+
         },
         (error) => {
           console.error('Error getting detokenized data:', error);
@@ -222,6 +222,13 @@ export class AppComponent implements OnInit, OnDestroy {
       alert('No tokenized data available to detokenize.');
     }
   }
+
+  openDetokenizedModal(detokenizedData: any[]) {
+    const modalRef = this.modalService.open(NgbdDetokenModalContent);
+    modalRef.componentInstance.detokenizedData = detokenizedData;
+    modalRef.componentInstance.SCXTokens = this.SCXTokens;
+  }
+
 
   onGoButtonClick() {
     if (this.templateId && this.baseUrl) {
