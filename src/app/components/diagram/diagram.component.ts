@@ -211,30 +211,36 @@ export class DiagramComponent implements OnInit {
       case "show_iframe":
         this.iframeBoxOutlineColor = "orange"
         this.iframeGenBoxOutlineColor = "orange"
+        this.showFlow("proxy")
         break;
       case "tokenize":
         this.iframeBoxOutlineColor = "orange"
         this.iframeGenBoxOutlineColor = "orange"
         this.tokenizationBoxOutlineColor = "orange"
         this.cacheBoxOutlineColor = "orange"
+        this.showFlow("tokenization")
         break;
       case "detokenize" :
         this.clientprocserviceBoxOutlineColor = "orange"
         this.detokenizationBoxOutlineColor = "orange"
+        this.showFlow("detokenization")
         break;
       case "sendto_server" :
         this.iframeBoxOutlineColor = "orange"
         this.clientprocserviceBoxOutlineColor = "orange"
         this.cacheBoxOutlineColor = "orange"
+        this.showFlow("proxy")
         break;
       case "view_tokens" :
         this.clientprocserviceBoxOutlineColor = "orange"
+        this.showFlow("proxy")
         break;
       case "proxy" :
         this.proxyBoxOutlineColor = "orange"
         this.clientprocserviceBoxOutlineColor = "orange"
         this.detokenizationBoxOutlineColor = "orange"
         this.thirdpartyBoxOutlineColor = "orange"
+        this.showFlow("proxy")
         break;
     }
 

@@ -1,12 +1,11 @@
-import {Component, OnInit, OnDestroy, Injectable} from '@angular/core';
+import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import {DiagramComponent} from "./components/diagram/diagram.component";
-import {SharedService} from "./services/sharedservice";
+import { DiagramComponent } from "./components/diagram/diagram.component";
+import { SharedService } from "./services/sharedservice";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './components/modal/modal-component'; // Adjust the path accordingly
 import { NgbdDetokenModalContent } from './components/modal/modal-detok-component';
-
 
 interface TokenResponse {
   messageId: string;
@@ -70,12 +69,23 @@ export class AppComponent implements OnInit, OnDestroy {
   showConsole: boolean = false;
   isGoPressed: boolean = false;
 
-  constructor(private http: HttpClient, private diagram: DiagramComponent, private sharedService :SharedService, private modalService: NgbModal ) {}
+  flow: string = 'proxy'; // Current flow, defaults to "tokenization"
+
+  showFlow(selectedFlow: string) {
+    this.flow = selectedFlow; // Update flow based on button clicks
+  }
+
+  constructor(
+    private http: HttpClient,
+    private diagram: DiagramComponent,
+    private sharedService: SharedService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
     window.addEventListener('message', this.onMessage.bind(this));
-    this.diagram.hideAll()
+    this.diagram.hideAll();
   }
 
   ngOnDestroy() {
@@ -84,6 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     window.removeEventListener('message', this.onMessage.bind(this));
   }
+
   private destroyIFrame() {
     if (this.scfrInstance) {
       this.scfrInstance.destroy(); // Assuming your IFrame instance has a destroy method
@@ -106,7 +117,9 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('Error', error);
     this.iframeErrors.push(error.message);
   }
+
   private tempTokenData: TokenDisplay | undefined;
+
   onShieldconexToken(tokenData: any) {
     console.log('Received Token Data:', tokenData);
 
@@ -151,10 +164,9 @@ export class AppComponent implements OnInit, OnDestroy {
           this.iframeErrors.push(error.message);
         }
       );
-    } else {
-
     }
   }
+
   onDetokenizeButtonClick() {
     if (this.readResponse) {
       this.sharedService.highlightMessage.next("detokenize");
@@ -162,11 +174,10 @@ export class AppComponent implements OnInit, OnDestroy {
       const values = this.SCXTokens; // Values that need to be detokenized
       const username = this.username;
       const password = this.password;
+      this.flow = 'detokenization';
 
-      // Log the data being sent to the API for debugging
       console.log({ bfid, values, username, password });
 
-      // Basic validation checks
       if (!bfid) {
         this.iframeErrors.push('BFID is missing.');
         return;
@@ -180,7 +191,6 @@ export class AppComponent implements OnInit, OnDestroy {
         return;
       }
 
-      // Make the HTTP request to detokenize the values
       this.http.post<DetokenizeResponse>(
         'https://st3nuq5s37.execute-api.us-east-1.amazonaws.com/token/detokenize',
         {
@@ -199,19 +209,14 @@ export class AppComponent implements OnInit, OnDestroy {
         (response) => {
           console.log('Received Detokenized Data:', response);
 
-          // Validate response
           if (!response || !response.values) {
             console.error('Invalid response:', response);
             this.iframeErrors.push('Invalid response received.');
             return;
           }
 
-          // Store the detokenized data
           this.detokenizedData = response.values;
-
-          // Open modal with detokenized data
           this.openDetokenizedModal(this.detokenizedData);
-
         },
         (error) => {
           console.error('Error getting detokenized data:', error);
@@ -229,12 +234,10 @@ export class AppComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.SCXTokens = this.SCXTokens;
   }
 
-
   onGoButtonClick() {
     if (this.templateId && this.baseUrl) {
       this.sharedService.highlightMessage.next("show_iframe");
 
-      // Destroy old IFrame if it exists
       this.destroyIFrame();
 
       const iframeConfigVersion2: IFrameConfigType = {
@@ -248,7 +251,6 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       };
 
-      // Create and render the new ShieldConex IFrame
       // @ts-ignore
       this.scfrInstance = new ShieldconexIFrame(iframeConfigVersion2);
 
@@ -264,7 +266,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.scfrInstance.render();
       this.iframeOutlineColor = 'orange';
-      this.isGoPressed = true; // Set this to true when Go is clicked
+      this.isGoPressed = true;
     } else {
       alert('Please enter a Template ID.');
     }
@@ -272,7 +274,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onTokenizeButtonClick() {
     if (this.scfrInstance) {
-      this.sharedService.highlightMessage.next("tokenize")
+      this.sharedService.highlightMessage.next("tokenize");
       try {
         this.scfrInstance.tokenize('echo data');
       } catch (error: any) {
@@ -327,7 +329,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   databaseItems: { id: number; token: string }[] = [];
 
-
   viewTokens(id: number) {
     const tokenData = this.databaseItems.find(item => item.id === id);
 
@@ -344,25 +345,23 @@ export class AppComponent implements OnInit, OnDestroy {
 
   openModal(tokenData: Array<{ token: string }>) {
     const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.tokens = tokenData; // Pass the token data to the modal
+    modalRef.componentInstance.tokens = tokenData;
   }
-
 
   isConfigFolded = false;
 
   toggleConfigFold() {
     this.isConfigFolded = !this.isConfigFolded;
   }
-  iframeOutlineColor: string = 'black'; // Default color
+
+  iframeOutlineColor: string = 'black';
 
   isIframeFolded: boolean = false;
 
-  // Toggle function for the IFrame visibility
   toggleIframeFold() {
     this.isIframeFolded = !this.isIframeFolded;
   }
+
   active = 1;
   protected readonly open = open;
-
 }
-
