@@ -119,7 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private tempTokenData: TokenDisplay | undefined;
-
+  active = 1;
   onShieldconexToken(tokenData: any) {
     console.log('Received Token Data:', tokenData);
 
@@ -158,14 +158,21 @@ export class AppComponent implements OnInit, OnDestroy {
           // Display the tokenized data
           this.SCXTokens = [...response.values];
           this.readResponse = response;
+
+          // Switch to the "Database" tab after successful processing
+          this.active = 1;
         },
         (error) => {
           console.error('Error retrieving tokens:', error);
           this.iframeErrors.push(error.message);
         }
       );
+    } else {
+      console.error('Invalid token data received:', tokenData);
+      this.iframeErrors.push('Invalid token data format.');
     }
   }
+
 
   onDetokenizeButtonClick() {
     if (this.readResponse) {
@@ -272,6 +279,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+
   onTokenizeButtonClick() {
     if (this.scfrInstance) {
       this.sharedService.highlightMessage.next("tokenize");
@@ -362,6 +370,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isIframeFolded = !this.isIframeFolded;
   }
 
-  active = 1;
+
   protected readonly open = open;
 }
