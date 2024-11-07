@@ -11,7 +11,6 @@ import { JsonPipe } from "@angular/common";
       <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <h3>Detokenized Data</h3>
       <pre>{{ formattedDetokenizedData }}</pre>
     </div>
     <div class="modal-footer">
