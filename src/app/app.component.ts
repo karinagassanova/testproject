@@ -40,6 +40,10 @@ type TokenDisplay = {
   token: string;
 };
 
+type Database = {
+  data : TokenResponse[];
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -68,6 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
   detokenizedData: string[] = []; // Added this for displaying detokenized data
   showConsole: boolean = false;
   isGoPressed: boolean = false;
+  db: Database = {data:[]};
 
   flow: string = 'proxy'; // Current flow, defaults to "tokenization"
 
@@ -95,10 +100,10 @@ export class AppComponent implements OnInit, OnDestroy {
     window.removeEventListener('message', this.onMessage.bind(this));
   }
 
-  private destroyIFrame() {
-    if (this.scfrInstance) {
-      this.scfrInstance.destroy(); // Assuming your IFrame instance has a destroy method
-      this.scfrInstance = null; // Clear the instance reference
+  private destroyIFrame(parentId :string) {
+    const parent = document.getElementById(parentId) as HTMLDivElement;
+    if (parent) {
+      parent.innerHTML = ""
     }
   }
 
@@ -130,7 +135,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.tempTokenData = { token };
 
       // Add the token to databaseItems
-      this.databaseItems.push({ id: this.databaseItems.length + 1, token });
+      //this.db.data.push({ id: this.databaseItems.length + 1, token });
+
 
       this.http.post<TokenResponse>(
         'https://st3nuq5s37.execute-api.us-east-1.amazonaws.com/token/handle',
@@ -154,6 +160,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this.iframeErrors.push('Invalid response received.');
             return;
           }
+          this.db.data.push(response);
 
           // Display the tokenized data
           this.SCXTokens = [...response.values];
@@ -174,11 +181,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  onDetokenizeButtonClick() {
-    if (this.readResponse) {
+  onDetokenizeButtonClick( id : string) {
+
+    const tokenData = this.db.data.find(item => item.bfid === id);
+
+    if (tokenData) {
       this.sharedService.highlightMessage.next("detokenize");
-      const bfid = this.readResponse.bfid; // Fetch BFID from the read response
-      const values = this.SCXTokens; // Values that need to be detokenized
+      const bfid = tokenData.bfid; // Fetch BFID from the read response
+      const values = tokenData.values // Values that need to be detokenized
       const username = this.username;
       const password = this.password;
       this.flow = 'detokenization';
@@ -245,12 +255,14 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.templateId && this.baseUrl) {
       this.sharedService.highlightMessage.next("show_iframe");
 
-      this.destroyIFrame();
+      let parentId = 'frame1'
+
+      this.destroyIFrame(parentId);
 
       const iframeConfigVersion2: IFrameConfigType = {
         baseUrl: this.baseUrl,
         templateId: this.templateId,
-        parent: 'frame1',
+        parent: parentId,
         attributes: {
           width: this.width,
           height: this.height,
@@ -335,15 +347,17 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  databaseItems: { id: number; token: string }[] = [];
+  viewTokens(id: string) {
 
-  viewTokens(id: number) {
-    const tokenData = this.databaseItems.find(item => item.id === id);
+    console.log("this.db.data", this.db.data)
+    const tokenData = this.db.data.find(item => item.bfid === id);
+
+    console.log("tokenData", tokenData)
 
     if (tokenData) {
       this.sharedService.highlightMessage.next("view_tokens");
       console.log(`Viewing tokens for ID ${id}:`, tokenData);
-      this.tokenData = [{ token: tokenData.token }];
+      this.tokenData = [{ token: tokenData.bfid }];
       this.openModal(this.tokenData);
     } else {
       console.error(`No token data found for ID ${id}`);
