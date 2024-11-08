@@ -1,0 +1,6 @@
+/* Enable line wrapping for preformatted text */
+.wrapped-pre {
+  white-space: pre-wrap;       /* Enable line wrapping */
+  word-break: break-all;       /* Break long words to fit within the container */
+  overflow-wrap: anywhere;     /* Allows breaking anywhere if necessary */
+}

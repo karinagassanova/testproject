@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
+import {Component, OnInit, OnDestroy, Injectable, NgIterable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { DiagramComponent } from "./components/diagram/diagram.component";
@@ -6,6 +6,8 @@ import { SharedService } from "./services/sharedservice";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './components/modal/modal-component'; // Adjust the path accordingly
 import { NgbdDetokenModalContent } from './components/modal/modal-detok-component';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 export interface TokenResponse {
   messageId: string;
@@ -75,6 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
   db: Database = {data:[]};
 
   flow: string = 'proxy'; // Current flow, defaults to "tokenization"
+  settingName: string | undefined;
 
   showFlow(selectedFlow: string) {
     this.flow = selectedFlow; // Update flow based on button clicks
@@ -84,13 +87,16 @@ export class AppComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private diagram: DiagramComponent,
     private sharedService: SharedService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
     window.addEventListener('message', this.onMessage.bind(this));
     this.diagram.hideAll();
+    this.savedSettingNames = this.getSavedSettingNames();
+
   }
 
   ngOnDestroy() {
@@ -384,5 +390,68 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  protected readonly open = open;
+  protected saveUserSettings() {
+    const settingName = this.settingName || 'Default Setting'; // Use provided name or fallback to 'Default Setting'
+
+    // Prepare the settings object
+    const userSettings = {
+      username: this.username,
+      password: this.password,
+      templateId: this.templateId,
+      baseUrl: this.baseUrl,
+      width: this.width,
+      height: this.height
+    };
+
+    // Retrieve the existing settings from localStorage and add the new one
+    const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
+    savedSettings.push({ name: settingName, settings: userSettings });
+
+    // Save all settings back to localStorage
+    localStorage.setItem('savedSettings', JSON.stringify(savedSettings));
+
+    // Refresh saved settings names and trigger change detection to update UI
+    this.savedSettingNames = this.getSavedSettingNames();
+    this.cdr.detectChanges();  // This triggers change detection immediately
+  }
+
+
+  protected loadUserSettings(settingName: string | undefined) {
+    const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
+    const selectedSetting = savedSettings.find((setting: { name: string, settings: any }) => setting.name === settingName);
+
+    if (selectedSetting) {
+      // Set the loaded values to the form
+      this.username = selectedSetting.settings.username;
+      this.password = selectedSetting.settings.password;
+      this.templateId = selectedSetting.settings.templateId;
+      this.baseUrl = selectedSetting.settings.baseUrl;
+      this.width = selectedSetting.settings.width;
+      this.height = selectedSetting.settings.height;
+    }
+  }
+
+
+// Get the list of saved setting names from localStorage
+  savedSettingNames: (NgIterable<unknown> & NgIterable<any>) | undefined | null;
+  private getSavedSettingNames() {
+    const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
+    return savedSettings.map((setting: { name: string }) => setting.name);
+  }
+// Delete a saved setting by its index
+  deleteSavedSetting(index: number) {
+    // Retrieve the current saved settings from localStorage
+    const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
+
+    // Remove the setting at the given index
+    savedSettings.splice(index, 1);
+
+    // Save the updated list of settings back to localStorage
+    localStorage.setItem('savedSettings', JSON.stringify(savedSettings));
+
+    // Update the list of saved setting names
+    this.savedSettingNames = this.getSavedSettingNames();
+  }
+
 }
+

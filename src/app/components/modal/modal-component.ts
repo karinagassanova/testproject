@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {TokenResponse} from "../../app.component";
+import { TokenResponse } from "../../app.component";
 
 @Component({
   selector: 'ngbd-modal-content',
@@ -11,8 +11,9 @@ import {TokenResponse} from "../../app.component";
       <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <pre>{{ formattedTokens }}</pre> <!-- Use the formattedTokens property -->
+      <pre class="wrapped-pre">{{ formattedTokens }}</pre> <!-- Wrapped output to fit modal width -->
     </div>
+
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
     </div>
@@ -20,16 +21,14 @@ import {TokenResponse} from "../../app.component";
 })
 export class NgbdModalContent implements OnInit {
   activeModal = inject(NgbActiveModal);
-  @Input() tokenResponse: TokenResponse | undefined = undefined; // Accept an array of tokens
+  @Input() tokenResponse: TokenResponse | undefined = undefined;
 
   // Computed property to format tokens
   get formattedTokens(): string {
-    return JSON.stringify(this.tokenResponse, null, 4)
-    //return this.tokenResponse.map(e => `BFID: ${e.token}`).join('\n'); // Format the output
+    return JSON.stringify(this.tokenResponse, null, 4);
   }
 
   ngOnInit() {
-    console.log('Tokens received in modal:', this.tokenResponse); // Log the tokens received
+    console.log('Tokens received in modal:', this.tokenResponse);
   }
-
 }
