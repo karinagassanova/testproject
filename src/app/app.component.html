@@ -18,18 +18,19 @@
             <!-- Save Settings Name Input -->
             <div class="input-group">
               <label for="settingName">Save Settings As:</label>
-              <input type="text" id="settingName" [(ngModel)]="settingName" placeholder="Enter a name for your settings" />
+              <input type="text" id="settingName" [(ngModel)]="settingName"
+                     placeholder="Enter a name for your settings"/>
             </div>
 
             <!-- User Credentials in One Row -->
             <div class="input-row">
               <div class="input-group">
                 <label for="usernameInput">Username:</label>
-                <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username" />
+                <input type="text" id="usernameInput" [(ngModel)]="username" placeholder="Enter Username"/>
               </div>
               <div class="input-group">
                 <label for="passwordInput">Password:</label>
-                <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password" />
+                <input type="password" id="passwordInput" [(ngModel)]="password" placeholder="Enter Password"/>
               </div>
             </div>
 
@@ -37,7 +38,7 @@
             <div class="input-row">
               <div class="input-group">
                 <label for="templateId">Template ID:</label>
-                <input type="text" id="templateId" placeholder="Enter Template ID" [(ngModel)]="templateId" />
+                <input type="text" id="templateId" placeholder="Enter Template ID" [(ngModel)]="templateId"/>
               </div>
               <div class="input-group">
                 <label for="baseUrl">Base URL:</label>
@@ -52,35 +53,37 @@
             <div class="input-row">
               <div class="input-group">
                 <label for="width">Width:</label>
-                <input type="text" id="width" [(ngModel)]="width" placeholder="e.g., 600px" />
+                <input type="text" id="width" [(ngModel)]="width" placeholder="e.g., 600px"/>
               </div>
               <div class="input-group">
                 <label for="height">Height:</label>
-                <input type="text" id="height" [(ngModel)]="height" placeholder="e.g., 800px" />
+                <input type="text" id="height" [(ngModel)]="height" placeholder="e.g., 800px"/>
               </div>
             </div>
 
             <!-- Buttons to Save and Load Settings -->
             <div class="save-load-buttons">
-          <td>
+              <td>
                 <button class="save-button" (click)="saveUserSettings()">Save Settings</button>
-          </td>
+              </td>
 
 
               <!-- Load Saved Settings Dropdown -->
               <div class="dropdown-container">
                 <label for="savedSettingsDropdown">Load Saved Settings:</label>
                 <select id="savedSettingsDropdown" [(ngModel)]="settingName" (change)="loadUserSettings(settingName)">
-                  <option *ngFor="let savedSettingName of savedSettingNames" [value]="savedSettingName">{{ savedSettingName }}</option>
+                  <option *ngFor="let savedSettingName of savedSettingNames"
+                          [value]="savedSettingName">{{ savedSettingName }}
+                  </option>
                 </select>
               </div>
 
-             <td>
+              <td>
                 <!-- Delete Saved Setting Button -->
                 <button class="delete-button" (click)="deleteSavedSetting(settingName)" [disabled]="!settingName">
                   Delete Selected Setting
                 </button>
-             </td>
+              </td>
 
             </div>
           </div>
@@ -132,15 +135,16 @@
                     </tr>
                   </table>
 
-                  <br /><br />
+                  <br/><br/>
 
                   <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
 
-                  <br /><br />
+                  <br/><br/>
 
                   <td>
                     <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
-                    <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+                    <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize
+                    </button>
                   </td>
                 </div>
               </div>

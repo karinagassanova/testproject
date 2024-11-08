@@ -1,12 +1,12 @@
 import {Component, OnInit, OnDestroy, Injectable, NgIterable} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { DiagramComponent } from "./components/diagram/diagram.component";
-import { SharedService } from "./services/sharedservice";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdModalContent } from './components/modal/modal-component'; // Adjust the path accordingly
-import { NgbdDetokenModalContent } from './components/modal/modal-detok-component';
-import { ChangeDetectorRef } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {DiagramComponent} from "./components/diagram/diagram.component";
+import {SharedService} from "./services/sharedservice";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbdModalContent} from './components/modal/modal-component'; // Adjust the path accordingly
+import {NgbdDetokenModalContent} from './components/modal/modal-detok-component';
+import {ChangeDetectorRef} from '@angular/core';
 
 
 export interface TokenResponse {
@@ -43,7 +43,7 @@ type TokenDisplay = {
 };
 
 type Database = {
-  data : TokenResponse[];
+  data: TokenResponse[];
 }
 
 @Injectable({
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
   detokenizedData: string[] = []; // Added this for displaying detokenized data
   showConsole: boolean = false;
   isGoPressed: boolean = false;
-  db: Database = {data:[]};
+  db: Database = {data: []};
 
   flow: string = 'proxy'; // Current flow, defaults to "tokenization"
   settingName: string | undefined;
@@ -89,7 +89,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private modalService: NgbModal,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.messageSubscription = new Subscription();
@@ -106,7 +107,7 @@ export class AppComponent implements OnInit, OnDestroy {
     window.removeEventListener('message', this.onMessage.bind(this));
   }
 
-  private destroyIFrame(parentId :string) {
+  private destroyIFrame(parentId: string) {
     const parent = document.getElementById(parentId) as HTMLDivElement;
     if (parent) {
       parent.innerHTML = ""
@@ -131,6 +132,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private tempTokenData: TokenDisplay | undefined;
   active = 1;
+
   onShieldconexToken(tokenData: any) {
     console.log('Received Token Data:', tokenData);
 
@@ -138,7 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const token = tokenData.token;
 
       // Store the token data temporarily
-      this.tempTokenData = { token };
+      this.tempTokenData = {token};
 
       // Add the token to databaseItems
       //this.db.data.push({ id: this.databaseItems.length + 1, token });
@@ -187,7 +189,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  onDetokenizeButtonClick( id : string) {
+  onDetokenizeButtonClick(id: string) {
 
     const tokenData = this.db.data.find(item => item.bfid === id);
 
@@ -199,7 +201,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const password = this.password;
       this.flow = 'detokenization';
 
-      console.log({ bfid, values, username, password });
+      console.log({bfid, values, username, password});
 
       if (!bfid) {
         this.iframeErrors.push('BFID is missing.');
@@ -405,7 +407,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Retrieve the existing settings from localStorage and add the new one
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
-    savedSettings.push({ name: settingName, settings: userSettings });
+    savedSettings.push({name: settingName, settings: userSettings});
 
     // Save all settings back to localStorage
     localStorage.setItem('savedSettings', JSON.stringify(savedSettings));
@@ -418,7 +420,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   protected loadUserSettings(settingName: string | undefined) {
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
-    const selectedSetting = savedSettings.find((setting: { name: string, settings: any }) => setting.name === settingName);
+    const selectedSetting = savedSettings.find((setting: {
+      name: string,
+      settings: any
+    }) => setting.name === settingName);
 
     if (selectedSetting) {
       // Set the loaded values to the form
@@ -434,6 +439,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 // Get the list of saved setting names from localStorage
   savedSettingNames: (NgIterable<unknown> & NgIterable<any>) | undefined | null;
+
   private getSavedSettingNames() {
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
     return savedSettings.map((setting: { name: string }) => setting.name);
@@ -467,8 +473,6 @@ export class AppComponent implements OnInit, OnDestroy {
     // Trigger change detection to immediately reflect the changes in the UI
     this.cdr.detectChanges();
   }
-
-
 
 
 }
