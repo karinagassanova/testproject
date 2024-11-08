@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './components/modal/modal-component'; // Adjust the path accordingly
 import { NgbdDetokenModalContent } from './components/modal/modal-detok-component';
 
-interface TokenResponse {
+export interface TokenResponse {
   messageId: string;
   bfid: string;
   reference: string;
@@ -357,17 +357,16 @@ export class AppComponent implements OnInit, OnDestroy {
     if (tokenData) {
       this.sharedService.highlightMessage.next("view_tokens");
       console.log(`Viewing tokens for ID ${id}:`, tokenData);
-      this.tokenData = [{ token: tokenData.bfid }];
-      this.openModal(this.tokenData);
+      this.openModal(tokenData);
     } else {
       console.error(`No token data found for ID ${id}`);
       this.iframeErrors.push(`No token data found for ID ${id}`);
     }
   }
 
-  openModal(tokenData: Array<{ token: string }>) {
+  openModal(tokenData: TokenResponse) {
     const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.tokens = tokenData;
+    modalRef.componentInstance.tokenResponse = tokenData;
   }
 
   isConfigFolded = false;
