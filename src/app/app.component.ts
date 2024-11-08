@@ -438,12 +438,24 @@ export class AppComponent implements OnInit, OnDestroy {
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
     return savedSettings.map((setting: { name: string }) => setting.name);
   }
-// Delete a saved setting by its index
-  deleteSavedSetting(index: number) {
+
+
+  deleteSavedSetting(settingName: string | undefined) {
+    if (!settingName) {
+      return;  // Exit early if no setting name is provided
+    }
+
     // Retrieve the current saved settings from localStorage
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
 
-    // Remove the setting at the given index
+    // Find the index of the selected setting by its name
+    const index = savedSettings.findIndex((setting: any) => setting.name === settingName);
+
+    if (index === -1) {
+      return;  // If the setting is not found, exit early
+    }
+
+    // Remove the setting at the found index
     savedSettings.splice(index, 1);
 
     // Save the updated list of settings back to localStorage
@@ -451,7 +463,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Update the list of saved setting names
     this.savedSettingNames = this.getSavedSettingNames();
+
+    // Trigger change detection to immediately reflect the changes in the UI
+    this.cdr.detectChanges();
   }
+
+
+
 
 }
 

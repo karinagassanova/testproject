@@ -42,16 +42,6 @@ select {
   font-size: 14px; /* Adjust input font size */
 }
 
-button {
-  padding: 10px 15px; /* Padding for buttons */
-  margin-top: 10px; /* Margin above buttons */
-  border: none; /* Remove default button border */
-  border-radius: 4px; /* Rounded corners for buttons */
-  background-color: #007bff; /* Bootstrap primary color */
-  color: white; /* White text on buttons */
-  cursor: pointer; /* Pointer cursor on hover */
-}
-
 button:hover {
   background-color: #0056b3; /* Darker shade on hover */
 }
@@ -175,7 +165,7 @@ td {
 /* Button Styling within the Table */
 td button {
   padding: 5px 10px; /* Padding for buttons in the table */
-  font-size: 14px; /* Font size for buttons */
+  font-size: 16px; /* Font size for buttons */
   border: none; /* Remove border */
   border-radius: 3px; /* Rounded corners */
   background-color: #007BFF; /* Button background color */
@@ -205,26 +195,7 @@ td button:hover {
 .fold-button:hover {
   background: #5a6268; /* Slightly darker grey on hover */
 }
-.clear-button {
-  color: white; /* White text color */
-  border: none; /* No border */
-  padding: 10px 10px; /* Padding for better touch targets */
-  cursor: pointer; /* Pointer cursor on hover */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 16px; /* Larger font size */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  width:70px;
-}
 
-button.tokenize-button {
-  border: none; /* No border */
-  padding: 10px 10px; /* Padding for better touch targets */
-  cursor: pointer; /* Pointer cursor on hover */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 16px; /* Larger font size */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  width:75px;
-}
 /* Styling for the IFrame container */
 #iframe-container {
   background-color: #fff; /* White background like config and console */
@@ -289,5 +260,18 @@ button.tokenize-button {
   background-color: white;
   border: 1px solid #e9ecef;
   border-radius: 5px;
+}
+
+/* Wrapper around the dropdown and the delete button */
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style for the dropdown select element */
+#savedSettingsDropdown {
+  padding: 5px;
+  margin-right: 10px;
+  font-size: 14px;
 }
 
