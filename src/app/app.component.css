@@ -112,23 +112,6 @@ button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
 
-/* Specific styling for each button */
-button.go-button {
-  background-color: #28a745; /* Green for "Go" button */
-}
-
-button.tokenize-button {
-  background-color: #17a2b8; /* Light blue for "Tokenize" button */
-}
-
-button.clear-button {
-  background-color: #ffc107; /* Yellow for "Clear" button */
-}
-
-button.detokenize-button {
-  background-color: #dc3545; /* Red for "Detokenize" button */
-}
-
 /* Ensure the diagram is responsive */
 .diagram svg {
   padding-top: 10px;
