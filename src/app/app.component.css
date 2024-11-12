@@ -279,3 +279,43 @@ td button:hover {
   font-size: 14px;
 }
 
+.load-delete-settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.dropdown-and-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group label {
+  font-weight: bold;
+}
+
+/* Button styling for Save and Delete in Load/Delete Saved Settings Section */
+.save-button,
+.delete-button {
+  padding: 5px 10px; /* Consistent padding with table buttons */
+  font-size: 15px; /* Match font size with table buttons */
+  border: none; /* Remove border for a clean look */
+  border-radius: 3px; /* Rounded corners for consistency */
+  background-color: #007BFF; /* Blue background color */
+  color: #fff; /* White text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+/* Hover effect for Save and Delete buttons */
+.save-button:hover,
+.delete-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
