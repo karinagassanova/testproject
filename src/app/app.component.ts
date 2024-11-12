@@ -393,9 +393,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   protected saveUserSettings() {
-    const settingName = this.settingName || 'Default Setting'; // Use provided name or fallback to 'Default Setting'
+    const settingName = this.settingName || 'Default Setting';
 
-    // Prepare the settings object
+
     const userSettings = {
       username: this.username,
       password: this.password,
@@ -405,16 +405,14 @@ export class AppComponent implements OnInit, OnDestroy {
       height: this.height
     };
 
-    // Retrieve the existing settings from localStorage and add the new one
+
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
     savedSettings.push({name: settingName, settings: userSettings});
-
-    // Save all settings back to localStorage
     localStorage.setItem('savedSettings', JSON.stringify(savedSettings));
 
-    // Refresh saved settings names and trigger change detection to update UI
+
     this.savedSettingNames = this.getSavedSettingNames();
-    this.cdr.detectChanges();  // This triggers change detection immediately
+    this.cdr.detectChanges();
   }
 
 
@@ -426,7 +424,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }) => setting.name === settingName);
 
     if (selectedSetting) {
-      // Set the loaded values to the form
+
       this.username = selectedSetting.settings.username;
       this.password = selectedSetting.settings.password;
       this.templateId = selectedSetting.settings.templateId;
@@ -437,7 +435,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-// Get the list of saved setting names from localStorage
+
   savedSettingNames: (NgIterable<unknown> & NgIterable<any>) | undefined | null;
 
   private getSavedSettingNames() {
@@ -448,29 +446,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
   deleteSavedSetting(settingName: string | undefined) {
     if (!settingName) {
-      return;  // Exit early if no setting name is provided
+      return;
     }
-
-    // Retrieve the current saved settings from localStorage
     const savedSettings = JSON.parse(localStorage.getItem('savedSettings') || '[]');
-
-    // Find the index of the selected setting by its name
     const index = savedSettings.findIndex((setting: any) => setting.name === settingName);
-
     if (index === -1) {
-      return;  // If the setting is not found, exit early
+      return;
     }
-
-    // Remove the setting at the found index
     savedSettings.splice(index, 1);
 
-    // Save the updated list of settings back to localStorage
+
     localStorage.setItem('savedSettings', JSON.stringify(savedSettings));
-
-    // Update the list of saved setting names
     this.savedSettingNames = this.getSavedSettingNames();
-
-    // Trigger change detection to immediately reflect the changes in the UI
     this.cdr.detectChanges();
   }
 
