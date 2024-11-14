@@ -21,7 +21,7 @@
               <input type="text" id="settingName" [(ngModel)]="settingName"
                      placeholder="Enter a name for your settings"/>
             </div>
-
+            <br>
             <!-- User Credentials in One Row -->
             <div class="input-row">
               <div class="input-group">
@@ -74,7 +74,9 @@
                     </option>
                   </select>
                 </div>
+
                 <div class="button-group">
+                  <br>
                   <button class="save-button" (click)="saveUserSettings()">Save Settings</button>
                   <button class="delete-button" (click)="deleteSavedSetting(settingName)" [disabled]="!settingName">
                     Delete Selected Setting

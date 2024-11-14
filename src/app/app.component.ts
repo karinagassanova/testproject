@@ -435,7 +435,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-
   savedSettingNames: (NgIterable<unknown> & NgIterable<any>) | undefined | null;
 
   private getSavedSettingNames() {
