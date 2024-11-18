@@ -200,3 +200,25 @@ button {
   box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
 }
 
+/* Container for pre and button */
+.copy-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+/* Position the button in the top-right corner */
+.copy-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Optionally, add some padding to the pre for better appearance */
+pre {
+  padding-right: 30px; /* Add some space on the right so the icon doesn't overlap text */
+  white-space: pre-wrap; /* Ensure wrapping if the content is too long */
+  word-wrap: break-word; /* Ensure long words break into the next line */
+}

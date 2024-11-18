@@ -13,21 +13,31 @@ import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
     </div>
     <div class="modal-body">
       <h3>Request</h3>
-      <pre>
-        curl --location 'https://secure-cert.shieldconex.com/api/tokenization/detokenize' \\
-        --header 'Content-Type: application/json' \\
-        --header 'Authorization: {{ generateAuth }}' \\
-        --data-raw '{{ formattedtokenData }}'
-      </pre>
-      <button (click)="copyToClipboard(formattedRequestData)" class="btn btn-outline-secondary btn-sm">Copy</button>
+      <div class="copy-container">
+    <pre>
+      curl --location 'https://secure-cert.shieldconex.com/api/tokenization/detokenize' \\\\
+      --header 'Content-Type: application/json' \\\\
+      --header 'Authorization: {{ generateAuth }}' \\\\
+      --data-raw '{{ formattedtokenData }}'
+    </pre>
+        <button (click)="copyToClipboard(formattedRequestData)" class="btn btn-outline-secondary btn-sm copy-button">
+          <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
+        </button>
+      </div>
 
       <h3>Response</h3>
-      <pre>{{ formattedDetokenizedData }}</pre>
-      <button (click)="copyToClipboard(formattedDetokenizedData)" class="btn btn-outline-secondary btn-sm">Copy</button>
+      <div class="copy-container">
+        <pre>{{ formattedDetokenizedData }}</pre>
+        <button (click)="copyToClipboard(formattedDetokenizedData)"
+                class="btn btn-outline-secondary btn-sm copy-button">
+          <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
+        </button>
+      </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
     </div>
+
   `,
   imports: [
     JsonPipe
