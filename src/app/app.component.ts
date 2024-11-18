@@ -416,7 +416,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   iframeOutlineColor: string = 'black';
-
+  isTabsFolded: boolean = false;
   isIframeFolded: boolean = false;
 
   toggleIframeFold() {

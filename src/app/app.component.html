@@ -84,104 +84,102 @@
                 </div>
               </div>
             </div>
-
-
-            <!-- Tabs Section -->
-            <br><br>
-            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="custom-nav-tabs">
-              <li [ngbNavItem]="1">
-                <button ngbNavLink>Database</button>
-                <ng-template ngbNavContent>
-                  <!-- Database Table -->
-                  <div id="database-table">
-                    <h2>Database</h2>
-                    <table>
-                      <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr *ngFor="let item of db.data">
-                        <td>{{ item.messageId }}</td>
-                        <td>
-                          <button (click)="viewTokens(item.bfid)">View Tokens</button>
-                          <button class="detokenize-button" (click)="onDetokenizeButtonClick(item.bfid)">Detokenize
-                          </button>
-                          <button class="proxy-button" (click)="onProxyButtonClick(item.bfid)">Proxy</button>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </ng-template>
-              </li>
-
-              <!-- IFrame Tab Content -->
-              <li [ngbNavItem]="2">
-                <button ngbNavLink>IFrame</button>
-                <ng-template ngbNavContent>
-                  <div id="iframe-toggle-area" [ngClass]="{ 'folded': isIframeFolded }">
-                    <div id="iframe-container">
-                      <h2>IFrame</h2>
-                      <td>
-                        <button class="load-iframe-button" (click)="onGoButtonClick()">Load Iframe</button>
-                      </td>
-                      <br/><br/>
-                      <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
-                      <br/><br/>
-                      <td>
-                        <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
-                        <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize
-                        </button>
-                      </td>
-                    </div>
-                  </div>
-                </ng-template>
-              </li>
-
-
-              <!-- Console Tab -->
-              <li [ngbNavItem]="3">
-                <button ngbNavLink>Console</button>
-                <ng-template ngbNavContent>
-                  <!-- Console Area -->
-                  <div id="right-column">
-                    <h2>Console</h2>
-                    <div class="result-section">
-                  <pre>
-                    <code id="combined-result">
-                      <h3>IFrame Render Status</h3>
-                      <div>{{ iframeRenderStatus }}</div>
-                      <div>MessageID: {{ readResponse?.messageId }}</div>
-                      <h3>Error Messages</h3>
-                      <div>
-                        <h3>Tokenized Data</h3>
-                        <div *ngFor="let e of SCXTokens">
-                          Name: {{ e.name }}, Value: {{ e.value }}
-                        </div>
-                        <h3>Token Data</h3>
-                        <div *ngFor="let e of tokenData">
-                          BFID: {{ e.token }}
-                        </div>
-                        <h3>Detokenized Data</h3>
-                        <div *ngFor="let e of detokenizedData; let i = index">
-                          Name: {{ SCXTokens[i].name }}, Detokenized Value: {{ e }}
-                        </div>
-                      </div>
-                    </code>
-                  </pre>
-                    </div>
-                  </div>
-                </ng-template>
-              </li>
-            </ul>
-
-            <!-- Render content for the active tab -->
-            <div [ngbNavOutlet]="nav"></div>
           </div>
-        </div>
+        </div> <!-- End of Config Area -->
+
+        <!-- Tabs Section -->
+        <div id="tabs-section" [ngClass]="{ 'folded': isTabsFolded }">
+          <br><br>
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="custom-nav-tabs">
+            <li [ngbNavItem]="1">
+              <button ngbNavLink>Database</button>
+              <ng-template ngbNavContent>
+                <!-- Database Table -->
+                <div id="database-table">
+                  <h2>Database</h2>
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of db.data">
+                      <td>{{ item.messageId }}</td>
+                      <td>
+                        <button (click)="viewTokens(item.bfid)">View Tokens</button>
+                        <button class="detokenize-button" (click)="onDetokenizeButtonClick(item.bfid)">Detokenize</button>
+                        <button class="proxy-button" (click)="onProxyButtonClick(item.bfid)">Proxy</button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+            </li>
+
+            <!-- IFrame Tab Content -->
+            <li [ngbNavItem]="2">
+              <button ngbNavLink>IFrame</button>
+              <ng-template ngbNavContent>
+                <div id="iframe-toggle-area" [ngClass]="{ 'folded': isIframeFolded }">
+                  <div id="iframe-container">
+                    <h2>IFrame</h2>
+                    <td>
+                      <button class="load-iframe-button" (click)="onGoButtonClick()">Load Iframe</button>
+                    </td>
+                    <br/><br/>
+                    <div id="frame1" class="iframe"></div> <!-- Loaded IFrame -->
+                    <br/><br/>
+                    <td>
+                      <button *ngIf="isGoPressed" class="clear-button" (click)="onClearButtonClick()">Clear</button>
+                      <button *ngIf="isGoPressed" class="tokenize-button" (click)="onTokenizeButtonClick()">Tokenize</button>
+                    </td>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+
+            <!-- Console Tab -->
+            <li [ngbNavItem]="3">
+              <button ngbNavLink>Console</button>
+              <ng-template ngbNavContent>
+                <!-- Console Area -->
+                <div id="right-column">
+                  <h2>Console</h2>
+                  <div class="result-section">
+                    <pre>
+                      <code id="combined-result">
+                        <h3>IFrame Render Status</h3>
+                        <div>{{ iframeRenderStatus }}</div>
+                        <div>MessageID: {{ readResponse?.messageId }}</div>
+                        <h3>Error Messages</h3>
+                        <div>
+                          <h3>Tokenized Data</h3>
+                          <div *ngFor="let e of SCXTokens">
+                            Name: {{ e.name }}, Value: {{ e.value }}
+                          </div>
+                          <h3>Token Data</h3>
+                          <div *ngFor="let e of tokenData">
+                            BFID: {{ e.token }}
+                          </div>
+                          <h3>Detokenized Data</h3>
+                          <div *ngFor="let e of detokenizedData; let i = index">
+                            Name: {{ SCXTokens[i].name }}, Detokenized Value: {{ e }}
+                          </div>
+                        </div>
+                      </code>
+                    </pre>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+
+          <!-- Render content for the active tab -->
+          <div [ngbNavOutlet]="nav"></div>
+        </div> <!-- End of Tabs Section -->
       </div>
     </div>
   </div>
