@@ -222,3 +222,27 @@ pre {
   white-space: pre-wrap; /* Ensure wrapping if the content is too long */
   word-wrap: break-word; /* Ensure long words break into the next line */
 }
+/* Container for the pre tag and copy button */
+.pre-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Style the copy button */
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button is above the content */
+}
+
+/* Style the pre tag */
+pre {
+  white-space: pre-wrap;        /* Wrap text in the pre tag */
+  word-wrap: break-word;        /* Break long words to fit the container */
+  padding-right: 40px;          /* Allow space for the copy button */
+}

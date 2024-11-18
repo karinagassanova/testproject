@@ -4,6 +4,7 @@ import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common'; // Import CommonModule
+import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
 @Component({
   selector: 'ngbd-proxy-modal-content',
   standalone: true,
@@ -53,10 +54,13 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
 
         <div *ngIf="activeTab === 2">
           <h3>Proxy Request</h3>
-          <pre>curl --location '{{ proxyUrl }}'
---header 'Content-Type: application/json'
---header 'Authorization: {{ generateProxyAuth }}'
---data '{{ formattedProxyData }}'</pre>
+
+          <div class="pre-container">
+            <pre>{{ formattedCurlRequest }}</pre>
+            <button (click)="copyToClipboard(formattedCurlRequest)" class="btn btn-outline-secondary btn-sm copy-button">
+              <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
+            </button>
+          </div>
         </div>
 
         <div *ngIf="activeTab === 3">
@@ -79,11 +83,19 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
 })
 export class NgbdProxyModalContent implements OnInit {
   activeModal = inject(NgbActiveModal);
-
+  clipboard = inject(Clipboard); // Inject Clipboard service
   @Input() proxyConfig: any = {};
   @Input() proxyResponse: any = {};
 
   activeTab = 1; // Default active tab
+
+  // Computed property to format the curl request
+  get formattedCurlRequest(): string {
+    return `curl --location '${this.proxyUrl}'
+--header 'Content-Type: application/json'
+--header 'Authorization: ${this.generateProxyAuth}'
+--data '${this.formattedProxyData}'`;
+  }
 
   get proxyUrl(): string {
     return this.proxyConfig.url || 'https://example.com/api/proxy';
@@ -119,5 +131,11 @@ export class NgbdProxyModalContent implements OnInit {
 
   sendRequest() {
     this.activeTab = 2; // Switch to the "Request" tab to show the generated curl
+  }
+
+  // Copy the curl request to clipboard
+  copyToClipboard(data: string): void {
+    this.clipboard.copy(data); // This copies the data to the clipboard
+    alert('Copied to clipboard!'); // Provide feedback to the user
   }
 }
