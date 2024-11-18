@@ -1,10 +1,10 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JsonPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common'; // Import CommonModule
-import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JsonPipe} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import {CommonModule} from '@angular/common'; // Import CommonModule
+import {Clipboard} from '@angular/cdk/clipboard';  // Import Clipboard service
 @Component({
   selector: 'ngbd-proxy-modal-content',
   standalone: true,
@@ -16,9 +16,12 @@ import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
 
     <div class="modal-body">
       <div class="btn-group" role="group" aria-label="Tab Navigation">
-        <button class="btn btn-outline-primary" (click)="activeTab = 1" [class.active]="activeTab === 1">Edit/Config</button>
-        <button class="btn btn-outline-primary" (click)="activeTab = 2" [class.active]="activeTab === 2">Request</button>
-        <button class="btn btn-outline-primary" (click)="activeTab = 3" [class.active]="activeTab === 3">Destination</button>
+        <button class="btn btn-outline-primary" (click)="activeTab = 1" [class.active]="activeTab === 1">Edit/Config
+        </button>
+        <button class="btn btn-outline-primary" (click)="activeTab = 2" [class.active]="activeTab === 2">Request
+        </button>
+        <button class="btn btn-outline-primary" (click)="activeTab = 3" [class.active]="activeTab === 3">Destination
+        </button>
       </div>
 
       <div class="mt-3">
@@ -41,7 +44,8 @@ import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
           <div class="input-row">
             <div class="input-group">
               <label for="payload">Request Body:</label>
-              <textarea id="payload" [(ngModel)]="proxyConfig.payload" rows="5" placeholder="Enter request payload"></textarea>
+              <textarea id="payload" [(ngModel)]="proxyConfig.payload" rows="5"
+                        placeholder="Enter request payload"></textarea>
             </div>
           </div>
 
@@ -57,7 +61,8 @@ import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
 
           <div class="pre-container">
             <pre>{{ formattedCurlRequest }}</pre>
-            <button (click)="copyToClipboard(formattedCurlRequest)" class="btn btn-outline-secondary btn-sm copy-button">
+            <button (click)="copyToClipboard(formattedCurlRequest)"
+                    class="btn btn-outline-secondary btn-sm copy-button">
               <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
             </button>
           </div>

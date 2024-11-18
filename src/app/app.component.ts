@@ -75,7 +75,8 @@ export class AppComponent implements OnInit, OnDestroy {
   detokenizedData: string[] = []; // Added this for displaying detokenized data
   showConsole: boolean = false;
   isGoPressed: boolean = false;
-  db: Database = {data: [{
+  db: Database = {
+    data: [{
       "messageId": "1202411151049141011092085",
       "bfid": "djI6MTIwMjQxMTE1MTA0OTEzMTAzMTUzNzQ2MnxlMzJjOTU3ZmI4M2E5ZTAzNDcyZjIzMjA3ZWRlNWVlMHx8fA==",
       "reference": "",
@@ -105,7 +106,8 @@ export class AppComponent implements OnInit, OnDestroy {
           "value": "669"
         }
       ]
-    }]};
+    }]
+  };
 
   flow: string = 'proxy'; // Current flow, defaults to "tokenization"
   settingName: string | undefined;
@@ -285,7 +287,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   openDetokenizedModal(detokenizedData: any[], tokenData: any) {
-    const modalRef = this.modalService.open(NgbdDetokenModalContent,{size: "lg"});
+    const modalRef = this.modalService.open(NgbdDetokenModalContent, {size: "lg"});
     modalRef.componentInstance.detokenizedData = detokenizedData;
     modalRef.componentInstance.tokenData = tokenData;
     modalRef.componentInstance.SCXTokens = this.SCXTokens;
@@ -405,7 +407,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   openModal(tokenData: TokenResponse) {
-    const modalRef = this.modalService.open(NgbdModalContent, {size:'lg'});
+    const modalRef = this.modalService.open(NgbdModalContent, {size: 'lg'});
     modalRef.componentInstance.tokenResponse = tokenData;
   }
 

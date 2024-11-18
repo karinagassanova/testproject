@@ -1,7 +1,7 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JsonPipe } from "@angular/common";
-import { Clipboard } from '@angular/cdk/clipboard';  // Import Clipboard service
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JsonPipe} from "@angular/common";
+import {Clipboard} from '@angular/cdk/clipboard';  // Import Clipboard service
 
 @Component({
   selector: 'ngbd-detoken-modal-content',
@@ -51,7 +51,8 @@ export class NgbdDetokenModalContent implements OnInit {
   @Input() detokenizedData: any[] = [];
   @Input() SCXTokens: Array<{ name: string }> = [];
 
-  constructor(private clipboard: Clipboard) {}
+  constructor(private clipboard: Clipboard) {
+  }
 
   // Generate Auth Header
   get generateAuth(): string {
@@ -60,7 +61,7 @@ export class NgbdDetokenModalContent implements OnInit {
 
   // Format token data for request
   get formattedtokenData(): string {
-    return JSON.stringify({ bfid: this.tokenData.bfid, values: this.tokenData.values }, null, 4);
+    return JSON.stringify({bfid: this.tokenData.bfid, values: this.tokenData.values}, null, 4);
   }
 
   // Format detokenized data for response

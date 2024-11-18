@@ -1,7 +1,7 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TokenResponse } from "../../app.component";
-import { Clipboard } from '@angular/cdk/clipboard';
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {TokenResponse} from "../../app.component";
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'ngbd-modal-content',
