@@ -1,278 +1,272 @@
 .container-fluid {
-  padding: 20px; /* Add some padding to the container */
+  padding: 20px;
 }
 
 .main-container {
-  border: 1px solid #ccc; /* Add a border around the main container */
-  border-radius: 8px; /* Rounded corners for the container */
-  padding: 20px; /* Padding inside the main container */
-  background-color: #f9f9f9; /* Light background color for better readability */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
 .input-row {
-  display: flex; /* Use flexbox to align items in a row */
-  justify-content: space-between; /* Distribute space evenly */
-  margin-bottom: 15px; /* Space between input rows */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .input-group {
-  flex: 1; /* Each input group takes equal space */
-  margin-right: 20px; /* Space between input groups */
+  flex: 1;
+  margin-right: 20px;
 }
 
 .input-group:last-child {
-  margin-right: 0; /* No margin for the last input group */
+  margin-right: 0;
 }
 
 label {
-  display: block; /* Display label as a block for better alignment */
-  margin-bottom: 5px; /* Space between label and input */
-  font-weight: bold; /* Bold label for emphasis */
-  font-size: 14px; /* Adjust label font size */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 input[type="text"],
 input[type="password"],
 select {
-  width: 100%; /* Make inputs take full width */
-  padding: 10px; /* Padding inside inputs */
-  border: 1px solid #ccc; /* Border around inputs */
-  border-radius: 4px; /* Rounded corners for inputs */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-size: 14px; /* Adjust input font size */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3;
 }
 
 
-/* Diagram styling */
 .diagram {
-  border: 0; /* Remove border */
-  padding: 0; /* Remove padding */
-  grid-column: 1; /* Place in the first column */
+  border: 0;
+  padding: 0;
+  grid-column: 1;
 }
 
 
-/* Configuration area styling */
 #config-area {
-  background-color: #fff; /* Background color for config area */
-  border: 1px solid #ddd; /* Border for config area */
-  padding: 20px; /* Padding inside the config area */
-  width: 100%; /* Ensure it takes full width of the main container */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Console area styling */
+
 #right-column {
-  border: 1px solid #ddd; /* Border for console area */
-  padding: 10px; /* Padding inside the console area */
-  max-height: 400px; /* Max height for scrolling */
-  overflow-y: auto; /* Vertical scroll if needed */
-  width: 100%; /* Ensure it takes full width of the main container */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Button layout adjustment */
+
 .button-row {
   display: flex;
-  flex-wrap: wrap; /* Allow buttons to wrap if they don't fit in one line */
-  gap: 10px; /* Space between buttons */
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-
-/* Button styling */
 button {
   padding-top: 10px;
-  flex: 1; /* Buttons take equal space */
-  margin: 0 10px; /* Space between buttons */
-  padding: 10px 15px; /* Padding inside buttons */
-  font-size: 14px; /* Font size for buttons */
-  cursor: pointer; /* Pointer cursor on hover */
-  border: none; /* Remove border */
-  background-color: #007BFF; /* Button background color */
-  color: #fff; /* Button text color */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  flex: 1;
+  margin: 0 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: #007BFF;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
+
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
-/* Ensure the diagram is responsive */
+
 .diagram svg {
   padding-top: 10px;
-  width: 100%; /* Full width of the diagram area */
-  height: 100%; /* Full height of the diagram area */
+  width: 100%;
+  height: 100%;
 }
 
-/* Specific styling for the console button */
+
 button.console-button {
-  background-color: #6c757d; /* Gray color for "Console" button */
+  background-color: #6c757d;
   flex: 1;
   margin: 0 10px;
 }
 
-/* Database Table Styling */
+
 #database-table {
-  background-color: #fff; /* Background color for the table area */
-  border: 1px solid #ddd; /* Border around the table */
-  border-radius: 5px; /* Rounded corners for the table */
-  overflow: hidden; /* Clip any overflowing content */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding-left: 5px;
 }
 
-/* Table styling */
+
 table {
-  width: 100%; /* Full width of the table area */
-  border-collapse: collapse; /* Merge borders */
-  table-layout: auto; /* Allow auto column width */
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
 }
 
-/* Table Header Styling */
+
 thead {
-  background-color: #f8f9fa; /* Light gray for header background */
+  background-color: #f8f9fa;
 }
 
 th {
-  padding: 10px; /* Padding inside table header */
-  text-align: left; /* Align text to the left */
-  border-bottom: 2px solid #ddd; /* Bottom border for header */
-  font-weight: bold; /* Bold font for header */
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
 }
 
-/* Table Row Styling */
+
 tbody tr {
-  transition: background-color 0.2s; /* Smooth transition for hover effect */
+  transition: background-color 0.2s;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* Light gray for even rows */
+  background-color: #f9f9f9;
 }
 
 tbody tr:hover {
-  background-color: #e9ecef; /* Light blue on hover */
+  background-color: #e9ecef;
 }
 
-/* Table Cell Styling */
+
 td {
-  padding: 10px; /* Padding inside table cells */
-  border-bottom: 1px solid #ddd; /* Bottom border for cells */
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Button Styling within the Table */
+
 td button {
-  padding: 5px 10px; /* Padding for buttons in the table */
-  font-size: 16px; /* Font size for buttons */
-  border: none; /* Remove border */
-  border-radius: 3px; /* Rounded corners */
-  background-color: #007BFF; /* Button background color */
-  color: #fff; /* Button text color */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Button hover effect in the table */
+
 td button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
-/* Styling for the fold/unfold button */
+
 .fold-button {
   padding-top: 10px;
-  background: #6c757d; /* Grey background color */
-  border: none; /* Remove border */
-  color: #fff; /* White text color */
-  font-size: 16px; /* Smaller font size */
-  cursor: pointer; /* Pointer cursor on hover */
-  padding: 5px 10px; /* Padding for smaller size */
-  border-radius: 3px; /* Slightly rounded corners */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  background: #6c757d;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
+
 .fold-button:hover {
-  background: #5a6268; /* Slightly darker grey on hover */
+  background: #5a6268;
 }
 
-/* Styling for the IFrame container */
+
 #iframe-container {
-  background-color: #fff; /* White background like config and console */
-  border: 1px solid #ddd; /* Light gray border for a clean look */
-  padding: 20px; /* Internal padding for consistency */
-  width: 100%; /* Full width to match the config and console */
-  box-sizing: border-box; /* Ensure padding and borders are included in the width */
-  border-radius: 5px; /* Rounded corners */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
 
 }
 
-/* Styling for the iframe inside the container */
+
 #iframe-container .iframe {
-  width: 100%; /* Ensure iframe takes full width of its container */
-  height: 600px; /* Fixed height for the iframe */
-  border: none; /* Remove border around the iframe */
-  background-color: #f8f9fa; /* Light background color to indicate the iframe area */
-  display: block; /* Ensure iframe is displayed as a block element */
-  padding: 10px; /* Optional: Add some padding around the iframe content */
-  box-sizing: border-box; /* Ensure padding is included in the total size */
+  width: 100%;
+  height: 600px;
+  border: none;
+  background-color: #f8f9fa;
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-/* Style for the navigation tabs */
 .custom-nav-tabs {
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
 }
 
-/* Style for each tab item */
+
 .custom-nav-tabs button {
-  padding: 5px 15px; /* Smaller padding for a more compact button */
-  margin-right: 5px; /* Spacing between the buttons */
-  background-color: rgb(128, 128, 128); /* Gray background for inactive tabs */
-  border: 2px solid transparent; /* Border for hover effects */
-  color: white; /* White text color */
-  border-radius: 4px; /* Slightly rounded corners */
-  font-size: 14px; /* Adjusted font size for a more compact look */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition on hover */
+  padding: 5px 15px;
+  margin-right: 5px;
+  background-color: rgb(128, 128, 128);
+  border: 2px solid transparent;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Style for the inactive tabs */
+
 .custom-nav-tabs button:not(.active) {
-  background-color: rgb(128, 128, 128); /* Gray background for inactive tabs */
-  color: white; /* Text color */
+  background-color: rgb(128, 128, 128);
+  color: white;
 }
 
-/* Hover effect for all tabs */
+
 .custom-nav-tabs button:hover {
-  background-color: rgb(105, 105, 105); /* Darker gray on hover */
-  color: white; /* Ensure text is white on hover */
+  background-color: rgb(105, 105, 105);
+  color: white;
 }
 
-/* Active tab style */
 .custom-nav-tabs button.active {
-  background-color: rgb(70, 130, 180); /* Highlight color (SteelBlue) */
-  border: 2px solid rgb(0, 128, 255); /* Add a visible border to highlight */
+  background-color: rgb(70, 130, 180);
+  border: 2px solid rgb(0, 128, 255);
 }
 
-/* Padding around the nav content */
+
 .ngbNavContent {
-  padding: 15px; /* Adjusted padding for the nav content */
+  padding: 15px;
   background-color: white;
   border: 1px solid #e9ecef;
   border-radius: 5px;
 }
 
-/* Wrapper around the dropdown and the delete button */
+
 .dropdown-wrapper {
   position: relative;
   display: inline-block;
 }
 
-/* Style for the dropdown select element */
+
 #savedSettingsDropdown {
   padding: 5px;
   margin-right: 10px;
@@ -300,21 +294,20 @@ td button:hover {
   font-weight: bold;
 }
 
-/* Button styling for Save and Delete in Load/Delete Saved Settings Section */
 .save-button,
 .delete-button {
-  padding: 5px 10px; /* Padding for buttons in the table */
-  font-size: 16px; /* Font size for buttons */
-  border: none; /* Remove border */
-  border-radius: 3px; /* Rounded corners */
-  background-color: #007BFF; /* Button background color */
-  color: #fff; /* Button text color */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Hover effect for Save and Delete buttons */
+
 .save-button:hover,
 .delete-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }

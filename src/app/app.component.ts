@@ -7,6 +7,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgbdModalContent} from './components/modal/modal-component'; // Adjust the path accordingly
 import {NgbdDetokenModalContent} from './components/modal/modal-detok-component';
 import {ChangeDetectorRef} from '@angular/core';
+import {NgbdProxyModalContent} from "./components/modal/modal-proxy-component";
 
 
 export interface TokenResponse {
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   username: string = 'bluefin';
   password: string = 'yO98lWEvIZ';
-  templateId: string = 'BluefinSecurity';
+  templateId: string = 'e32c957fb83a9e03472f23207ede5ee0';
   baseUrl: string = 'https://secure-cert.shieldconex.com';
   width: number = 600;
   height: number = 800;
@@ -74,7 +75,37 @@ export class AppComponent implements OnInit, OnDestroy {
   detokenizedData: string[] = []; // Added this for displaying detokenized data
   showConsole: boolean = false;
   isGoPressed: boolean = false;
-  db: Database = {data: []};
+  db: Database = {data: [{
+      "messageId": "1202411151049141011092085",
+      "bfid": "djI6MTIwMjQxMTE1MTA0OTEzMTAzMTUzNzQ2MnxlMzJjOTU3ZmI4M2E5ZTAzNDcyZjIzMjA3ZWRlNWVlMHx8fA==",
+      "reference": "",
+      "values": [
+        {
+          "name": "scx_token_name",
+          "value": "hsWxqAH iFbz"
+        },
+        {
+          "name": "email",
+          "value": "Yo@HhHGQfl.FxC"
+        },
+        {
+          "name": "scx_token_last_name",
+          "value": "hmUHOE TnZ"
+        },
+        {
+          "name": "scx_token_card_number",
+          "value": "5850459886792406"
+        },
+        {
+          "name": "scx_token_card_expiration",
+          "value": "6812"
+        },
+        {
+          "name": "scx_token_card_verification",
+          "value": "669"
+        }
+      ]
+    }]};
 
   flow: string = 'proxy'; // Current flow, defaults to "tokenization"
   settingName: string | undefined;
@@ -215,15 +246,15 @@ export class AppComponent implements OnInit, OnDestroy {
         this.iframeErrors.push('Username or password is missing.');
         return;
       }
-
+      const body = {
+        bfid: bfid,
+        values: values,
+        username: username,
+        password: password
+      }
       this.http.post<DetokenizeResponse>(
         'https://st3nuq5s37.execute-api.us-east-1.amazonaws.com/token/detokenize',
-        {
-          bfid: bfid,
-          values: values,
-          username: username,
-          password: password
-        },
+        body,
         {
           headers: new HttpHeaders({
             Accept: 'application/json',
@@ -241,7 +272,7 @@ export class AppComponent implements OnInit, OnDestroy {
           }
 
           this.detokenizedData = response.values;
-          this.openDetokenizedModal(this.detokenizedData);
+          this.openDetokenizedModal(this.detokenizedData, body);
         },
         (error) => {
           console.error('Error getting detokenized data:', error);
@@ -253,9 +284,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  openDetokenizedModal(detokenizedData: any[]) {
-    const modalRef = this.modalService.open(NgbdDetokenModalContent);
+  openDetokenizedModal(detokenizedData: any[], tokenData: any) {
+    const modalRef = this.modalService.open(NgbdDetokenModalContent,{size: "lg"});
     modalRef.componentInstance.detokenizedData = detokenizedData;
+    modalRef.componentInstance.tokenData = tokenData;
     modalRef.componentInstance.SCXTokens = this.SCXTokens;
   }
 
@@ -373,7 +405,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   openModal(tokenData: TokenResponse) {
-    const modalRef = this.modalService.open(NgbdModalContent);
+    const modalRef = this.modalService.open(NgbdModalContent, {size:'lg'});
     modalRef.componentInstance.tokenResponse = tokenData;
   }
 
@@ -458,6 +490,21 @@ export class AppComponent implements OnInit, OnDestroy {
     localStorage.setItem('savedSettings', JSON.stringify(savedSettings));
     this.savedSettingNames = this.getSavedSettingNames();
     this.cdr.detectChanges();
+  }
+
+  onProxyButtonClick(bfid: string) {
+    console.log(`Proxy button clicked for BFID: ${bfid}`);
+
+    const modalRef = this.modalService.open(NgbdProxyModalContent);
+    modalRef.componentInstance.proxyConfig = {
+      url: this.baseUrl + '/api/proxy',
+      username: this.username,
+      password: this.password,
+      payload: {
+        bfid: bfid
+      }
+    };
+    modalRef.componentInstance.proxyResponse = {};
   }
 
 
