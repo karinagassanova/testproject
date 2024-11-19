@@ -16,7 +16,7 @@ import {Clipboard} from '@angular/cdk/clipboard';
       <div class="copy-container">
         <pre class="wrapped-pre">{{ formattedTokens }}</pre>
         <button (click)="copyToClipboard(formattedTokens)" class="btn btn-outline-secondary btn-sm copy-button">
-          <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
+          <i class="fas fa-copy"></i>
         </button>
       </div>
     </div>

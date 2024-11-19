@@ -3,8 +3,9 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {JsonPipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
-import {CommonModule} from '@angular/common'; // Import CommonModule
-import {Clipboard} from '@angular/cdk/clipboard';  // Import Clipboard service
+import {CommonModule} from '@angular/common';
+import {Clipboard} from '@angular/cdk/clipboard';
+
 @Component({
   selector: 'ngbd-proxy-modal-content',
   standalone: true,
@@ -94,13 +95,6 @@ export class NgbdProxyModalContent implements OnInit {
 
   activeTab = 1; // Default active tab
 
-  // Computed property to format the curl request
-  get formattedCurlRequest(): string {
-    return `curl --location '${this.proxyUrl}'
---header 'Content-Type: application/json'
---header 'Authorization: ${this.generateProxyAuth}'
---data '${this.formattedProxyData}'`;
-  }
 
   get proxyUrl(): string {
     return this.proxyConfig.url || 'https://example.com/api/proxy';
@@ -110,10 +104,22 @@ export class NgbdProxyModalContent implements OnInit {
     return "Basic " + btoa(this.proxyConfig.username + ":" + this.proxyConfig.password);
   }
 
-  get formattedProxyData(): string {
-    const jsonData = JSON.stringify(this.proxyConfig.payload);
-    return jsonData.replace(/(\r\n|\n|\r)/g, "");  // Ensure single line without newlines
+  get formattedCurlRequest(): string {
+    // Construct the curl string with the full path, including the dynamic config ID
+    const fullUrl = `${this.proxyUrl}/api/v1/partners/bluefin/configurations/${this.proxyConfig.bfid}`;
+
+    return `curl --location '${fullUrl}'
+--header 'Content-Type: application/json'
+--header 'Authorization: ${this.generateProxyAuth}'
+--data ${this.formattedProxyData}`;
   }
+
+  get formattedProxyData(): string {
+    // Ensure pretty print without wrapping quotes or escaping
+    const jsonData = JSON.stringify(this.proxyConfig.payload, null, 4); // Pretty-print the JSON
+    return jsonData.replace(/\\n/g, '\n').replace(/\\\"/g, '"'); // Ensure no escape characters
+  }
+
 
   ngOnInit() {
     console.log('Proxy configuration received in modal:', this.proxyConfig);
