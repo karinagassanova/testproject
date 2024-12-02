@@ -27,49 +27,40 @@ import {Clipboard} from '@angular/cdk/clipboard';
 
       <div *ngIf="activeTab === 1" id="edit-config-container">
         <h3>Edit Configuration</h3>
-        <div class="input-row">
-          <div class="input-group">
+        <!-- Compact Layout for Inputs -->
+        <div class="form-grid">
+          <div class="form-group">
             <label for="proxyConfigId">Proxy Config ID:</label>
             <input type="text" id="proxyConfigId" [(ngModel)]="proxyConfig.bfid" placeholder="Enter Proxy Config ID"/>
           </div>
-        </div>
-
-        <div class="input-row">
-          <div class="input-group">
+          <div class="form-group">
             <label for="proxyUrl">Proxy URL:</label>
             <input type="text" id="proxyUrl" [(ngModel)]="proxyConfig.url" placeholder="Enter Proxy URL"/>
           </div>
         </div>
 
-        <div class="input-row">
-          <div class="input-group">
+        <div class="form-grid">
+          <div class="form-group">
             <label for="payload">Substitute Data:</label>
-            <textarea id="payload" [(ngModel)]="substituteData" rows="5" placeholder="Enter request payload"></textarea>
+            <textarea id="payload" [(ngModel)]="substituteData" rows="3" placeholder="Enter request payload"></textarea>
           </div>
-        </div>
-
-        <div class="input-row">
-          <div class="input-group">
+          <div class="form-group">
             <label for="payload">Request Body:</label>
-            <textarea id="payload" [(ngModel)]="proxyConfig.payload" rows="5" placeholder="Enter request payload"></textarea>
+            <textarea id="payload" [(ngModel)]="proxyConfig.payload" rows="3" placeholder="Enter request payload"></textarea>
           </div>
         </div>
 
-        <!-- Save Configuration with a Name -->
-        <div class="input-row">
-          <div class="input-group">
+        <div class="form-grid">
+          <div class="form-group">
             <label for="configName">Save Config Name:</label>
-            <input type="text" id="configName" [(ngModel)]="saveConfigName" placeholder="Enter a name for this configuration"/>
+            <input type="text" id="configName" [(ngModel)]="saveConfigName" placeholder="Enter configuration name"/>
           </div>
-        </div>
-
-        <!-- Dropdown to Select and Load/Delete Config -->
-        <div class="input-row">
-          <label for="savedConfigs">Manage Saved Configs:</label>
-          <select id="savedConfigs" [(ngModel)]="selectedConfigId" class="form-select">
-            <option *ngFor="let config of savedConfigs" [value]="config.id">{{ config.name }}</option>
-          </select>
-
+          <div class="form-group">
+            <label for="savedConfigs">Manage Saved Configs:</label>
+            <select id="savedConfigs" [(ngModel)]="selectedConfigId" class="form-select">
+              <option *ngFor="let config of savedConfigs" [value]="config.id">{{ config.name }}</option>
+            </select>
+          </div>
         </div>
 
         <div class="button-row">
@@ -82,12 +73,10 @@ import {Clipboard} from '@angular/cdk/clipboard';
 
       <div *ngIf="activeTab === 2">
         <h3>Proxy Request</h3>
-
         <div class="pre-container">
           <pre>{{ formattedCurlRequest }}</pre>
-          <button (click)="copyToClipboard(formattedCurlRequest)"
-                  class="btn btn-outline-secondary btn-sm copy-button">
-            <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
+          <button (click)="copyToClipboard(formattedCurlRequest)" class="btn btn-outline-secondary btn-sm copy-button">
+            <i class="fas fa-copy"></i>
           </button>
         </div>
       </div>
@@ -96,6 +85,7 @@ import {Clipboard} from '@angular/cdk/clipboard';
         <h3>Destination</h3>
       </div>
     </div>
+
 
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
