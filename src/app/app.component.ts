@@ -10,6 +10,8 @@ import {ChangeDetectorRef} from '@angular/core';
 import {NgbdProxyModalContent} from "./components/modal/modal-proxy-component";
 
 
+
+
 export interface TokenResponse {
   messageId: string;
   bfid: string;

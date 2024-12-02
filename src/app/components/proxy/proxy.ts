@@ -1,32 +1,38 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {JsonPipe} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
-import {CommonModule} from '@angular/common';
-import {Clipboard} from '@angular/cdk/clipboard';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { HttpClient, HttpHeaders } from '@angular/common/http';  // Import HttpClient
 
 @Component({
-  selector: 'ngbd-proxy-modal-content',
+  selector: 'app-proxy-config',
   standalone: true,
   template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Proxy Configuration</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-    </div>
+    <div class="main-container">
+      <h4>Proxy Configuration
+        <!-- Fold/Unfold Button -->
+        <button class="btn btn-outline-secondary btn-sm ms-2" (click)="toggleConfigVisibility()">
+          <i class="fas" [ngClass]="isConfigVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </button>
+      </h4>
 
-    <div class="modal-body">
-      <div class="btn-group" role="group" aria-label="Tab Navigation">
-        <button class="btn btn-outline-primary" (click)="activeTab = 1" [class.active]="activeTab === 1">Edit/Config
-        </button>
-        <button class="btn btn-outline-primary" (click)="activeTab = 2" [class.active]="activeTab === 2">Request
-        </button>
-        <button class="btn btn-outline-primary" (click)="activeTab = 3" [class.active]="activeTab === 3">Destination
-        </button>
-      </div>
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1">Edit Configuration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">Proxy Request</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">Destination</a>
+        </li>
+      </ul>
 
-      <div *ngIf="activeTab === 1" id="edit-config-container">
-        <!-- Compact Layout for Inputs -->
+      <!-- Edit Configuration Tab -->
+      <div *ngIf="activeTab === 1 && isConfigVisible" id="edit-config-container">
         <div class="form-grid">
           <div class="form-group">
             <label for="proxyConfigId">Proxy Config ID:</label>
@@ -70,8 +76,8 @@ import {Clipboard} from '@angular/cdk/clipboard';
         </div>
       </div>
 
+      <!-- Proxy Request Tab -->
       <div *ngIf="activeTab === 2">
-        <h3>Proxy Request</h3>
         <div class="pre-container">
           <pre>{{ formattedCurlRequest }}</pre>
           <button (click)="copyToClipboard(formattedCurlRequest)" class="btn btn-outline-secondary btn-sm copy-button">
@@ -80,14 +86,11 @@ import {Clipboard} from '@angular/cdk/clipboard';
         </div>
       </div>
 
+      <!-- Destination Tab -->
       <div *ngIf="activeTab === 3">
         <h3>Destination</h3>
+        <!-- Add more content related to the destination here -->
       </div>
-    </div>
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `,
   imports: [
@@ -96,20 +99,21 @@ import {Clipboard} from '@angular/cdk/clipboard';
     NgbNavModule,
     CommonModule,
   ],
-  styleUrls: ['./modal-component.css']
+  styleUrls: ['./proxy.css']
 })
-export class NgbdProxyModalContent implements OnInit {
-  activeModal = inject(NgbActiveModal);
+export class ProxyConfigComponent implements OnInit {
   clipboard = inject(Clipboard); // Inject Clipboard service
+  private httpClient = inject(HttpClient); // Inject HttpClient
 
   @Input() proxyConfig: any = {};
   @Input() substituteData: any = {};
   @Input() proxyResponse: any = {};
 
-  activeTab = 1; // Default active tab
-  savedConfigs: Array<{ id: string; name: string; data: any }> = []; // Saved configurations array
-  saveConfigName: string = ''; // Name for the configuration to be saved
-  selectedConfigId: string = ''; // Selected configuration ID from the dropdown
+  activeTab = 1; // Default active tab is 1 (Edit Configuration)
+  savedConfigs: Array<{ id: string; name: string; data: any }> = [];
+  saveConfigName: string = '';
+  selectedConfigId: string = '';
+  isConfigVisible: boolean = true; // Controls the visibility of the config section
 
   ngOnInit() {
     this.loadAllConfigs(); // Load all configurations on init
@@ -216,5 +220,9 @@ export class NgbdProxyModalContent implements OnInit {
   getReplacementValue(key: string, array: any[]): any {
     const item = array.find(entry => entry.name === key);
     return item ? item.value : `$${key}`;
+  }
+
+  toggleConfigVisibility() {
+    this.isConfigVisible = !this.isConfigVisible; // Toggle visibility of the configuration section
   }
 }

@@ -178,24 +178,6 @@ td button:hover {
 }
 
 
-.fold-button {
-  padding-top: 10px;
-  background: #6c757d;
-  border: none;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-}
-
-
-.fold-button:hover {
-  background: #5a6268;
-}
-
-
 #iframe-container {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -316,7 +298,19 @@ td button:hover {
   margin-right: 10px; /* Adjust spacing between heading and button */
 }
 
-.fold-button {
-  display: inline-block;
-  vertical-align: middle;
+.btn.btn-outline-secondary.btn-sm.ms-2 {
+  background-color: white; /* Default background color */
+  color: #333; /* Default text color */
+  border: 1px solid #ccc; /* Light border */
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 12px; /* Smaller font size */
+  border-radius: 3px; /* Slightly rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+}
+
+/* Hover effect */
+.btn.btn-outline-secondary.btn-sm.ms-2:hover {
+  background-color: #e2e6ea; /* Light gray background on hover */
+  color: #333; /* Keep text color dark */
+  border-color: #ddd; /* Optional: Change border color slightly on hover */
 }

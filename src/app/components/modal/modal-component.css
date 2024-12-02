@@ -246,3 +246,7 @@ pre {
   word-wrap: break-word;
   padding-right: 40px;
 }
+
+label{
+  color: #495057;
+}

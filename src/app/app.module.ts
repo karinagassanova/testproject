@@ -8,6 +8,7 @@ import { FormsModule } from "@angular/forms";
 import { SharedService } from "./services/sharedservice";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {ProxyConfigComponent} from "./components/proxy/proxy";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    ProxyConfigComponent,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
