@@ -497,15 +497,18 @@ export class AppComponent implements OnInit, OnDestroy {
   onProxyButtonClick(bfid: string) {
     console.log(`Proxy button clicked for BFID: ${bfid}`);
 
+
+    const tokenData = this.db.data.find(item => item.bfid === bfid);
+
     const modalRef = this.modalService.open(NgbdProxyModalContent, {size: 'lg'});
+
     modalRef.componentInstance.proxyConfig = {
       url: this.baseUrl + '/api/proxy',
       username: this.username,
       password: this.password,
-      payload: {
-        bfid: bfid
-      }
+      payload: "",
     };
+    modalRef.componentInstance.substituteData = JSON.stringify(tokenData, null, 4)
     modalRef.componentInstance.proxyResponse = {};
   }
 
