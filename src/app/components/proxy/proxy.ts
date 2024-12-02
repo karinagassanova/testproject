@@ -76,19 +76,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';  // Import HttpC
         </div>
       </div>
 
-      <!-- Proxy Request Tab -->
       <div *ngIf="activeTab === 2">
-        <div class="pre-container">
+        <div class="pre-container" style="position: relative;">
           <pre>{{ formattedCurlRequest }}</pre>
-          <button (click)="copyToClipboard(formattedCurlRequest)" class="btn btn-outline-secondary btn-sm copy-button">
-            <i class="fas fa-copy"></i>
+          <button (click)="copyToClipboard(formattedCurlRequest)" class="copy-button">
+            <i class="fas fa-copy"></i> <!-- Copy Icon -->
           </button>
         </div>
       </div>
 
+
+
       <!-- Destination Tab -->
       <div *ngIf="activeTab === 3">
-        <h3>Destination</h3>
         <!-- Add more content related to the destination here -->
       </div>
     </div>
@@ -150,7 +150,6 @@ export class ProxyConfigComponent implements OnInit {
     const selectedConfig = this.savedConfigs.find(config => config.id === this.selectedConfigId);
     if (selectedConfig) {
       this.proxyConfig = { ...selectedConfig.data };
-      alert(`Configuration "${selectedConfig.name}" loaded successfully!`);
     } else {
       alert('No configuration selected or found.');
     }

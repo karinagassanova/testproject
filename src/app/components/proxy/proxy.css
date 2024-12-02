@@ -71,3 +71,39 @@ textarea {
   color: #333; /* Keep text color dark */
   border-color: #ddd; /* Optional: Change border color slightly on hover */
 }
+pre {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.pre-container {
+  position: relative; /* Enables absolute positioning for the button inside the container */
+}
+
+.copy-button {
+  position: absolute; /* Allows positioning inside the container */
+  top: 0px; /* Adjust vertical position */
+  right: 0px; /* Adjust horizontal position */
+  padding: 5px; /* Compact padding for the button */
+  font-size: 14px; /* Appropriate font size for the icon */
+  background-color: white; /* Button background */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 3px; /* Slightly rounded corners */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
+}
+
+.copy-button:hover {
+  background-color: #e2e6ea; /* Light gray background on hover */
+}
+
+.copy-button i {
+  margin: 0; /* No extra spacing for the icon */
+  color: #333; /* Icon color */
+}
+
