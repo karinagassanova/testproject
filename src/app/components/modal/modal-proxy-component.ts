@@ -25,61 +25,75 @@ import {Clipboard} from '@angular/cdk/clipboard';
         </button>
       </div>
 
-      <div class="mt-3">
-        <div *ngIf="activeTab === 1" id="edit-config-container">
-          <h3>Edit Configuration</h3>
-          <div class="input-row">
-            <div class="input-group">
-              <label for="proxyConfigId">Proxy Config ID:</label>
-              <input type="text" id="proxyConfigId" [(ngModel)]="proxyConfig.bfid" placeholder="Enter Proxy Config ID"/>
-            </div>
-          </div>
-
-          <div class="input-row">
-            <div class="input-group">
-              <label for="proxyUrl">Proxy URL:</label>
-              <input type="text" id="proxyUrl" [(ngModel)]="proxyConfig.url" placeholder="Enter Proxy URL"/>
-            </div>
-          </div>
-
-          <div class="input-row">
-            <div class="input-group">
-              <label for="payload">Substitute Data:</label>
-              <textarea id="payload" [(ngModel)]="substituteData" rows="5"
-                        placeholder="Enter request payload"></textarea>
-            </div>
-          </div>
-
-          <div class="input-row">
-            <div class="input-group">
-              <label for="payload">Request Body:</label>
-              <textarea id="payload" [(ngModel)]="proxyConfig.payload" rows="5"
-                        placeholder="Enter request payload"></textarea>
-            </div>
-          </div>
-
-          <div class="button-row">
-            <button class="save-button" (click)="saveConfig()">Save</button>
-            <button class="load-button" (click)="loadConfig()">Load</button>
-            <button class="go-button" (click)="sendRequest()">Go</button>
+      <div *ngIf="activeTab === 1" id="edit-config-container">
+        <h3>Edit Configuration</h3>
+        <div class="input-row">
+          <div class="input-group">
+            <label for="proxyConfigId">Proxy Config ID:</label>
+            <input type="text" id="proxyConfigId" [(ngModel)]="proxyConfig.bfid" placeholder="Enter Proxy Config ID"/>
           </div>
         </div>
 
-        <div *ngIf="activeTab === 2">
-          <h3>Proxy Request</h3>
-
-          <div class="pre-container">
-            <pre>{{ formattedCurlRequest }}</pre>
-            <button (click)="copyToClipboard(formattedCurlRequest)"
-                    class="btn btn-outline-secondary btn-sm copy-button">
-              <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
-            </button>
+        <div class="input-row">
+          <div class="input-group">
+            <label for="proxyUrl">Proxy URL:</label>
+            <input type="text" id="proxyUrl" [(ngModel)]="proxyConfig.url" placeholder="Enter Proxy URL"/>
           </div>
         </div>
 
-        <div *ngIf="activeTab === 3">
-          <h3>Destination</h3>
+        <div class="input-row">
+          <div class="input-group">
+            <label for="payload">Substitute Data:</label>
+            <textarea id="payload" [(ngModel)]="substituteData" rows="5" placeholder="Enter request payload"></textarea>
+          </div>
         </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label for="payload">Request Body:</label>
+            <textarea id="payload" [(ngModel)]="proxyConfig.payload" rows="5" placeholder="Enter request payload"></textarea>
+          </div>
+        </div>
+
+        <!-- Save Configuration with a Name -->
+        <div class="input-row">
+          <div class="input-group">
+            <label for="configName">Save Config Name:</label>
+            <input type="text" id="configName" [(ngModel)]="saveConfigName" placeholder="Enter a name for this configuration"/>
+          </div>
+        </div>
+
+        <!-- Dropdown to Select and Load/Delete Config -->
+        <div class="input-row">
+          <label for="savedConfigs">Manage Saved Configs:</label>
+          <select id="savedConfigs" [(ngModel)]="selectedConfigId" class="form-select">
+            <option *ngFor="let config of savedConfigs" [value]="config.id">{{ config.name }}</option>
+          </select>
+
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" (click)="loadSelectedConfig()">Load</button>
+          <button class="btn btn-primary" (click)="deleteSelectedConfig()">Delete</button>
+          <button class="btn btn-outline-secondary" (click)="saveConfig()">Save</button>
+          <button class="btn btn-outline-secondary" (click)="sendRequest()">Go</button>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 2">
+        <h3>Proxy Request</h3>
+
+        <div class="pre-container">
+          <pre>{{ formattedCurlRequest }}</pre>
+          <button (click)="copyToClipboard(formattedCurlRequest)"
+                  class="btn btn-outline-secondary btn-sm copy-button">
+            <i class="fas fa-copy"></i> <!-- Font Awesome Copy Icon -->
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 3">
+        <h3>Destination</h3>
       </div>
     </div>
 
@@ -98,90 +112,108 @@ import {Clipboard} from '@angular/cdk/clipboard';
 export class NgbdProxyModalContent implements OnInit {
   activeModal = inject(NgbActiveModal);
   clipboard = inject(Clipboard); // Inject Clipboard service
+
   @Input() proxyConfig: any = {};
   @Input() substituteData: any = {};
   @Input() proxyResponse: any = {};
 
   activeTab = 1; // Default active tab
+  savedConfigs: Array<{ id: string; name: string; data: any }> = []; // Saved configurations array
+  saveConfigName: string = ''; // Name for the configuration to be saved
+  selectedConfigId: string = ''; // Selected configuration ID from the dropdown
 
+  ngOnInit() {
+    this.loadAllConfigs(); // Load all configurations on init
+  }
+
+  saveConfig() {
+    if (!this.saveConfigName.trim()) {
+      alert('Please enter a name for the configuration!');
+      return;
+    }
+
+    const newConfig = {
+      id: Date.now().toString(), // Unique ID for each config
+      name: this.saveConfigName.trim(),
+      data: { ...this.proxyConfig }, // Clone the proxyConfig to store
+    };
+
+    this.savedConfigs.push(newConfig);
+    localStorage.setItem('proxyConfigs', JSON.stringify(this.savedConfigs));
+    alert(`Configuration "${this.saveConfigName}" saved successfully!`);
+    this.saveConfigName = ''; // Clear the input
+  }
+
+  loadAllConfigs() {
+    const saved = localStorage.getItem('proxyConfigs');
+    if (saved) {
+      this.savedConfigs = JSON.parse(saved);
+    } else {
+      this.savedConfigs = [];
+    }
+  }
+
+  loadSelectedConfig() {
+    const selectedConfig = this.savedConfigs.find(config => config.id === this.selectedConfigId);
+    if (selectedConfig) {
+      this.proxyConfig = { ...selectedConfig.data };
+      alert(`Configuration "${selectedConfig.name}" loaded successfully!`);
+    } else {
+      alert('No configuration selected or found.');
+    }
+  }
+
+  deleteSelectedConfig() {
+    const index = this.savedConfigs.findIndex(config => config.id === this.selectedConfigId);
+    if (index !== -1) {
+      const deletedConfig = this.savedConfigs.splice(index, 1)[0];
+      localStorage.setItem('proxyConfigs', JSON.stringify(this.savedConfigs));
+      alert(`Configuration "${deletedConfig.name}" deleted successfully!`);
+      this.selectedConfigId = ''; // Clear the selection
+    } else {
+      alert('No configuration selected to delete.');
+    }
+  }
+
+  sendRequest() {
+    this.activeTab = 2; // Switch to the "Request" tab
+  }
+
+  copyToClipboard(data: string): void {
+    this.clipboard.copy(data);
+    alert('Copied to clipboard!');
+  }
 
   get proxyUrl(): string {
     return this.proxyConfig.url || 'https://example.com/api/proxy';
   }
 
   get generateProxyAuth(): string {
-    return "Basic " + btoa(this.proxyConfig.username + ":" + this.proxyConfig.password);
+    return 'Basic ' + btoa(`${this.proxyConfig.username}:${this.proxyConfig.password}`);
   }
 
   get formattedCurlRequest(): string {
-    // Construct the curl string with the full path, including the dynamic config ID
     const fullUrl = `${this.proxyUrl}/api/v1/partners/bluefin/configurations/${this.proxyConfig.bfid}`;
-
     return `curl --location '${fullUrl}'
 --header 'Content-Type: application/json'
 --header 'Authorization: ${this.generateProxyAuth}'
 --data ${this.formattedProxyData}`;
   }
 
-
   get formattedProxyData(): string {
-
-    const pl = JSON.parse(this.proxyConfig.payload)
-    const scx = JSON.parse(this.substituteData)
-
-    const body = this.recursiveSubstitute(pl, scx.values)
-
-    // Ensure pretty print without wrapping quotes or escaping
-    const jsonData = JSON.stringify(body, null, 4); // Pretty-print the JSON
-    return jsonData.replace(/\\n/g, '\n').replace(/\\\"/g, '"'); // Ensure no escape characters
+    const pl = JSON.parse(this.proxyConfig.payload || '{}');
+    const scx = JSON.parse(this.substituteData || '{}');
+    const body = this.recursiveSubstitute(pl, scx.values || []);
+    return JSON.stringify(body, null, 4).replace(/\\n/g, '\n').replace(/\\"/g, '"');
   }
 
-  ngOnInit() {
-    console.log('Proxy configuration received in modal:', this.proxyConfig);
-  }
-
-  saveConfig() {
-    localStorage.setItem('proxyConfig', JSON.stringify(this.proxyConfig));
-    console.log('Config saved');
-  }
-
-  loadConfig() {
-    const savedConfig = localStorage.getItem('proxyConfig');
-    if (savedConfig) {
-      this.proxyConfig = JSON.parse(savedConfig);
-      console.log('Config loaded');
-    } else {
-      console.log('No saved config found');
-    }
-  }
-
-  sendRequest() {
-    this.activeTab = 2; // Switch to the "Request" tab to show the generated curl
-  }
-
-  // Copy the curl request to clipboard
-  copyToClipboard(data: string): void {
-    this.clipboard.copy(data); // This copies the data to the clipboard
-    alert('Copied to clipboard!'); // Provide feedback to the user
-  }
-
-  getReplacementValue(key: any, array : any[]) {
-    const item = array.find(entry => entry.name === key);
-    return item ? item.value : `$${key}`; // Return the original if not found
-  }
-
-  recursiveSubstitute(target : any, arr: any[]) : any {
-
+  recursiveSubstitute(target: any, arr: any[]): any {
     if (typeof target === 'object' && target !== null) {
-      // If the target is an array, recursively process each element
       if (Array.isArray(target)) {
-        // return target.map(this.recursiveSubstitute, arr);
-      }
-      // If the target is an object, recursively process its properties
-      else {
-        const result = {};
+        return target.map(item => this.recursiveSubstitute(item, arr));
+      } else {
+        const result: any = {};
         for (const key in target) {
-          // @ts-ignore
           result[key] = this.recursiveSubstitute(target[key], arr);
         }
         return result;
@@ -189,8 +221,11 @@ export class NgbdProxyModalContent implements OnInit {
     } else if (typeof target === 'string' && target.startsWith('$')) {
       return this.getReplacementValue(target.slice(1), arr);
     }
-
-    // Return the target as is if no substitution is required
     return target;
+  }
+
+  getReplacementValue(key: string, array: any[]): any {
+    const item = array.find(entry => entry.name === key);
+    return item ? item.value : `$${key}`;
   }
 }
