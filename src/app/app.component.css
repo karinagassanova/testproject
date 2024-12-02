@@ -311,3 +311,12 @@ td button:hover {
 .delete-button:hover {
   background-color: #0056b3;
 }
+#config-area h2 {
+  display: inline-block;
+  margin-right: 10px; /* Adjust spacing between heading and button */
+}
+
+.fold-button {
+  display: inline-block;
+  vertical-align: middle;
+}

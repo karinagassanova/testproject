@@ -7,11 +7,12 @@
       <div class="main-container">
         <!-- Configuration Area -->
         <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
-          <h2>Demo Configuration</h2>
-          <button class="fold-button" (click)="toggleConfigFold()">
-            {{ isConfigFolded ? 'v' : '^' }}
-          </button>
-
+          <div class="config-header">
+            <h2>Demo Configuration</h2>
+            <button class="fold-button" (click)="toggleConfigFold()">
+              {{ isConfigFolded ? 'v' : '^' }}
+            </button>
+          </div>
           <div *ngIf="!isConfigFolded">
             <p>Enter your credentials, Template ID, and configure the IFrame settings</p>
 
