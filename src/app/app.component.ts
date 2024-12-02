@@ -109,7 +109,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }]
   };
 
-  flow: string = 'proxy'; // Current flow, defaults to "tokenization"
+  flow: string = 'all';
   settingName: string | undefined;
 
   showFlow(selectedFlow: string) {
@@ -126,9 +126,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.messageSubscription = new Subscription();
     window.addEventListener('message', this.onMessage.bind(this));
-    this.diagram.hideAll();
     this.savedSettingNames = this.getSavedSettingNames();
 
   }
@@ -496,8 +496,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onProxyButtonClick(bfid: string) {
     console.log(`Proxy button clicked for BFID: ${bfid}`);
-
-
+    this.flow = 'proxy';
+    this.sharedService.highlightMessage.next("proxy");
     const tokenData = this.db.data.find(item => item.bfid === bfid);
 
     const modalRef = this.modalService.open(NgbdProxyModalContent, {size: 'lg'});

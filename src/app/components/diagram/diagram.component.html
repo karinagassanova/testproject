@@ -2,6 +2,8 @@
   <button (click)="showFlow('tokenization')" [class.active]="flow === 'tokenization'">Tokenization Flow</button>
   <button (click)="showFlow('detokenization')" [class.active]="flow === 'detokenization'">Detokenization Flow</button>
   <button (click)="showFlow('proxy')" [class.active]="flow === 'proxy'">Proxy Flow</button>
+  <button (click)="showFlow('all')" [class.active]="flow === 'all'">All</button>
+
 </div>
 <div class="diagram">
 
@@ -335,6 +337,38 @@
               </g>
             </g>
           </g>
+          <g data-cell-id="qTu5bRzqaAmpRmO-GuTe-34">
+            <g>
+              <path d="M 449 55 L 615.5 55 L 615.01 338.63" fill="none" [attr.stroke]="proxyarrowoneOutlineColor"
+                    [attr.visibility]="proxyarrowoneVisible" stroke-width="1"/>
+              <path d="M 615 343.88 L 611.51 336.88 L 615.01 338.63 L 618.51 336.89 Z" fill="rgb(0, 0, 0)"
+                    [attr.stroke]="proxyarrowoneOutlineColor" [attr.visibility]="proxyarrowoneVisible"
+                    stroke-width="1"/>
+            </g>
+            <g>
+              <g transform="translate(-0.5 -0.5)">
+                <switch>
+                  <foreignObject pointer-events="none" width="100%" height="100%"
+                                 requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+                                 style="overflow: visible; text-align: left;" [attr.visibility]="proxyarrowoneVisible">
+                    <div xmlns="http://www.w3.org/1999/xhtml"
+                         style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 345px; margin-left: 625px;">
+                      <div data-drawio-colors="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); "
+                           style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                        <div
+                          style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 255); white-space: nowrap;">
+                          1
+                        </div>
+                      </div>
+                    </div>
+                  </foreignObject>
+                  <text x="625" y="348" fill="rgb(0, 0, 0)" font-family="&quot;Helvetica&quot;" font-size="11px"
+                        text-anchor="middle">1
+                  </text>
+                </switch>
+              </g>
+            </g>
+          </g>
           <g data-cell-id="qTu5bRzqaAmpRmO-GuTe-10">
             <g>
               <rect x="369" y="35" width="80" height="80" fill="rgb(65,105,225)"
@@ -462,6 +496,38 @@
                   </foreignObject>
                   <text x="478" y="88" fill="rgb(0, 0, 0)" font-family="&quot;Helvetica&quot;" font-size="11px"
                         text-anchor="middle">9
+                  </text>
+                </switch>
+              </g>
+            </g>
+          </g>
+          <g data-cell-id="4DtW_utm37HhDO2xQRjj-20">
+            <g>
+              <path d="M 590 355 L 590 75 L 455.37 75" fill="none" [attr.stroke]="proxyarrowtwoOutlineColor"
+                    [attr.visibility]="proxyarrowtwoVisible" stroke-width="1"/>
+              <path d="M 450.12 75 L 457.12 71.5 L 455.37 75 L 457.12 78.5 Z" fill="rgb(0, 0, 0)"
+                    [attr.stroke]="proxyarrowtwoOutlineColor" [attr.visibility]="proxyarrowtwoVisible"
+                    stroke-width="1"/>
+            </g>
+            <g>
+              <g transform="translate(-0.5 -0.5)">
+                <switch>
+                  <foreignObject pointer-events="none" width="100%" height="100%"
+                                 requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+                                 style="overflow: visible; text-align: left;" [attr.visibility]="proxyarrowtwoVisible">
+                    <div xmlns="http://www.w3.org/1999/xhtml"
+                         style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 85px; margin-left: 478px;">
+                      <div data-drawio-colors="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); "
+                           style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                        <div
+                          style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 255); white-space: nowrap;">
+                          2
+                        </div>
+                      </div>
+                    </div>
+                  </foreignObject>
+                  <text x="478" y="88" fill="rgb(0, 0, 0)" font-family="&quot;Helvetica&quot;" font-size="11px"
+                        text-anchor="middle">2
                   </text>
                 </switch>
               </g>
@@ -854,8 +920,8 @@
 <br>
 <br>
 <div class="diagram-description p-3" style="font-family: Helvetica, Arial, sans-serif;">
-  <div [ngStyle]="{'display': (flow === 'proxy' ? 'block' : 'none')}">
-    <div class="h3">Proxy Flow</div>
+  <div [ngStyle]="{'display': (flow === 'all' ? 'block' : 'none')}">
+    <h3>All</h3>
     <ol>
       <li>Consumer opens up Client Website and ShieldConex® iframe elements are loaded into the Consumer’s Browser.</li>
       <li>As Consumer enters data into the iframe elements, they are captured directly by ShieldConex® and tokenized.
@@ -882,6 +948,19 @@
     </ol>
   </div>
 
+  <div [ngStyle]="{'display': (flow === 'proxy' ? 'block' : 'none')}">
+    <h3>Proxy Flow</h3>
+    <ol>
+      <li>Using the BFID, the Client requests their tokens and they are returned.</li>
+      <li>The Client sends the message to ShieldConex® in the format required by their processor with the tokens in
+        place rather than PAN (credit card).
+      </li>
+      <li>The ShieldConex® Proxy will detokenize the tokens, reinsert the actual PAN data into the payload, and relay
+        the payment request to the processor.
+      </li>
+      <li>The response is proxied back to the Client.</li>
+    </ol>
+  </div>
 
   <div [ngStyle]="{'display': (flow === 'detokenization' ? 'block' : 'none')}">
     <h3>Detokenization Flow</h3>
