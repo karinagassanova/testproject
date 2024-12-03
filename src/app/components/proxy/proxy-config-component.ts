@@ -1,8 +1,9 @@
 import {Component, inject, Injectable, Input, OnInit} from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {SharedService} from "../../services/sharedservice";
-import {TokenResponse} from "../../app.component";  // Import HttpClient
+import {TokenResponse} from "../../app.component";
+import {firstValueFrom} from "rxjs";  // Import HttpClient
 
 
 type SavedConfig = {
@@ -25,7 +26,6 @@ type SavedConfig = {
 })
 export class ProxyConfigComponent implements OnInit {
   clipboard = inject(Clipboard); // Inject Clipboard service
-  private httpClient = inject(HttpClient); // Inject HttpClient
 
   proxyId: string = ""
   url: string = ""
@@ -34,7 +34,8 @@ export class ProxyConfigComponent implements OnInit {
   @Input() payload: string = "";
   @Input() headers: string = "";
   @Input() substituteData: string = "";
-  @Input() proxyResponse: string = "";
+
+  proxyResponse: HttpResponse<any> | undefined = undefined;
 
   activeTab = 1; // Default active tab is 1 (Edit Configuration)
   savedConfigs: Array<SavedConfig> = [];
@@ -71,9 +72,6 @@ export class ProxyConfigComponent implements OnInit {
       }
       if (mess.substituteData){
         this.substituteData = mess.substituteData
-      }
-      if (mess.proxyResponse){
-        this.proxyResponse = mess.proxyResponse
       }
     })
   }
@@ -146,35 +144,76 @@ export class ProxyConfigComponent implements OnInit {
   }
 
   copyToClipboard(data: string): void {
-    data = data.replace(/\n/g," ").replace(/\r/g," ")
     this.clipboard.copy(data);
     alert('Copied to clipboard!');
   }
 
-  makeProxyCall(): void{
-    this.http.post<TokenResponse>(
-      `${this.proxyUrl}`,
-      this.formattedProxyData(),
-      {
-        headers: new HttpHeaders({
-          Accept: 'application/json',
-          Authorization: `${this.generateProxyAuth}'`,
-          'scx-bfid' : 'djI6MTIwMjQxMTE1MTA0OTEzMTAzMTUzNzQ2MnxlMzJjOTU3ZmI4M2E5ZTAzNDcyZjIzMjA3ZWRlNWVlMHx8fA==',
-          'Content-Type': 'application/json'
-        })
-      }
-    ).subscribe(
-      (response) => {
-        console.log('Received Tokenized Data:', response);
-      },
-      (error) => {
-        console.error('Error retrieving tokens:', error);
-      }
+  getReqHeaders() : any {
+
+    const defaultHeaders = {
+      Accept: 'application/json',
+      Authorization: `${this.generateProxyAuth}`,
+      'Content-Type': 'application/json',
+    }
+
+    const uiHeaders = JSON.parse(this.headers || '{}')
+
+    return  {...defaultHeaders, ...uiHeaders}
+  }
+
+  async makeProxyCall(){
+
+    const defaultHeaders = this.getReqHeaders()
+
+    const proxyHeaders = {target: `${this.proxyUrl}`}
+
+    const allHeaders = {...defaultHeaders, ...proxyHeaders}
+
+    const response: HttpResponse<any> = await firstValueFrom(
+      this.http.post<any>(
+        `https://5h1t6xmh5m.execute-api.us-east-1.amazonaws.com/test/api/v1/partners/${this.username}/configurations/${this.proxyId}`,
+        this.formattedProxyData(),
+        {
+          headers: new HttpHeaders(allHeaders),
+          observe: 'response', // Enables access to response metadata
+        }
+      )
     );
+
+    this.proxyResponse = response;
+    console.log("Response", response)
+
+  }
+
+  get responseCode(): string{
+    if (this.proxyResponse) {
+      return JSON.stringify(this.proxyResponse.status, null, 4)
+    }
+    return ""
+  }
+
+  get responseHeaders(): string{
+    if (this.proxyResponse) {
+      const headerObj: Record<string, string | string[]> = {};
+      this.proxyResponse.headers.keys().forEach((key) => {
+        if (this.proxyResponse){
+          headerObj[key] = this.proxyResponse.headers.getAll(key) || this.proxyResponse.headers.get(key) || '';
+        }
+      });
+      return JSON.stringify(headerObj, null, 4)
+    }
+    return ""
+  }
+
+  get responseBody(): string{
+    if (this.proxyResponse) {
+      return JSON.stringify(this.proxyResponse.body, null, 4)
+    }
+    return ""
   }
 
   get proxyUrl(): string {
-    return this.url || 'https://example.com/api/proxy';
+    return this.url || '';
   }
 
   get generateProxyAuth(): string {
@@ -183,18 +222,15 @@ export class ProxyConfigComponent implements OnInit {
 
   get formattedCurlRequest(): string {
     const fullUrl = `${this.proxyUrl}/api/v1/partners/${this.username}/configurations/${this.proxyId}`;
-    return `curl --location '${fullUrl}'
---header 'Content-Type: application/json'
---header 'Authorization: ${this.generateProxyAuth}'
-${this.formattedHeaders}
---data '${this.formattedProxyDataAsString}'`;
+    return `curl --location '${fullUrl}' \\
+${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
   }
 
   get formattedHeaders(): string {
-    const headers = JSON.parse(this.headers || '[]');
+    const headers = this.getReqHeaders();
     let h = ''
-    for ( let i = 0; i < headers.length; i++){
-      h += "--header " + headers[i]
+    for ( let i in headers){
+      h += "--header '" + i + ": " + headers[i] + "' \\\n"
     }
     return h;
   }

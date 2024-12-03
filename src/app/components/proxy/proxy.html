@@ -82,6 +82,23 @@
       </button>
     </div>
     <button class="btn btn-primary" (click)="makeProxyCall()">Go</button>
+    <br/>
+    <br/>
+    Response Status Code:
+    <div class="pre-container" style="position: relative;">
+      <pre>{{ responseCode }}</pre>
+    </div>
+    Response Headers:
+    <div class="pre-container" style="position: relative;">
+      <pre>{{ responseHeaders }}</pre>
+    </div>
+    Response Body:
+    <div class="pre-container" style="position: relative;">
+      <pre>{{ responseBody }}</pre>
+      <button (click)="copyToClipboard(responseBody)" class="copy-button">
+        <i class="fas fa-copy"></i> <!-- Copy Icon -->
+      </button>
+    </div>
   </div>
 
 
