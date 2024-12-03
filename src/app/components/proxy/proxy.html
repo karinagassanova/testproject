@@ -1,0 +1,92 @@
+<div class="main-container">
+  <h4>Proxy Configuration
+    <!-- Fold/Unfold Button -->
+    <button class="btn btn-outline-secondary btn-sm ms-2" (click)="toggleConfigVisibility()">
+      <i class="fas" [ngClass]="isConfigVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+    </button>
+  </h4>
+
+  <!-- Tab Navigation -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1">Edit Configuration</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">Proxy Request</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">Destination</a>
+    </li>
+  </ul>
+
+  <!-- Edit Configuration Tab -->
+  <div *ngIf="activeTab === 1 && isConfigVisible" id="edit-config-container">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="proxyUrl">Proxy URL:</label>
+        <input type="text" id="proxyUrl" [(ngModel)]="url" placeholder="Enter Proxy URL"/>
+      </div>
+      <div class="form-group">
+        <label for="proxyConfigId">Proxy Config ID:</label>
+        <input type="text" id="proxyConfigId" [(ngModel)]="proxyId" placeholder="Enter Proxy Config ID"/>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="headers">Custom Request Headers:</label>
+        <textarea id="headers" [(ngModel)]="headers" rows="3" placeholder="Enter request headers"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="payload">TBD:</label>
+        <textarea id="tbd" rows="3" placeholder="Do Nothing"></textarea>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="payload">Request Body:</label>
+        <textarea id="payload" [(ngModel)]="payload" rows="3" placeholder="Enter request payload"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="payload">Substitute Data:</label>
+        <textarea id="subData" [(ngModel)]="substituteData" rows="3" placeholder="Enter request payload"></textarea>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="configName">Save Config Name:</label>
+        <input type="text" id="configName" [(ngModel)]="saveConfigName" placeholder="Enter configuration name"/>
+      </div>
+      <div class="form-group">
+        <label for="savedConfigs">Manage Saved Configs:</label>
+        <select id="savedConfigs" [(ngModel)]="selectedConfigId" class="form-select">
+          <option *ngFor="let config of savedConfigs" [value]="config.configId">{{ config.name }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button class="btn btn-primary" (click)="loadSelectedConfig()">Load</button>
+      <button class="btn btn-primary" (click)="deleteSelectedConfig()">Delete</button>
+      <button class="btn btn-outline-secondary" (click)="saveConfig()">Save</button>
+      <button class="btn btn-outline-secondary" (click)="sendRequest()">Go</button>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 2">
+    <div class="pre-container" style="position: relative;">
+      <pre>{{ formattedCurlRequest }}</pre>
+      <button (click)="copyToClipboard(formattedCurlRequest)" class="copy-button">
+        <i class="fas fa-copy"></i> <!-- Copy Icon -->
+      </button>
+    </div>
+    <button class="btn btn-primary" (click)="makeProxyCall()">Go</button>
+  </div>
+
+
+  <!-- Destination Tab -->
+  <div *ngIf="activeTab === 3">
+    <!-- Add more content related to the destination here -->
+  </div>
+</div>

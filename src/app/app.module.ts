@@ -7,20 +7,19 @@ import { DiagramComponent } from "./components/diagram/diagram.component";
 import { FormsModule } from "@angular/forms";
 import { SharedService } from "./services/sharedservice";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import {ProxyConfigComponent} from "./components/proxy/proxy";
+import {ProxyConfigComponent} from "./components/proxy/proxy-config-component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    DiagramComponent
+    DiagramComponent,
+    ProxyConfigComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     NgbModule,
-    ProxyConfigComponent,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

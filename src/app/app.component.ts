@@ -7,7 +7,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgbdModalContent} from './components/modal/modal-component'; // Adjust the path accordingly
 import {NgbdDetokenModalContent} from './components/modal/modal-detok-component';
 import {ChangeDetectorRef} from '@angular/core';
-import {NgbdProxyModalContent} from "./components/modal/modal-proxy-component";
+import {ProxyConfigComponent} from "./components/proxy/proxy-config-component";
 
 
 
@@ -63,9 +63,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   message: string = ""
 
-  username: string = 'bluefin';
-  password: string = 'yO98lWEvIZ';
-  templateId: string = 'e32c957fb83a9e03472f23207ede5ee0';
+  username: string = '';
+  password: string = '';
+  templateId: string = '';
   baseUrl: string = 'https://secure-cert.shieldconex.com';
   width: number = 600;
   height: number = 800;
@@ -78,37 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showConsole: boolean = false;
   isGoPressed: boolean = false;
   db: Database = {
-    data: [{
-      "messageId": "1202411151049141011092085",
-      "bfid": "djI6MTIwMjQxMTE1MTA0OTEzMTAzMTUzNzQ2MnxlMzJjOTU3ZmI4M2E5ZTAzNDcyZjIzMjA3ZWRlNWVlMHx8fA==",
-      "reference": "",
-      "values": [
-        {
-          "name": "scx_token_name",
-          "value": "hsWxqAH iFbz"
-        },
-        {
-          "name": "email",
-          "value": "Yo@HhHGQfl.FxC"
-        },
-        {
-          "name": "scx_token_last_name",
-          "value": "hmUHOE TnZ"
-        },
-        {
-          "name": "scx_token_card_number",
-          "value": "5850459886792406"
-        },
-        {
-          "name": "scx_token_card_expiration",
-          "value": "6812"
-        },
-        {
-          "name": "scx_token_card_verification",
-          "value": "669"
-        }
-      ]
-    }]
+    data: []
   };
 
   flow: string = 'all';
@@ -120,10 +90,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private http: HttpClient,
-    private diagram: DiagramComponent,
     private sharedService: SharedService,
     private modalService: NgbModal,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -502,18 +471,18 @@ export class AppComponent implements OnInit, OnDestroy {
     this.sharedService.highlightMessage.next("proxy");
     const tokenData = this.db.data.find(item => item.bfid === bfid);
 
-    const modalRef = this.modalService.open(NgbdProxyModalContent, {size: 'lg'});
-
-    modalRef.componentInstance.proxyConfig = {
-      url: this.baseUrl + '/api/proxy',
+    const data = {
+      url: this.baseUrl.replace("secure", "proxy"),
       username: this.username,
       password: this.password,
+      headers: JSON.stringify(['scx-bfid:' + tokenData?.bfid], null, 4),
       payload: "",
-    };
-    modalRef.componentInstance.substituteData = JSON.stringify(tokenData, null, 4)
-    modalRef.componentInstance.proxyResponse = {};
-  }
+      substituteData : JSON.stringify(tokenData, null, 4),
+      proxyResponse : ""
+    }
 
+    this.sharedService.loadInProxy.next(data);
+  }
 
 }
 
