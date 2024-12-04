@@ -1,7 +1,12 @@
-<div class="main-container">
-  <h4>Proxy Configuration
-    <button class="btn btn-outline-secondary btn-sm ms-2" (click)="toggleConfigVisibility()">
-      <i class="fas" [ngClass]="isConfigVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+<div [ngClass]="{ 'fullscreen': isFullscreen }" class="main-container">
+  <h4>
+    Proxy Configuration
+    <button
+      class="btn btn-outline-secondary btn-sm ms-2"
+      (click)="toggleFullscreen()"
+    >
+      <i class="fas" [ngClass]="isFullscreen ? 'fa-compress' : 'fa-expand'"></i>
+      {{ isFullscreen ? 'Exit Fullscreen' : 'Fullscreen' }}
     </button>
   </h4>
 

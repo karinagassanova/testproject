@@ -483,6 +483,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.sharedService.loadInProxy.next(data);
   }
-
+  isFullscreen = false; // Track fullscreen state
+  toggleFullscreen(): void {
+    this.isFullscreen = !this.isFullscreen; // Toggle fullscreen mode
+  }
 }
 

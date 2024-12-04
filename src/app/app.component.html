@@ -4,7 +4,7 @@
       <diagram></diagram>
     </div>
     <div class="col-lg-7">
-      <div class="main-container">
+      <div class="main-container" [ngClass]="{ 'fullscreen': isFullscreen }">
         <!-- Configuration Area -->
         <div id="config-area" [ngClass]="{ 'folded': isConfigFolded }">
           <div class="config-header">

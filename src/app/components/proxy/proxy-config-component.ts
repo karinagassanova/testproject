@@ -42,7 +42,7 @@ export class ProxyConfigComponent implements OnInit {
   saveConfigName: string = '';
   selectedConfigId: string = '';
   isConfigVisible: boolean = true; // Controls the visibility of the config section
-
+  isFullscreen = false; // Track fullscreen state
 
   constructor(private http: HttpClient, private sharedService: SharedService) {
   }
@@ -272,4 +272,8 @@ ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
   toggleConfigVisibility() {
     this.isConfigVisible = !this.isConfigVisible; // Toggle visibility of the configuration section
   }
+  toggleFullscreen() {
+    this.isFullscreen = !this.isFullscreen;
+  }
+
 }
