@@ -63,10 +63,10 @@ export class DiagramComponent implements OnInit {
   proxyarrowtwoVisible:string="visible"
   proxyarrowtwoOutlineColor:string="black"
 
-  bigboxOutlineColor:string="black"
+  bigboxOutlineColor:string="blue"
   bigboxVisible:string="visible"
 
-  bigboxtextOutlineColor:string="pink"
+  bigboxtextOutlineColor:string="black"
   bigboxtextVisible:string="visible"
 
 
@@ -171,8 +171,8 @@ export class DiagramComponent implements OnInit {
     this.browserlineOutlineColor="grey"
     this.proxyarrowoneOutlineColor="black"
     this.proxyarrowtwoOutlineColor="black"
-    this.bigboxOutlineColor="black"
-    this.bigboxtextOutlineColor="pink"
+    this.bigboxOutlineColor="blue"
+    this.bigboxtextOutlineColor="grey"
   }
 
   public showFlow(flow: string) {
@@ -270,9 +270,8 @@ export class DiagramComponent implements OnInit {
         break;
       case "proxy" :
         this.proxyBoxOutlineColor = "orange"
-        this.clientprocserviceBoxOutlineColor = "orange"
-        this.detokenizationBoxOutlineColor = "orange"
-        this.thirdpartyBoxOutlineColor = "orange"
+        this.bigboxtextOutlineColor="orange"
+        this.bigboxOutlineColor="orange"
         this.showFlow("proxy")
         break;
     }
