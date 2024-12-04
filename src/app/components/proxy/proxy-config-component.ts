@@ -26,7 +26,7 @@ type SavedConfig = {
 })
 export class ProxyConfigComponent implements OnInit {
   clipboard = inject(Clipboard); // Inject Clipboard service
-
+  scxPartnerId: string = '';
   proxyId: string = ""
   url: string = ""
   username: string = ""
@@ -238,8 +238,9 @@ ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
   formattedProxyData(): string {
     const pl = JSON.parse(this.payload || '{}');
     const scx = JSON.parse(this.substituteData || '{}');
+    pl.partnerId = this.scxPartnerId;
     const body = this.recursiveSubstitute(pl, scx.values || []);
-    return body
+    return body;
   }
 
   get formattedProxyDataAsString(): string {

@@ -1,6 +1,5 @@
 <div class="main-container">
   <h4>Proxy Configuration
-    <!-- Fold/Unfold Button -->
     <button class="btn btn-outline-secondary btn-sm ms-2" (click)="toggleConfigVisibility()">
       <i class="fas" [ngClass]="isConfigVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
     </button>
@@ -38,10 +37,11 @@
         <textarea id="headers" [(ngModel)]="headers" rows="3" placeholder="Enter request headers"></textarea>
       </div>
       <div class="form-group">
-        <label for="payload">TBD:</label>
-        <textarea id="tbd" rows="3" placeholder="Do Nothing"></textarea>
+        <label for="scxPartnerId">SCX Partner ID:</label>
+        <textarea id="scxPartnerId" [(ngModel)]="scxPartnerId" rows="3" placeholder="Enter SCX Partner ID"></textarea>
       </div>
     </div>
+
     <div class="form-grid">
       <div class="form-group">
         <label for="payload">Request Body:</label>
