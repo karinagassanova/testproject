@@ -313,3 +313,26 @@ td button:hover {
   color: #333; /* Keep text color dark */
   border-color: #ddd; /* Optional: Change border color slightly on hover */
 }
+
+.diagram-container {
+  position: relative; /* Allow positioning within the diagram container */
+}
+
+.fullscreen-icon {
+  position: absolute;
+  top: 5px; /* Adjust position */
+  right: 65px; /* Adjust position */
+  z-index: 1000; /* Make sure it appears above the diagram */
+  background: none; /* No background */
+  border: none; /* No border */
+  cursor: pointer;
+  color: #007BFF; /* Icon color */
+  font-size: 1.5rem; /* Adjust icon size */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.fullscreen-icon:hover {
+  color: white; /* Change color on hover */
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+

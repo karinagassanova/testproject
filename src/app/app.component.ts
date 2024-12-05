@@ -475,17 +475,18 @@ export class AppComponent implements OnInit, OnDestroy {
       url: this.baseUrl.replace("secure", "proxy"),
       username: this.username,
       password: this.password,
-      headers: JSON.stringify({'scx-bfid' : tokenData?.bfid}, null, 4),
+      headers: JSON.stringify({'scx-bfid': tokenData?.bfid}, null, 4),
       payload: "",
-      substituteData : JSON.stringify(tokenData, null, 4),
-      proxyResponse : ""
+      substituteData: JSON.stringify(tokenData, null, 4),
+      proxyResponse: ""
     }
 
     this.sharedService.loadInProxy.next(data);
   }
+
   isFullscreen = false; // Track fullscreen state
   toggleFullscreen(): void {
     this.isFullscreen = !this.isFullscreen; // Toggle fullscreen mode
   }
-}
 
+}
