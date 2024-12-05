@@ -109,12 +109,13 @@ pre {
 .fullscreen {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 600vw;
   height: 100vh;
   z-index: 2000; /* Ensure it overlays other content */
   background: white; /* Optional */
   overflow: auto; /* Allow scrolling if content exceeds viewport */
+  transform: translateX(-50%);
 }
 
 .fullscreen {

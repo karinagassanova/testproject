@@ -272,6 +272,7 @@ ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
   toggleConfigVisibility() {
     this.isConfigVisible = !this.isConfigVisible; // Toggle visibility of the configuration section
   }
+
   toggleFullscreen() {
     this.isFullscreen = !this.isFullscreen;
   }
