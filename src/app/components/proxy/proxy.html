@@ -1,14 +1,17 @@
 <div [ngClass]="{ 'fullscreen': isFullscreen }" class="main-container">
-  <h4>
-    Proxy
+  <div class="header-container">
+    <h4>
+      Proxy
+    </h4>
+
     <button
-      class="btn btn-outline-secondary btn-sm ms-2"
+      class="btn btn-outline-secondary btn-sm ms-2 align-right"
       (click)="toggleFullscreen()"
     >
       <i class="fas" [ngClass]="isFullscreen ? 'fa-compress' : 'fa-expand'"></i>
       {{ isFullscreen ? 'Exit Fullscreen' : 'Fullscreen' }}
     </button>
-  </h4>
+  </div>
 
   <!-- Tab Navigation -->
   <ul class="nav nav-tabs">

@@ -45,6 +45,17 @@ textarea {
   margin-top: 30px;
 }
 
+
+.header-container {
+  display: flex; /* Enable flexbox */
+  justify-content: space-between; /* Space between the h4 and the button */
+  align-items: center; /* Align items vertically */
+}
+
+.align-right {
+  margin-left: auto; /* Push the button to the far right */
+}
+
 /* Button Styling */
 .button-row {
 
