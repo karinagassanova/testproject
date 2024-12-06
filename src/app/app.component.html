@@ -1,7 +1,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-5">
-      <diagram></diagram>
+      <div id="diagramContainer" class="diagram-container">
+        <diagram></diagram>
+        <button class="fullscreen-diagram" (click)="toggleFullscreen2()">
+          <i [class]="isFullscreen ? 'fas fa-compress' : 'fas fa-expand'"></i>
+          <span>{{ isFullscreen ? ' Exit' : ' ' }}</span>
+        </button>
+      </div>
     </div>
     <div class="col-lg-7">
       <div class="main-container" [ngClass]="{ 'fullscreen': isFullscreen }">

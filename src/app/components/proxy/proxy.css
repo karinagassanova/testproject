@@ -76,6 +76,7 @@ textarea {
 .button-row button:not(:last-child) {
   margin-right: 5px; /* Space between buttons */
 }
+
 .btn.btn-outline-secondary.btn-sm.ms-2 {
   background-color: white; /* Default background color */
   color: #333; /* Default text color */
@@ -92,6 +93,7 @@ textarea {
   color: #333; /* Keep text color dark */
   border-color: #ddd; /* Optional: Change border color slightly on hover */
 }
+
 pre {
   background-color: #f5f5f5;
   padding: 1rem;
@@ -127,6 +129,7 @@ pre {
   margin: 0; /* No extra spacing for the icon */
   color: #333; /* Icon color */
 }
+
 .fullscreen {
   position: fixed;
   top: 0;

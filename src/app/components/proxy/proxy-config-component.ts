@@ -161,28 +161,33 @@ export class ProxyConfigComponent implements OnInit {
     return  {...defaultHeaders, ...uiHeaders}
   }
 
-  async makeProxyCall(){
+  async makeProxyCall() {
+    // Clear previous response data before making a new request
+    this.proxyResponse = undefined;
 
-    const defaultHeaders = this.getReqHeaders()
+    const defaultHeaders = this.getReqHeaders();
 
-    const proxyHeaders = {target: `${this.proxyUrl}`}
+    const proxyHeaders = {target: `${this.proxyUrl}`};
 
-    const allHeaders = {...defaultHeaders, ...proxyHeaders}
+    const allHeaders = {...defaultHeaders, ...proxyHeaders};
 
-    const response: HttpResponse<any> = await firstValueFrom(
-      this.http.post<any>(
-        `https://5h1t6xmh5m.execute-api.us-east-1.amazonaws.com/test/api/v1/partners/${this.username}/configurations/${this.proxyId}`,
-        this.formattedProxyData(),
-        {
-          headers: new HttpHeaders(allHeaders),
-          observe: 'response', // Enables access to response metadata
-        }
-      )
-    );
-
-    this.proxyResponse = response;
-    console.log("Response", response)
-
+    try {
+      const response: HttpResponse<any> = await firstValueFrom(
+        this.http.post<any>(
+          `https://5h1t6xmh5m.execute-api.us-east-1.amazonaws.com/test/api/v1/partners/${this.username}/configurations/${this.proxyId}`,
+          this.formattedProxyData(),
+          {
+            headers: new HttpHeaders(allHeaders),
+            observe: 'response',
+          }
+        )
+      );
+      this.proxyResponse = response;
+      console.log("Response", response);
+    } catch (error) {
+      console.error("Error during proxy call", error);
+      alert('Error occurred during the proxy call');
+    }
   }
 
   get responseCode(): string{

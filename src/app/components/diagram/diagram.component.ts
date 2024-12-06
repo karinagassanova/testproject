@@ -55,20 +55,19 @@ export class DiagramComponent implements OnInit {
   arrowlinenineVisible: string = "visible"
   detokflowlineOutlineColor: string = "black"
   detokflowlineVisible: string = "hidden"
-  browserlineOutlineColor:string="grey"
-  browserlineVisible:string="visible"
+  browserlineOutlineColor: string = "grey"
+  browserlineVisible: string = "visible"
 
-  proxyarrowoneOutlineColor:string= "black"
-  proxyarrowoneVisible:string="visible"
-  proxyarrowtwoVisible:string="visible"
-  proxyarrowtwoOutlineColor:string="black"
+  proxyarrowoneOutlineColor: string = "black"
+  proxyarrowoneVisible: string = "visible"
+  proxyarrowtwoVisible: string = "visible"
+  proxyarrowtwoOutlineColor: string = "black"
 
-  bigboxOutlineColor:string="blue"
-  bigboxVisible:string="visible"
+  bigboxOutlineColor: string = "blue"
+  bigboxVisible: string = "visible"
 
-  bigboxtextOutlineColor:string="black"
-  bigboxtextVisible:string="visible"
-
+  bigboxtextOutlineColor: string = "black"
+  bigboxtextVisible: string = "visible"
 
 
   constructor(private cdr: ChangeDetectorRef, private sharedService: SharedService) {
@@ -112,11 +111,11 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightVisible = 'hidden'
     this.arrowlinenineVisible = 'hidden'
     this.detokflowlineVisible = 'hidden'
-    this.browserlineVisible='hidden'
-    this.proxyarrowoneVisible='hidden'
-    this.proxyarrowtwoVisible='hidden'
-    this.bigboxVisible='hidden'
-    this.bigboxtextVisible='hidden'
+    this.browserlineVisible = 'hidden'
+    this.proxyarrowoneVisible = 'hidden'
+    this.proxyarrowtwoVisible = 'hidden'
+    this.bigboxVisible = 'hidden'
+    this.bigboxtextVisible = 'hidden'
   }
 
   public resetVisibility() {
@@ -140,11 +139,11 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightVisible = "hidden"
     this.arrowlinenineVisible = "hidden"
     this.detokflowlineVisible = "hidden"
-    this.browserlineVisible="hidden"
-    this.proxyarrowoneVisible="hidden"
-    this.proxyarrowtwoVisible="hidden"
-    this.bigboxVisible="hidden"
-    this.bigboxtextVisible="hidden"
+    this.browserlineVisible = "hidden"
+    this.proxyarrowoneVisible = "hidden"
+    this.proxyarrowtwoVisible = "hidden"
+    this.bigboxVisible = "hidden"
+    this.bigboxtextVisible = "hidden"
   }
 
   public resetColour() {
@@ -168,18 +167,18 @@ export class DiagramComponent implements OnInit {
     this.arrowlineeightOutlineColor = "black"
     this.arrowlinenineOutlineColor = "black"
     this.detokflowlineOutlineColor = "black"
-    this.browserlineOutlineColor="grey"
-    this.proxyarrowoneOutlineColor="black"
-    this.proxyarrowtwoOutlineColor="black"
-    this.bigboxOutlineColor="blue"
-    this.bigboxtextOutlineColor="grey"
+    this.browserlineOutlineColor = "grey"
+    this.proxyarrowoneOutlineColor = "black"
+    this.proxyarrowtwoOutlineColor = "black"
+    this.bigboxOutlineColor = "blue"
+    this.bigboxtextOutlineColor = "grey"
   }
 
   public showFlow(flow: string) {
 
     console.log("diagram.showFlow")
     this.resetVisibility();
-    this.flow=flow
+    this.flow = flow
 
     switch (flow) {
       case "tokenization":
@@ -193,7 +192,7 @@ export class DiagramComponent implements OnInit {
         this.arrowlinetwoVisible = "visible"
         this.arrowlinethreeVisible = "visible"
         this.lineiframetokenVisible = "visible"
-        this.browserlineVisible="visible"
+        this.browserlineVisible = "visible"
         break;
       case "detokenization":
         this.clientprocserviceBoxVisible = "visible"
@@ -220,15 +219,15 @@ export class DiagramComponent implements OnInit {
         this.lineproxydetokVisible = "visible"
         this.arrowlineeightVisible = "visible"
         this.arrowlinenineVisible = "visible"
-        this.browserlineVisible="visible"
+        this.browserlineVisible = "visible"
         break;
       case "proxy":
-        this.proxyarrowoneVisible="visible"
+        this.proxyarrowoneVisible = "visible"
         this.thirdpartyBoxVisible = "visible"
         this.clientprocserviceBoxVisible = "visible"
         this.proxyBoxVisible = "visible"
-        this.proxyarrowtwoVisible="visible"
-        this.bigboxVisible="visible"
+        this.proxyarrowtwoVisible = "visible"
+        this.bigboxVisible = "visible"
         break;
     }
     this.cdr.detectChanges()
@@ -270,11 +269,11 @@ export class DiagramComponent implements OnInit {
         break;
       case "proxy" :
         this.proxyBoxOutlineColor = "orange"
-        this.bigboxtextOutlineColor="orange"
-        this.bigboxOutlineColor="orange"
-        this.bigboxOutlineColor="orange"
-        this.thirdpartyBoxOutlineColor="orange"
-        this.clientprocserviceBoxOutlineColor="orange"
+        this.bigboxtextOutlineColor = "orange"
+        this.bigboxOutlineColor = "orange"
+        this.bigboxOutlineColor = "orange"
+        this.thirdpartyBoxOutlineColor = "orange"
+        this.clientprocserviceBoxOutlineColor = "orange"
         this.showFlow("proxy")
         break;
     }

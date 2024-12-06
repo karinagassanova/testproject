@@ -1,9 +1,11 @@
 /* Ensure the diagram is responsive */
 .diagram svg {
   padding-top: 10px;
+  padding-bottom:10px;
   width: 100%; /* Full width of the diagram area */
   height: 100%; /* Full height of the diagram area */
 }
+
 /* Diagram styling */
 .diagram {
   border: 0; /* Remove border */
@@ -12,6 +14,7 @@
   width: 700px; /* Full width of the allocated column */
   height: 400px; /* Set a specific height for the diagram to make it larger */
 }
+
 .button-container {
   display: flex;
   justify-content: flex-start; /* Aligns buttons to the left */
@@ -93,4 +96,22 @@
   }
 }
 
+:host {
+  display: block;
+  width: 40vw;
+  height: 200vh;
+  position: relative;
+}
 
+.diagram-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.diagram-box {
+  position: absolute;
+  /* your specific positioning logic */
+}

@@ -326,7 +326,7 @@ td button:hover {
   background: none; /* No background */
   border: none; /* No border */
   cursor: pointer;
-  color: #007BFF; /* Icon color */
+  color: grey; /* Icon color */
   font-size: 1.5rem; /* Adjust icon size */
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -336,3 +336,20 @@ td button:hover {
   transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
+.diagram-container:fullscreen {
+  width: 1000px;
+  height: 1000px;
+  display: inline-grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.fullscreen-diagram {
+  position: absolute;
+  top:12px;
+  right: 70px;
+  z-index: 1000;
+
+}

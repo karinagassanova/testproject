@@ -10,8 +10,6 @@ import {ChangeDetectorRef} from '@angular/core';
 import {ProxyConfigComponent} from "./components/proxy/proxy-config-component";
 
 
-
-
 export interface TokenResponse {
   messageId: string;
   bfid: string;
@@ -489,4 +487,51 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isFullscreen = !this.isFullscreen; // Toggle fullscreen mode
   }
 
+  toggleFullscreen2(): void {
+    const diagramContainer = document.getElementById('diagramContainer');
+    const diagramDescription = document.querySelector('.diagram-description') as HTMLElement;
+    const diagram = document.querySelector('.diagram') as HTMLElement;
+
+    if (this.isFullscreen) {
+      // Exit fullscreen mode
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+
+      // Reset the diagram size
+      this.resizeDiagram(false);
+
+      // No need to hide the description anymore, so we leave it as is
+      diagramDescription.style.display = ''; // Keep the description visible when exiting fullscreen
+    } else {
+      // Enter fullscreen mode
+      if (diagramContainer?.requestFullscreen) {
+        diagramContainer.requestFullscreen();
+      }
+
+      // Resize the diagram to fullscreen size
+      this.resizeDiagram(true);
+
+      // Keep the diagram description visible in fullscreen mode
+      diagramDescription.style.display = ''; // Keep it visible, no need to hide it
+    }
+
+    // Toggle the fullscreen state
+    this.isFullscreen = !this.isFullscreen;
+  }
+
+// Helper function to resize the diagram
+  resizeDiagram(isFullscreen: boolean): void {
+    const diagram = document.querySelector('.diagram') as HTMLElement;
+
+    if (isFullscreen) {
+      // Set the diagram's width and height when entering fullscreen
+      diagram.style.width = '800px'; // Set width to 800px (you can adjust this as needed)
+      diagram.style.height = '500px'; // Set height to 500px (you can adjust this as needed)
+    } else {
+      // Reset the diagram's width and height to default
+      diagram.style.width = ''; // Reset to default width (auto or 100%)
+      diagram.style.height = ''; // Reset to default height (auto or 100%)
+    }
+  }
 }
