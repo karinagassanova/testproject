@@ -46,7 +46,7 @@
       </div>
       <div class="form-group">
         <label for="scxPartnerId">SCX Partner ID:</label>
-        <textarea id="scxPartnerId" [(ngModel)]="scxPartnerId" rows="3" placeholder="Enter SCX Partner ID"></textarea>
+        <input id="scxPartnerId" [(ngModel)]="scxPartnerId" placeholder="Enter SCX Partner ID" />
       </div>
     </div>
 
@@ -112,6 +112,23 @@
 
   <!-- Destination Tab -->
   <div *ngIf="activeTab === 3">
+    <div *ngIf="!isDestinationUrlSet">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="proxyUrl">Proxy URL:</label>
+          <input type="text" id="destinationUrl" [(ngModel)]="destinationUrl" placeholder="Enter Destination URL"/>
+          <button (click)="loadDestinationUrl()">
+            Load
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isDestinationUrlSet" >
+      <iframe [src]="safeDestinationUrl" width="100% " height="600px"></iframe>
+      <button (click)="clearDestinationUrl()">
+        Clear
+      </button>
+    </div>
     <!-- Add more content related to the destination here -->
   </div>
 </div>

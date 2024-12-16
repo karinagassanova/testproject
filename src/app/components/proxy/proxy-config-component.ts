@@ -3,12 +3,15 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {SharedService} from "../../services/sharedservice";
 import {TokenResponse} from "../../app.component";
-import {firstValueFrom} from "rxjs";  // Import HttpClient
+import {firstValueFrom} from "rxjs";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";  // Import HttpClient
 
 
 type SavedConfig = {
   configId: string;
   proxyId: string;
+  partner: string;
+  headers: string;
   name: string;
   url: string,
   username: string,
@@ -42,9 +45,13 @@ export class ProxyConfigComponent implements OnInit {
   saveConfigName: string = '';
   selectedConfigId: string = '';
   isConfigVisible: boolean = true; // Controls the visibility of the config section
+  isDestinationUrlSet: boolean = false; // Controls the visibility of the config section
   isFullscreen = false; // Track fullscreen state
 
-  constructor(private http: HttpClient, private sharedService: SharedService) {
+  destinationUrl: string = ""
+  safeDestinationUrl: SafeResourceUrl = ""
+
+  constructor(private http: HttpClient, private sharedService: SharedService, private domSanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -91,6 +98,8 @@ export class ProxyConfigComponent implements OnInit {
     const newConfig = {
       configId: Date.now().toString(), // Unique ID for each config
       name: this.saveConfigName.trim(),
+      partner: this.scxPartnerId.trim(),
+      headers: this.headers.trim(),
       proxyId: this.proxyId,
       url: this.url,
       username: this.username,
@@ -104,14 +113,6 @@ export class ProxyConfigComponent implements OnInit {
     this.saveConfigName = ''; // Clear the input
   }
 
-  loadAllConfigs() {
-    const saved = localStorage.getItem('proxyConfigs');
-    if (saved) {
-      this.savedConfigs = JSON.parse(saved);
-    } else {
-      this.savedConfigs = [];
-    }
-  }
 
   loadSelectedConfig() {
     const conf = this.savedConfigs.find(config => config.configId === this.selectedConfigId);
@@ -119,11 +120,22 @@ export class ProxyConfigComponent implements OnInit {
       this.saveConfigName = conf.name
       this.url = conf.url
       this.proxyId = conf.proxyId
+      this.scxPartnerId = conf.partner
+      this.headers = conf.headers
       this.payload = conf.payload
       this.username = conf.username
       this.password = conf.password
     } else {
       alert('No configuration selected or found.');
+    }
+  }
+
+  loadAllConfigs() {
+    const saved = localStorage.getItem('proxyConfigs');
+    if (saved) {
+      this.savedConfigs = JSON.parse(saved);
+    } else {
+      this.savedConfigs = [];
     }
   }
 
@@ -152,13 +164,19 @@ export class ProxyConfigComponent implements OnInit {
 
     const defaultHeaders = {
       Accept: 'application/json',
-      Authorization: `${this.generateProxyAuth}`,
+ //s     Authorization: `${this.generateProxyAuth}`,
       'Content-Type': 'application/json',
     }
 
     const uiHeaders = JSON.parse(this.headers || '{}')
 
-    return  {...defaultHeaders, ...uiHeaders}
+    const allHeaders = {...defaultHeaders, ...uiHeaders}
+
+    if (!allHeaders['Authorization'] && !allHeaders['authorization']){
+      allHeaders['Authorization'] = `${this.generateProxyAuth}`
+    }
+
+    return allHeaders
   }
 
   async makeProxyCall() {
@@ -174,7 +192,7 @@ export class ProxyConfigComponent implements OnInit {
     try {
       const response: HttpResponse<any> = await firstValueFrom(
         this.http.post<any>(
-          `https://5h1t6xmh5m.execute-api.us-east-1.amazonaws.com/test/api/v1/partners/${this.username}/configurations/${this.proxyId}`,
+          `https://5h1t6xmh5m.execute-api.us-east-1.amazonaws.com/test/api/v1/partners/${this.scxPartnerId}/configurations/${this.proxyId}`,
           this.formattedProxyData(),
           {
             headers: new HttpHeaders(allHeaders),
@@ -226,7 +244,7 @@ export class ProxyConfigComponent implements OnInit {
   }
 
   get formattedCurlRequest(): string {
-    const fullUrl = `${this.proxyUrl}/api/v1/partners/${this.username}/configurations/${this.proxyId}`;
+    const fullUrl = `${this.proxyUrl}/api/v1/partners/${this.scxPartnerId}/configurations/${this.proxyId}`;
     return `curl --location '${fullUrl}' \\
 ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
   }
@@ -243,7 +261,6 @@ ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
   formattedProxyData(): string {
     const pl = JSON.parse(this.payload || '{}');
     const scx = JSON.parse(this.substituteData || '{}');
-    pl.partnerId = this.scxPartnerId;
     const body = this.recursiveSubstitute(pl, scx.values || []);
     return body;
   }
@@ -282,4 +299,13 @@ ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
     this.isFullscreen = !this.isFullscreen;
   }
 
+  loadDestinationUrl() {
+    this.safeDestinationUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.destinationUrl);
+    this.isDestinationUrlSet = true;
+  }
+
+  clearDestinationUrl() {
+    this.safeDestinationUrl = "";
+    this.isDestinationUrlSet = false;
+  }
 }
