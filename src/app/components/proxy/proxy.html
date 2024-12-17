@@ -131,15 +131,16 @@
     </div>
     <button class="btn btn-primary" (click)="makeProxyCall()">Go</button>
 
-    <!-- Response Tab Navigation -->
     <ul class="nav nav-pills mt-4">
       <li class="nav-item">
-        <a class="nav-link" [class.active]="responseTab === 1" (click)="responseTab = 1">Response Headers</a>
+        <a class="nav-link response-tab-btn" [class.active]="responseTab === 1" (click)="responseTab = 1">Response Headers</a>
       </li>
+      <br>
       <li class="nav-item">
-        <a class="nav-link" [class.active]="responseTab === 2" (click)="responseTab = 2">Response Body</a>
+        <a class="nav-link response-tab-btn" [class.active]="responseTab === 2" (click)="responseTab = 2">Response Body</a>
       </li>
     </ul>
+
 
     <!-- Response Headers -->
     <div *ngIf="responseTab === 1" class="response-section mt-3">

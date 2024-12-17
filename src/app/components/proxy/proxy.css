@@ -146,3 +146,29 @@ pre {
 .fullscreen {
   transition: all 0.3s ease-in-out;
 }
+
+.response-tab-btn {
+  background-color: white; /* Default background color */
+  color: #333; /* Default text color */
+  border: 1px solid #ccc; /* Light border */
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 15px; /* Smaller font size */
+  border-radius: 3px; /* Slightly rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+  text-align: center; /* Center text alignment */
+  display: inline-block; /* Inline block for tab alignment */
+}
+
+/* Active tab styling */
+.response-tab-btn.active {
+  background-color: #e2e6ea; /* Light gray background */
+  color: #333; /* Keep text color dark */
+  border-color: #ddd; /* Slightly darker border for active state */
+}
+
+/* Hover effect */
+.response-tab-btn:hover {
+  background-color: #f7f7f7; /* Lighter gray background on hover */
+  color: #333; /* Keep text color dark */
+  border-color: #ddd; /* Optional: Change border color slightly on hover */
+}
