@@ -306,6 +306,7 @@ export class AppComponent implements OnInit, OnDestroy {
   onTokenizeButtonClick() {
     if (this.scfrInstance) {
       this.sharedService.highlightMessage.next("tokenize");
+      this.cdr.detectChanges();
       try {
         this.scfrInstance.tokenize('echo data');
       } catch (error: any) {
