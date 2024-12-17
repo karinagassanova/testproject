@@ -99,7 +99,7 @@ export class ProxyConfigComponent implements OnInit {
       configId: Date.now().toString(), // Unique ID for each config
       name: this.saveConfigName.trim(),
       partner: this.scxPartnerId.trim(),
-      headers: this.headers.trim(),
+      headers: this.headers,
       proxyId: this.proxyId,
       url: this.url,
       username: this.username,
@@ -303,7 +303,7 @@ ${this.formattedHeaders}--data '${this.formattedProxyDataAsString}'`;
     this.safeDestinationUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.destinationUrl);
     this.isDestinationUrlSet = true;
   }
-
+  responseTab: number = 1;
   clearDestinationUrl() {
     this.safeDestinationUrl = "";
     this.isDestinationUrlSet = false;

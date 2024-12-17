@@ -34,44 +34,77 @@
           <option value="https://proxy.shieldconex.com">Production</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="proxyConfigId">Proxy Config ID:</label>
-        <input type="text" id="proxyConfigId" [(ngModel)]="proxyId" placeholder="Enter Proxy Config ID"/>
+        <input
+          type="text"
+          id="proxyConfigId"
+          [(ngModel)]="proxyId"
+          placeholder="Enter Proxy Config ID"
+        />
       </div>
     </div>
 
     <div class="form-grid">
       <div class="form-group">
         <label for="headers">Custom Request Headers:</label>
-        <textarea id="headers" [(ngModel)]="headers" rows="3" placeholder="Enter request headers"></textarea>
+        <textarea
+          id="headers"
+          [(ngModel)]="headers"
+          rows="3"
+          placeholder="Enter request headers"
+        ></textarea>
       </div>
       <div class="form-group">
         <label for="scxPartnerId">SCX Partner ID:</label>
-        <input id="scxPartnerId" [(ngModel)]="scxPartnerId" placeholder="Enter SCX Partner ID" />
+        <input
+          id="scxPartnerId"
+          [(ngModel)]="scxPartnerId"
+          placeholder="Enter SCX Partner ID"
+        />
       </div>
     </div>
 
     <div class="form-grid">
       <div class="form-group">
         <label for="payload">Request Body:</label>
-        <textarea id="payload" [(ngModel)]="payload" rows="3" placeholder="Enter request payload"></textarea>
+        <textarea
+          id="payload"
+          [(ngModel)]="payload"
+          rows="3"
+          placeholder="Enter request payload"
+        ></textarea>
       </div>
       <div class="form-group">
-        <label for="payload">Substitute Data:</label>
-        <textarea id="subData" [(ngModel)]="substituteData" rows="3" placeholder="Enter request payload"></textarea>
+        <label for="subData">Substitute Data:</label>
+        <textarea
+          id="subData"
+          [(ngModel)]="substituteData"
+          rows="3"
+          placeholder="Enter substitute data"
+        ></textarea>
       </div>
     </div>
 
     <div class="form-grid">
       <div class="form-group">
         <label for="configName">Save Config Name:</label>
-        <input type="text" id="configName" [(ngModel)]="saveConfigName" placeholder="Enter configuration name"/>
+        <input
+          type="text"
+          id="configName"
+          [(ngModel)]="saveConfigName"
+          placeholder="Enter configuration name"
+        />
       </div>
       <div class="form-group">
         <label for="savedConfigs">Manage Saved Configs:</label>
         <select id="savedConfigs" [(ngModel)]="selectedConfigId" class="form-select">
-          <option *ngFor="let config of savedConfigs" [value]="config.configId">{{ config.name }}</option>
+          <option
+            *ngFor="let config of savedConfigs"
+            [value]="config.configId"
+          >
+            {{ config.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -84,30 +117,54 @@
     </div>
   </div>
 
+  <!-- Proxy Request Tab -->
   <div *ngIf="activeTab === 2">
+    <!-- cURL Preview -->
     <div class="pre-container" style="position: relative;">
       <pre>{{ formattedCurlRequest }}</pre>
-      <button (click)="copyToClipboard(formattedCurlRequest)" class="copy-button">
-        <i class="fas fa-copy"></i> <!-- Copy Icon -->
+      <button
+        (click)="copyToClipboard(formattedCurlRequest)"
+        class="copy-button"
+      >
+        <i class="fas fa-copy"></i>
       </button>
     </div>
     <button class="btn btn-primary" (click)="makeProxyCall()">Go</button>
-    <br/>
-    <br/>
-    Response Status Code:
-    <div class="pre-container" style="position: relative;">
-      <pre>{{ responseCode }}</pre>
+
+    <!-- Response Tab Navigation -->
+    <ul class="nav nav-pills mt-4">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="responseTab === 1" (click)="responseTab = 1">Response Headers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="responseTab === 2" (click)="responseTab = 2">Response Body</a>
+      </li>
+    </ul>
+
+    <!-- Response Headers -->
+    <div *ngIf="responseTab === 1" class="response-section mt-3">
+      <p><strong>Response Headers:</strong></p>
+      <div class="pre-container">
+        <pre>{{ responseHeaders }}</pre>
+      </div>
+      <p><strong> Response Status Code: </strong></p>
+      <div class="pre-container" style="position: relative;">
+        <pre>{{ responseCode }}</pre>
+      </div>
     </div>
-    Response Headers:
-    <div class="pre-container" style="position: relative;">
-      <pre>{{ responseHeaders }}</pre>
-    </div>
-    Response Body:
-    <div class="pre-container" style="position: relative;">
-      <pre>{{ responseBody }}</pre>
-      <button (click)="copyToClipboard(responseBody)" class="copy-button">
-        <i class="fas fa-copy"></i> <!-- Copy Icon -->
-      </button>
+
+    <!-- Response Body -->
+    <div *ngIf="responseTab === 2" class="response-section mt-3">
+      <p><strong>Response Body:</strong></p>
+      <div class="pre-container" style="position: relative;">
+        <pre>{{ responseBody }}</pre>
+        <button
+          (click)="copyToClipboard(responseBody)"
+          class="copy-button"
+        >
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -116,20 +173,20 @@
     <div *ngIf="!isDestinationUrlSet">
       <div class="form-grid">
         <div class="form-group">
-          <label for="proxyUrl">Proxy URL:</label>
-          <input type="text" id="destinationUrl" [(ngModel)]="destinationUrl" placeholder="Enter Destination URL"/>
-          <button (click)="loadDestinationUrl()">
-            Load
-          </button>
+          <label for="destinationUrl">Destination URL:</label>
+          <input
+            type="text"
+            id="destinationUrl"
+            [(ngModel)]="destinationUrl"
+            placeholder="Enter Destination URL"
+          />
+          <button (click)="loadDestinationUrl()">Load</button>
         </div>
       </div>
     </div>
-    <div *ngIf="isDestinationUrlSet" >
-      <iframe [src]="safeDestinationUrl" width="100% " height="600px"></iframe>
-      <button (click)="clearDestinationUrl()">
-        Clear
-      </button>
+    <div *ngIf="isDestinationUrlSet">
+      <iframe [src]="safeDestinationUrl" width="100%" height="600px"></iframe>
+      <button (click)="clearDestinationUrl()">Clear</button>
     </div>
-    <!-- Add more content related to the destination here -->
   </div>
 </div>
