@@ -1,9 +1,6 @@
 <div [ngClass]="{ 'fullscreen': isFullscreen }" class="main-container">
   <div class="header-container">
-    <h4>
-      Proxy
-    </h4>
-
+    <h4>Proxy</h4>
     <button
       class="btn btn-outline-secondary btn-sm ms-2 align-right"
       (click)="toggleFullscreen()"
@@ -29,10 +26,15 @@
   <!-- Edit Configuration Tab -->
   <div *ngIf="activeTab === 1 && isConfigVisible" id="edit-config-container">
     <div class="form-grid">
+      <!-- Proxy URL Dropdown -->
       <div class="form-group">
         <label for="proxyUrl">Proxy URL:</label>
-        <input type="text" id="proxyUrl" [(ngModel)]="url" placeholder="Enter Proxy URL"/>
+        <select id="proxyUrl" [(ngModel)]="url" class="form-select">
+          <option value="https://proxy-cert.shieldconex.com">Cert</option>
+          <option value="https://proxy.shieldconex.com">Production</option>
+        </select>
       </div>
+
       <div class="form-group">
         <label for="proxyConfigId">Proxy Config ID:</label>
         <input type="text" id="proxyConfigId" [(ngModel)]="proxyId" placeholder="Enter Proxy Config ID"/>
@@ -108,7 +110,6 @@
       </button>
     </div>
   </div>
-
 
   <!-- Destination Tab -->
   <div *ngIf="activeTab === 3">
